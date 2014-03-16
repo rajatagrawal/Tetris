@@ -1,12 +1,13 @@
 require 'spec_helper'
-require 'tetris/shape'
+require 'tetris/shape/shape'
 
 module Tetris
   describe Shape do
 
     it 'stores the coordinates of the shape' do
       window = double 'window'
-      shape = Shape.new(window, 5,6)
+      config = { x: 5, y:6 }
+      shape = Shape.new(window,config)
       expect(shape.x).to eq 5
       expect(shape.y).to eq 6
     end
@@ -20,7 +21,8 @@ module Tetris
 
     it 'assigns color to the shape' do
       window = double 'window'
-      shape = Shape.new(window, 0,0,'red')
+      config = { color: 'red' }
+      shape = Shape.new(window, config)
       expect(shape.color).to eq 'red'
     end
 

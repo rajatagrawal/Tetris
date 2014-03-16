@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'tetris/block'
+require 'tetris/shape/block'
 
 module Tetris
   describe Block do
@@ -13,9 +13,8 @@ module Tetris
 
       it 'stores the coordinates 'do
         window = double('window')
-        x = 1;
-        y = 2;
-        block = Block.new(window, x, y)
+        config={ x: 1, y: 2 }
+        block = Block.new(window,config)
         expect(block.x).to eq 1;
         expect(block.y).to eq 2;
       end
@@ -29,9 +28,8 @@ module Tetris
 
       it 'stores the height and width of the block' do
         window = double('window')
-        width = 15
-        height = 10
-        block = Block.new(window, 1,1 , width, height)
+        config = { width: 15, height: 10 }
+        block = Block.new(window, config)
         expect(block.width).to eq 15
         expect(block.height).to eq 10
       end
@@ -45,7 +43,8 @@ module Tetris
 
       it 'stores the color for the block' do
         window = double 'window'
-        block = Block.new(window,0,0,0,0, 'red')
+        config = { color: 'red' }
+        block = Block.new(window, config)
         expect(block.color).to eq 'red'
       end
 
@@ -60,7 +59,7 @@ module Tetris
       it 'draws a rectangle' do
         window = double('window')
         red = Gosu::Color::RED
-        block = Block.new(window,0,0,10,10,red)
+        block = Block.new(window)
         expect(window).to receive(:draw_quad).
           with(0,0,red, 10,0,red, 10,10,red, 0,10,red)
         block.draw

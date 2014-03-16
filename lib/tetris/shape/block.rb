@@ -3,18 +3,13 @@ module Tetris
 
     attr_accessor :window, :x, :y, :width, :height, :color
 
-    def initialize(gosu_window,
-                   x =0,
-                   y=0,
-                   width=10,
-                   height=10,
-                   color=Gosu::Color::RED)
+    def initialize(gosu_window, config={})
       @window = gosu_window
-      @x = x
-      @y = y
-      @width = width
-      @height = height
-      @color = color
+      @x = config[:x] || 0
+      @y = config[:y] || 0
+      @width = config[:width] || 10
+      @height = config[:height] || 10
+      @color = config[:color] || Gosu::Color::RED
     end
 
     def draw
