@@ -1,22 +1,27 @@
+require 'tetris/shape/shape'
 module Tetris
-  class Block
+  class Block < Shape
 
-    attr_accessor :window, :x, :y, :width, :height, :color
+    attr_accessor :side_length
 
-    def initialize(gosu_window, config={})
-      @window = gosu_window
-      @x = config[:x] || 0
-      @y = config[:y] || 0
-      @width = config[:width] || 10
-      @height = config[:height] || 10
-      @color = config[:color] || Gosu::Color::RED
+    def initialize(window, config={})
+      super
+      @side_length = config[:side_length] || 10
+    end
+
+    def height
+      side_length
+    end
+
+    def width
+      side_length
     end
 
     def draw
-      @window.draw_quad(x,y,color,
-                        x+width, y, color,
-                        x+width, y+height, color,
-                        x, y+height, color)
+      window.draw_quad(x, y, color,
+                       x + side_length, y, color,
+                       x + side_length, y + side_length, color,
+                       x, y + side_length, color)
     end
   end
 end
