@@ -3,7 +3,6 @@ require 'tetris/shape/block'
 
 module Tetris
   describe Block do
-
     describe '#initialize' do
       it 'assigns the gosu window object to an instance variable' do
         window = double('window')
