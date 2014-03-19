@@ -16,5 +16,8 @@ module Tetris
     def width
       0
     end
+
+    def draw
+    end
   end
 end
