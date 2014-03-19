@@ -43,6 +43,19 @@ module Tetris
         expect(shape.height).to eq 0
         expect(shape.width).to eq 0
       end
+
+      it 'stores speed for object to move with' do
+        window = double 'window'
+        config = { speed: 6 }
+        shape = Shape.new(window, config)
+        expect(shape.speed).to eq 6
+      end
+
+      it 'assigns default speed to shape' do
+        window = double 'window'
+        shape = Shape.new(window)
+        expect(shape.speed).to eq 5
+      end
     end
 
     describe '#draw' do
@@ -50,6 +63,40 @@ module Tetris
         window = double 'window'
         shape = Shape.new(window)
         expect(shape.draw).to eq nil
+      end
+    end
+
+    describe '#move' do
+      it 'moves the shape in down direction' do
+        window = double 'window'
+        shape = Shape.new(window)
+        direction = 'down'
+        expect{shape.move(direction)}.
+          to change{shape.y}.by(shape.speed)
+      end
+
+      it 'moves the shape in up direction' do
+        window = double 'window'
+        shape = Shape.new(window)
+        direction = 'up'
+        expect{shape.move(direction)}.
+          to change{shape.y}.by(-1 * shape.speed)
+      end
+
+      it 'moves the shape right' do
+        window = double 'window'
+        shape = Shape.new(window)
+        direction = 'right'
+        expect{shape.move(direction)}.
+          to change{shape.x}.by(shape.speed)
+      end
+
+      it 'moves the shape left' do
+        window = double 'window'
+        shape = Shape.new(window)
+        direction = 'left'
+        expect{shape.move(direction)}.
+          to change{shape.x}.by(-1 * shape.speed)
       end
     end
   end
