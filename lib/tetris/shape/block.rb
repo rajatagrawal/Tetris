@@ -1,4 +1,4 @@
-require 'tetris/shape/shape'
+require_relative 'shape'
 module Tetris
   class Block < Shape
 

@@ -87,5 +87,68 @@ module Tetris
         square.draw
       end
     end
+
+    describe '#move' do
+      it 'moves itself down' do
+        window = double 'window'
+        config = { speed: 6 }
+        square = Square.new(window, config)
+        expect{square.move('down')}.
+          to change{square.y}.by(square.speed)
+        expect{square.move('down')}.
+          to change{square.top_left_block.y}.by(square.speed)
+        expect{square.move('down')}.
+          to change{square.top_right_block.y}.by(square.speed)
+        expect{square.move('down')}.
+          to change{square.bottom_left_block.y}.by(square.speed)
+        expect{square.move('down')}.
+          to change{square.bottom_right_block.y}.by(square.speed)
+      end
+
+      it 'moves itself up' do
+        window = double 'window'
+        square = Square.new(window)
+        expect{square.move('up')}.
+          to change{square.y}.by(-1 * square.speed)
+        expect{square.move('up')}.
+          to change{square.top_left_block.y}.by(-1 * square.speed)
+        expect{square.move('up')}.
+          to change{square.top_right_block.y}.by(-1 * square.speed)
+        expect{square.move('up')}.
+          to change{square.bottom_left_block.y}.by(-1 * square.speed)
+        expect{square.move('up')}.
+          to change{square.bottom_right_block.y}.by(-1 * square.speed)
+      end
+
+      it 'moves itself right' do
+        window = double 'window'
+        square = Square.new(window)
+        expect{square.move('right')}.
+          to change{square.x}.by(square.speed)
+        expect{square.move('right')}.
+          to change{square.top_left_block.x}.by(square.speed)
+        expect{square.move('right')}.
+          to change{square.top_right_block.x}.by(square.speed)
+        expect{square.move('right')}.
+          to change{square.bottom_left_block.x}.by(square.speed)
+        expect{square.move('right')}.
+          to change{square.bottom_right_block.x}.by(square.speed)
+      end
+
+      it 'moves itself left' do
+        window = double 'window'
+        square = Square.new(window)
+        expect{square.move('left')}.
+          to change{square.x}.by(-1 * square.speed)
+        expect{square.move('left')}.
+          to change{square.top_left_block.x}.by(-1 * square.speed)
+        expect{square.move('left')}.
+          to change{square.top_right_block.x}.by(-1 * square.speed)
+        expect{square.move('left')}.
+          to change{square.bottom_left_block.x}.by(-1 * square.speed)
+        expect{square.move('left')}.
+          to change{square.bottom_right_block.x}.by(-1 * square.speed)
+      end
+    end
   end
 end
