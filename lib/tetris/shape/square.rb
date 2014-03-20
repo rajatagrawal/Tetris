@@ -1,5 +1,5 @@
-require 'tetris/shape/shape'
-require 'tetris/shape/block'
+require_relative 'shape.rb'
+require_relative 'block.rb'
 module Tetris
   class Square < Shape
     attr_accessor :block_side
@@ -21,10 +21,16 @@ module Tetris
     end
 
     def draw
-      top_left_block.draw
-      top_right_block.draw
-      bottom_left_block.draw
-      bottom_right_block.draw
+      blocks.each do |block|
+        block.draw
+      end
+    end
+
+    def move(direction)
+      super
+      blocks.each do |block|
+        block.move(direction)
+      end
     end
 
     private
@@ -33,22 +39,34 @@ module Tetris
       @top_left_block = Block.new(window, { x: x,
                                            y: y,
                                            side_length: block_side,
-                                           color: color})
+                                           color: color,
+                                           speed: speed })
 
       @top_right_block = Block.new(window, { x: x + block_side,
                                             y: y,
                                             side_length: block_side,
-                                            color: color})
+                                            color: color,
+                                            speed: speed })
 
       @bottom_left_block = Block.new(window, { x: x,
                                             y: y + block_side,
                                             side_length: block_side,
-                                            color: color})
+                                            color: color,
+                                            speed: speed })
 
       @bottom_right_block = Block.new(window, { x: x + block_side,
                                             y: y + block_side,
                                             side_length: block_side,
-                                            color: color})
+                                            color: color,
+                                            speed: speed })
+    end
+
+    def blocks
+      [ top_left_block,
+        top_right_block,
+        bottom_left_block,
+        bottom_right_block
+      ]
     end
   end
 end
