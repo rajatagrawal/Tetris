@@ -99,5 +99,25 @@ module Tetris
           to change{shape.x}.by(-1 * shape.speed)
       end
     end
+
+    describe '#right_edge' do
+      it 'gives x coordinates of the right edge' do
+        window = double 'window'
+        config = { x: 15 }
+        shape = Shape.new(window, config)
+        expect(shape).to receive(:width).and_return(30)
+        expect(shape.right_edge).to eq 45
+      end
+    end
+
+    describe '#bottom_edge' do
+      it 'gives y coordinates of bottom edge' do
+        window = double 'window'
+        config = { y: 15 }
+        shape = Shape.new(window, config)
+        expect(shape).to receive(:height).and_return(30)
+        expect(shape.bottom_edge).to eq 45
+      end
+    end
   end
 end

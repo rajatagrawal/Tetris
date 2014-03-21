@@ -18,6 +18,14 @@ module Tetris
       0
     end
 
+    def right_edge
+      x + width
+    end
+
+    def bottom_edge
+      y + height
+    end
+
     def draw
     end
 
