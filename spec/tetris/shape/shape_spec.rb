@@ -100,6 +100,13 @@ module Tetris
       end
     end
 
+    describe' block_coordinates' do
+      it 'returns coordinates of constitutent blocks of shape' do
+        shape = Shape.new window
+        expect(shape.block_coordinates).to eq([])
+      end
+    end
+
     describe '#right_edge' do
       it 'gives x coordinates of the right edge' do
         config = { x: 15 }

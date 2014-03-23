@@ -30,6 +30,10 @@ module Tetris
     def draw
     end
 
+    def block_coordinates
+      []
+    end
+
     def move(direction)
       case direction
       when 'down'
