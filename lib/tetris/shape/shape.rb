@@ -1,6 +1,6 @@
 module Tetris
   class Shape
-    attr_accessor :x, :y, :color, :window, :speed
+    attr_accessor :x, :y, :color, :window, :speed, :unit_side
 
     def initialize(window, config={})
       @window = window
@@ -8,6 +8,7 @@ module Tetris
       @y = config[:y] || 0
       @speed = config[:speed] || 5
       @color = config[:color] || Gosu::Color::RED
+      @unit_side = config[:unit_side] || 10
     end
 
     def height
