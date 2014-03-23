@@ -14,6 +14,10 @@ module Tetris
       unit_side
     end
 
+    def block_coordinates
+      [[x,y]]
+    end
+
     def draw
       window.draw_quad(x, y, color,
                        x + unit_side, y, color,

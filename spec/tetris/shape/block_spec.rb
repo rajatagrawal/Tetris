@@ -33,5 +33,13 @@ module Tetris
           block.draw
       end
     end
+
+    describe '#block_coordinates' do
+      it 'returns block coordinates of block' do
+        config = { x: 20, y: 20 }
+        block = Block.new(window, config)
+        expect(block.block_coordinates).to eq([[20,20]])
+      end
+    end
   end
 end
