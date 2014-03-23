@@ -2,26 +2,23 @@ require_relative 'shape'
 module Tetris
   class Block < Shape
 
-    attr_accessor :side_length
-
     def initialize(window, config={})
       super
-      @side_length = config[:side_length] || 10
     end
 
     def height
-      side_length
+      unit_side
     end
 
     def width
-      side_length
+      unit_side
     end
 
     def draw
       window.draw_quad(x, y, color,
-                       x + side_length, y, color,
-                       x + side_length, y + side_length, color,
-                       x, y + side_length, color)
+                       x + unit_side, y, color,
+                       x + unit_side, y + unit_side, color,
+                       x, y + unit_side, color)
     end
   end
 end
