@@ -2,22 +2,20 @@ require_relative 'shape.rb'
 require_relative 'block.rb'
 module Tetris
   class Square < Shape
-    attr_accessor :block_side
     attr_accessor :top_left_block, :top_right_block
     attr_accessor :bottom_left_block, :bottom_right_block
 
     def initialize(window, config={})
       super
-      @block_side = config[:block_side] || 10
       initialize_blocks
     end
 
     def height
-      2 * block_side
+      2 * unit_side
     end
 
     def width
-      2 * block_side
+      2 * unit_side
     end
 
     def draw
@@ -38,25 +36,25 @@ module Tetris
     def initialize_blocks
       @top_left_block = Block.new(window, { x: x,
                                            y: y,
-                                           side_length: block_side,
+                                           unit_side: unit_side,
                                            color: color,
                                            speed: speed })
 
-      @top_right_block = Block.new(window, { x: x + block_side,
+      @top_right_block = Block.new(window, { x: x + unit_side,
                                             y: y,
-                                            side_length: block_side,
+                                            unit_side: unit_side,
                                             color: color,
                                             speed: speed })
 
       @bottom_left_block = Block.new(window, { x: x,
-                                            y: y + block_side,
-                                            side_length: block_side,
+                                            y: y + unit_side,
+                                            unit_side: unit_side,
                                             color: color,
                                             speed: speed })
 
-      @bottom_right_block = Block.new(window, { x: x + block_side,
-                                            y: y + block_side,
-                                            side_length: block_side,
+      @bottom_right_block = Block.new(window, { x: x + unit_side,
+                                            y: y + unit_side,
+                                            unit_side: unit_side,
                                             color: color,
                                             speed: speed })
     end
