@@ -31,6 +31,13 @@ module Tetris
       end
     end
 
+    def block_coordinates
+      [[top_left_block.x, top_left_block.y],
+       [top_right_block.x, top_right_block.y],
+       [bottom_left_block.x, bottom_left_block.y],
+       [bottom_right_block.x, bottom_right_block.y]]
+    end
+
     private
 
     def initialize_blocks

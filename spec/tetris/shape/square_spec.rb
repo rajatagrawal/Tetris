@@ -60,6 +60,15 @@ module Tetris
       end
     end
 
+    describe '#block_coordinates' do
+      it 'returns coordinates of all four blocks' do
+        config = { x: 20, y: 20, unit_side: 15}
+        square = Square.new(window, config)
+        block_coordinates = [[20,20],[35,20],[35,35],[20,35]]
+        expect(square.block_coordinates).to match_array block_coordinates
+      end
+    end
+
     describe '#draw' do
       it 'draws blocks of the square' do
         square = Square.new(window)
