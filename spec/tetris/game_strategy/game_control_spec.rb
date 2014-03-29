@@ -46,16 +46,17 @@ module Tetris
 
       describe 'freeze_shape' do
         it 'stores the coordinates of the shape in tetris map' do
-          game_strategy = TestGameControl.new window
+          config = { height: 5, width: 5 }
+          game_strategy = TestGameControl.new(window, config)
           square = Square.new window
-          block_coordinates = [[10,10],[8,8],[7,7],[6,6]]
+          block_coordinates = [[1,2],[2,2],[1,3],[2,3]]
           allow(square).to receive(:block_coordinates).
             and_return(block_coordinates)
           game_strategy.freeze_shape square
-          expect(game_strategy.tetris_map[10][10]).to eq false
-          expect(game_strategy.tetris_map[8][8]).to eq false
-          expect(game_strategy.tetris_map[7][7]).to eq false
-          expect(game_strategy.tetris_map[6][6]).to eq false
+          expect(game_strategy.tetris_map[1][2]).to eq false
+          expect(game_strategy.tetris_map[2][2]).to eq false
+          expect(game_strategy.tetris_map[1][3]).to eq false
+          expect(game_strategy.tetris_map[2][3]).to eq false
         end
       end
 
