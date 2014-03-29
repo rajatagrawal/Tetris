@@ -55,6 +55,27 @@ module Tetris
           shape1 = game_strategy.generate_shape.last
           expect(shape1.color).to eq Gosu::Color::BLUE
         end
+
+        it 'exits the program if there is no space to generate shape' do
+          expect(game_strategy).to receive(:space_empty?).and_return false
+          expect(Kernel).to receive(:exit)
+          game_strategy.generate_shape
+        end
+      end
+
+      describe '#space_empty?' do
+        let(:strategy_config) { { height: 2, width: 2 } }
+        let(:game_strategy) { TestGameControl.new(window, strategy_config) }
+        let(:shape_config) { { x: 1, y: 1 } }
+        let(:shape) { Square.new(window, shape_config) }
+        it 'returns true if there is space to generate a shape' do
+          expect(game_strategy.space_empty?(shape)).to eq true
+        end
+
+        it 'returns false if there is no space to generate a shape' do
+          game_strategy.tetris_map[1][1] = false
+          expect(game_strategy.space_empty?(shape)).to eq false
+        end
       end
 
       describe 'freeze_shape' do

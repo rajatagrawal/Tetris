@@ -17,11 +17,16 @@ module Tetris
 
 
       def generate_shape
-        shape = Shapes.sample
-        config = { x: shape_x(shape),
+        shape_class = Shapes.sample
+        config = { x: shape_x(shape_class),
                    unit_side: unit_side,
                    color: ShapeColors.sample }
-        shapes << shape.new(window, config)
+        shape = shape_class.new(window, config)
+        if space_empty?(shape)
+          shapes << shape
+        else
+          Kernel.exit
+        end
       end
 
       def freeze_shape shape
@@ -48,6 +53,15 @@ module Tetris
         shape_width = shape_class.new(window).width
         max_x = width - shape_width + 1
         (1..max_x).to_a.sample
+      end
+
+      def space_empty?(shape)
+        shape.block_coordinates.each do |coordinate|
+          x = coordinate[0]
+          y = coordinate[1]
+          return false if tetris_map[x][y] == false
+        end
+        true
       end
     end
   end
