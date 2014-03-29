@@ -6,6 +6,7 @@ module Tetris
 
     class TestMovement
       include Window
+      include GameControl
       include Movement
     end
 
