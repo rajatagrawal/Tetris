@@ -79,60 +79,60 @@ module Tetris
 
     describe '#move' do
       it 'moves itself down' do
-        config = { speed: 6 }
-        square = Square.new(window, config)
+        square = Square.new window
+
         expect{square.move('down')}.
-          to change{square.y}.by(square.speed)
+          to change{square.y}.by(1)
         expect{square.move('down')}.
-          to change{square.top_left_block.y}.by(square.speed)
+          to change{square.top_left_block.y}.by(1)
         expect{square.move('down')}.
-          to change{square.top_right_block.y}.by(square.speed)
+          to change{square.top_right_block.y}.by(1)
         expect{square.move('down')}.
-          to change{square.bottom_left_block.y}.by(square.speed)
+          to change{square.bottom_left_block.y}.by(1)
         expect{square.move('down')}.
-          to change{square.bottom_right_block.y}.by(square.speed)
+          to change{square.bottom_right_block.y}.by(1)
       end
 
       it 'moves itself up' do
         square = Square.new(window)
         expect{square.move('up')}.
-          to change{square.y}.by(-1 * square.speed)
+          to change{square.y}.by(-1)
         expect{square.move('up')}.
-          to change{square.top_left_block.y}.by(-1 * square.speed)
+          to change{square.top_left_block.y}.by(-1)
         expect{square.move('up')}.
-          to change{square.top_right_block.y}.by(-1 * square.speed)
+          to change{square.top_right_block.y}.by(-1)
         expect{square.move('up')}.
-          to change{square.bottom_left_block.y}.by(-1 * square.speed)
+          to change{square.bottom_left_block.y}.by(-1)
         expect{square.move('up')}.
-          to change{square.bottom_right_block.y}.by(-1 * square.speed)
+          to change{square.bottom_right_block.y}.by(-1)
       end
 
       it 'moves itself right' do
         square = Square.new(window)
         expect{square.move('right')}.
-          to change{square.x}.by(square.speed)
+          to change{square.x}.by(1)
         expect{square.move('right')}.
-          to change{square.top_left_block.x}.by(square.speed)
+          to change{square.top_left_block.x}.by(1)
         expect{square.move('right')}.
-          to change{square.top_right_block.x}.by(square.speed)
+          to change{square.top_right_block.x}.by(1)
         expect{square.move('right')}.
-          to change{square.bottom_left_block.x}.by(square.speed)
+          to change{square.bottom_left_block.x}.by(1)
         expect{square.move('right')}.
-          to change{square.bottom_right_block.x}.by(square.speed)
+          to change{square.bottom_right_block.x}.by(1)
       end
 
       it 'moves itself left' do
         square = Square.new(window)
         expect{square.move('left')}.
-          to change{square.x}.by(-1 * square.speed)
+          to change{square.x}.by(-1)
         expect{square.move('left')}.
-          to change{square.top_left_block.x}.by(-1 * square.speed)
+          to change{square.top_left_block.x}.by(-1)
         expect{square.move('left')}.
-          to change{square.top_right_block.x}.by(-1 * square.speed)
+          to change{square.top_right_block.x}.by(-1)
         expect{square.move('left')}.
-          to change{square.bottom_left_block.x}.by(-1 * square.speed)
+          to change{square.bottom_left_block.x}.by(-1)
         expect{square.move('left')}.
-          to change{square.bottom_right_block.x}.by(-1 * square.speed)
+          to change{square.bottom_right_block.x}.by(-1)
       end
     end
   end

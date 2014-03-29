@@ -44,26 +44,22 @@ module Tetris
       @top_left_block = Block.new(window, { x: x,
                                            y: y,
                                            unit_side: unit_side,
-                                           color: color,
-                                           speed: speed })
+                                           color: color})
 
       @top_right_block = Block.new(window, { x: x + 1,
                                             y: y,
                                             unit_side: unit_side,
-                                            color: color,
-                                            speed: speed })
+                                            color: color})
 
       @bottom_left_block = Block.new(window, { x: x,
                                             y: y + 1,
                                             unit_side: unit_side,
-                                            color: color,
-                                            speed: speed })
+                                            color: color})
 
       @bottom_right_block = Block.new(window, { x: x + 1,
                                             y: y + 1,
                                             unit_side: unit_side,
-                                            color: color,
-                                            speed: speed })
+                                            color: color})
     end
 
     def blocks
