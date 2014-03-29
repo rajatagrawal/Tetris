@@ -10,7 +10,7 @@ module Tetris
       end
 
       def generate_shape
-        config = { x: random_x_coordinate }
+        config = { x: random_x_coordinate, unit_side: unit_side }
         shapes << [Square, Block].sample.new(window, config)
       end
 

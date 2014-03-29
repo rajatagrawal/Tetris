@@ -34,6 +34,14 @@ module Tetris
           expect(game_strategy).to receive(:random_x_coordinate)
           game_strategy.generate_shape
         end
+
+        it 'assigns the unit side to the generated shape' do
+          config = { unit_side: 50 }
+          game_strategy = TestGameControl.new(window, config)
+          game_strategy.generate_shape
+          shape = game_strategy.shapes.last
+          expect(shape.unit_side).to eq 50
+        end
       end
 
       describe 'freeze_shape' do
