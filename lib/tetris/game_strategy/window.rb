@@ -22,8 +22,13 @@ module Tetris
 
       def initialize_tetris_map
         @tetris_map = {}
-        (1..height).each do |n|
-          @tetris_map[n] = Array.new(width, true)
+        (1..width).each do |n|
+
+          hsh = Hash.new{ |h,k| h[k] = true }
+          (1..height).each do |w|
+            hsh[w]
+          end
+          @tetris_map[n] = hsh
         end
       end
     end

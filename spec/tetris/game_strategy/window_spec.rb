@@ -20,8 +20,9 @@ module Tetris
         it 'stores the tetris map' do
           config = { width: 3, height: 2 }
           game_strategy = TestWindow.new(window, config)
-          tetris_map = { 1=> [true, true, true],
-                         2=> [true, true, true]}
+          tetris_map = { 1=> {1 => true, 2 => true},
+                         2=> {1 => true, 2 => true},
+                         3=> {1 => true, 2 => true}}
           expect(game_strategy.tetris_map).to eq tetris_map
         end
 
