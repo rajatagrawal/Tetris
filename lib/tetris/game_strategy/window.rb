@@ -5,13 +5,13 @@ module Tetris
   module GameStrategy
     module Window
       attr_accessor :window
-      attr_accessor :unit_length
+      attr_accessor :unit_side
       attr_accessor :height, :width
       attr_accessor :shapes, :tetris_map
 
       def initialize(window, config={})
         @window = window
-        @unit_length = config[:unit_length] || 10
+        @unit_side = config[:unit_side] || 10
         @width = config[:width] || 10
         @height = config[:height] || 10
         @shapes = []

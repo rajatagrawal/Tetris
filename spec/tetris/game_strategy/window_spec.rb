@@ -26,14 +26,14 @@ module Tetris
         end
 
         it 'stores the unit length for a block' do
-          config = { unit_length: 15 }
+          config = { unit_side: 15 }
           game_strategy = TestWindow.new(window, config)
-          expect(game_strategy.unit_length).to eq 15
+          expect(game_strategy.unit_side).to eq 15
         end
 
         it 'assigns a default unit length' do
           game_strategy = TestWindow.new window
-          expect(game_strategy.unit_length).to eq 10
+          expect(game_strategy.unit_side).to eq 10
         end
 
         it 'stores blocks width of the tetris window' do
