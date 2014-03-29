@@ -12,6 +12,19 @@ module Tetris
         end
       end
 
+      def space_to_move?(direction, shape)
+        case direction
+        when 'right'
+          space_in_right?(shape)
+        when 'left'
+          space_in_left?(shape)
+        when 'down'
+          space_in_bottom?(shape)
+        when 'up'
+          false
+        end
+      end
+
       def space_in_bottom?(shape)
         shape.block_coordinates.each do |coordinate|
           x = coordinate[0]
@@ -58,20 +71,6 @@ module Tetris
           end
         end
         return true
-      end
-
-
-      def space_to_move?(direction, shape)
-        case direction
-        when 'right'
-          space_in_right?(shape)
-        when 'left'
-          space_in_left?(shape)
-        when 'down'
-          space_in_bottom?(shape)
-        when 'up'
-          false
-        end
       end
     end
   end
