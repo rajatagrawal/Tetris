@@ -1,12 +1,11 @@
 module Tetris
   class Shape
-    attr_accessor :x, :y, :color, :window, :speed, :unit_side
+    attr_accessor :x, :y, :color, :window, :unit_side
 
     def initialize(window, config={})
       @window = window
-      @x = config[:x] || 0
-      @y = config[:y] || 0
-      @speed = config[:speed] || 5
+      @x = config[:x] || 1
+      @y = config[:y] || 1
       @color = config[:color] || Gosu::Color::RED
       @unit_side = config[:unit_side] || 10
     end
@@ -37,13 +36,13 @@ module Tetris
     def move(direction)
       case direction
       when 'down'
-        @y+= speed
+        @y+= 1
       when 'up'
-        @y -= speed
+        @y -= 1
       when 'right'
-        @x += speed
+        @x += 1
       when 'left'
-        @x -= speed
+        @x -= 1
       end
     end
   end

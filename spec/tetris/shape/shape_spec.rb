@@ -10,6 +10,7 @@ module Tetris
         shape = Shape.new(window)
         expect(shape.window).to eq window
       end
+
       it 'stores the coordinates of the shape' do
         config = { x: 5, y:6 }
         shape = Shape.new(window,config)
@@ -19,8 +20,8 @@ module Tetris
 
       it 'assigns default coordinates to the shape' do
         shape = Shape.new window
-        expect(shape.x).to eq 0
-        expect(shape.y).to eq 0
+        expect(shape.x).to eq 1
+        expect(shape.y).to eq 1
       end
 
       it 'assigns color to the shape' do
@@ -38,17 +39,6 @@ module Tetris
         shape = Shape.new(window)
         expect(shape.height).to eq 0
         expect(shape.width).to eq 0
-      end
-
-      it 'stores speed for object to move with' do
-        config = { speed: 6 }
-        shape = Shape.new(window, config)
-        expect(shape.speed).to eq 6
-      end
-
-      it 'assigns default speed to shape' do
-        shape = Shape.new(window)
-        expect(shape.speed).to eq 5
       end
 
       it 'stores unit side for shape' do
@@ -75,28 +65,28 @@ module Tetris
         shape = Shape.new(window)
         direction = 'down'
         expect{shape.move(direction)}.
-          to change{shape.y}.by(shape.speed)
+          to change{shape.y}.by(1)
       end
 
       it 'moves the shape in up direction' do
         shape = Shape.new(window)
         direction = 'up'
         expect{shape.move(direction)}.
-          to change{shape.y}.by(-1 * shape.speed)
+          to change{shape.y}.by(-1)
       end
 
       it 'moves the shape right' do
         shape = Shape.new(window)
         direction = 'right'
         expect{shape.move(direction)}.
-          to change{shape.x}.by(shape.speed)
+          to change{shape.x}.by(1)
       end
 
       it 'moves the shape left' do
         shape = Shape.new(window)
         direction = 'left'
         expect{shape.move(direction)}.
-          to change{shape.x}.by(-1 * shape.speed)
+          to change{shape.x}.by(-1)
       end
     end
 
