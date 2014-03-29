@@ -42,6 +42,13 @@ module Tetris
           shape = game_strategy.shapes.last
           expect(shape.unit_side).to eq 50
         end
+
+        it 'assigns a random color to each shape' do
+          expect(described_class::ShapeColors).to receive(:sample)
+            .and_return('blue')
+          shape1 = game_strategy.generate_shape.last
+          expect(shape1.color).to eq Gosu::Color::BLUE
+        end
       end
 
       describe 'freeze_shape' do

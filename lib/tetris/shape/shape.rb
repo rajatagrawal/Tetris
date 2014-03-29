@@ -41,6 +41,14 @@ module Tetris
         Gosu::Color::GREEN
       when 'red'
         Gosu::Color::RED
+      when 'aqua'
+        Gosu::Color::AQUA
+      when 'yellow'
+        Gosu::Color::YELLOW
+      when 'cyan'
+        Gosu::Color::CYAN
+      when 'fuchsia'
+        Gosu::Color::FUCHSIA
       else
         Gosu::Color::RED
       end
