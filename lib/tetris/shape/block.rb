@@ -7,11 +7,11 @@ module Tetris
     end
 
     def height
-      unit_side
+      1
     end
 
     def width
-      unit_side
+      1
     end
 
     def block_coordinates
@@ -19,10 +19,12 @@ module Tetris
     end
 
     def draw
-      window.draw_quad(x, y, color,
-                       x + unit_side, y, color,
-                       x + unit_side, y + unit_side, color,
-                       x, y + unit_side, color)
+      x_value = x * unit_side
+      y_value = y * unit_side
+      window.draw_quad(x_value, y_value, color,
+                       x_value + unit_side, y_value, color,
+                       x_value + unit_side, y_value + unit_side, color,
+                       x_value, y_value + unit_side, color)
     end
   end
 end
