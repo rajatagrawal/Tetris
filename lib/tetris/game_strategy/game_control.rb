@@ -5,6 +5,8 @@ module Tetris
   module GameStrategy
     module GameControl
 
+      Shapes = [Square, Block]
+
       ShapeColors = ['blue',
                      'red',
                      'green',
@@ -13,15 +15,13 @@ module Tetris
                      'cyan',
                      'fuchsia']
 
-      def random_x_coordinate
-        (1..(width-1)).to_a.sample
-      end
 
       def generate_shape
-        config = { x: random_x_coordinate,
+        shape = Shapes.sample
+        config = { x: shape_x(shape),
                    unit_side: unit_side,
                    color: ShapeColors.sample }
-        shapes << [Square, Block].sample.new(window, config)
+        shapes << shape.new(window, config)
       end
 
       def freeze_shape shape
@@ -42,6 +42,12 @@ module Tetris
           freeze_shape shapes.last
           generate_shape
         end
+      end
+
+      def shape_x(shape_class)
+        shape_width = shape_class.new(window).width
+        max_x = width - shape_width + 1
+        (1..max_x).to_a.sample
       end
     end
   end

@@ -12,11 +12,14 @@ module Tetris
     describe TestGameControl do
       let(:window) { double 'window' }
 
-      describe '#random_coordinates' do
-        it 'generates a pair of random x coordinate' do
+      describe '#shape_x' do
+        it 'generates random x coordinate for a
+          shape between 1 and (width - shape_width + 1 )' do
           game_strategy = TestGameControl.new window
-          width = game_strategy.width
-          expect(game_strategy.random_x_coordinate).to be_between(1, width)
+          shape_width = Square.new(window).width
+          max_value = game_strategy.width - shape_width + 1
+          x = game_strategy.shape_x(Square)
+          expect(x).to be_between(1, max_value)
         end
       end
 
@@ -25,13 +28,16 @@ module Tetris
 
         it 'generates a random shape' do
           expect(game_strategy.shapes.size).to eq 0
+          expect(described_class::Shapes).to receive(:sample)
+            .and_return(Square)
           game_strategy.generate_shape
           expect(game_strategy.shapes.size).to eq 1
-          expect([Square, Block]).to include game_strategy.shapes[0].class
+          shape_class = game_strategy.shapes.last.class
+          expect(shape_class).to eq Square
         end
 
         it 'generates a shape with random x coordinate' do
-          expect(game_strategy).to receive(:random_x_coordinate)
+          expect(game_strategy).to receive(:shape_x)
           game_strategy.generate_shape
         end
 
