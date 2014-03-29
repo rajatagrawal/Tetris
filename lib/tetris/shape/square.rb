@@ -11,11 +11,11 @@ module Tetris
     end
 
     def height
-      2 * unit_side
+      2
     end
 
     def width
-      2 * unit_side
+      2
     end
 
     def draw
@@ -32,10 +32,10 @@ module Tetris
     end
 
     def block_coordinates
-      [[top_left_block.x, top_left_block.y],
-       [top_right_block.x, top_right_block.y],
-       [bottom_left_block.x, bottom_left_block.y],
-       [bottom_right_block.x, bottom_right_block.y]]
+      [[x,y],
+       [x+1,y],
+       [x,y+1],
+       [x+1,y+1]]
     end
 
     private
@@ -47,20 +47,20 @@ module Tetris
                                            color: color,
                                            speed: speed })
 
-      @top_right_block = Block.new(window, { x: x + unit_side,
+      @top_right_block = Block.new(window, { x: x + 1,
                                             y: y,
                                             unit_side: unit_side,
                                             color: color,
                                             speed: speed })
 
       @bottom_left_block = Block.new(window, { x: x,
-                                            y: y + unit_side,
+                                            y: y + 1,
                                             unit_side: unit_side,
                                             color: color,
                                             speed: speed })
 
-      @bottom_right_block = Block.new(window, { x: x + unit_side,
-                                            y: y + unit_side,
+      @bottom_right_block = Block.new(window, { x: x + 1,
+                                            y: y + 1,
                                             unit_side: unit_side,
                                             color: color,
                                             speed: speed })
