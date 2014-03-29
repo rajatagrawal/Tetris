@@ -26,10 +26,10 @@ module Tetris
                    color: 'red' }
         block = Block.new(window, config)
         expect(window).to receive(:draw_quad).
-          with(75,75,'red',
-               90,75,'red',
-               90,90,'red',
-               75,90,'red')
+          with(75,75,Gosu::Color::RED,
+               90,75,Gosu::Color::RED,
+               90,90,Gosu::Color::RED,
+               75,90,Gosu::Color::RED)
           block.draw
       end
     end

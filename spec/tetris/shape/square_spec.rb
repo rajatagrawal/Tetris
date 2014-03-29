@@ -12,7 +12,7 @@ module Tetris
         square = Square.new(window, config)
         expect(square.top_left_block.x).to eq 10
         expect(square.top_left_block.y).to eq 10
-        expect(square.top_left_block.color).to eq 'red'
+        expect(square.top_left_block.color).to eq Gosu::Color::RED
       end
 
       it 'creates and configures top right block' do
@@ -21,7 +21,7 @@ module Tetris
         expect(square.top_right_block.x).to eq 2
         expect(square.top_right_block.y).to eq 1
         expect(square.top_right_block.unit_side).to eq 15
-        expect(square.top_right_block.color).to eq 'red'
+        expect(square.top_right_block.color).to eq Gosu::Color::RED
       end
 
       it 'creates and configures bottom left block' do
@@ -30,7 +30,7 @@ module Tetris
         expect(square.bottom_left_block.x).to eq 1
         expect(square.bottom_left_block.y).to eq 2
         expect(square.bottom_left_block.unit_side).to eq 15
-        expect(square.bottom_left_block.color).to eq 'red'
+        expect(square.bottom_left_block.color).to eq Gosu::Color::RED
       end
 
       it 'creates and configures bottom right block' do
@@ -39,7 +39,7 @@ module Tetris
         expect(square.bottom_right_block.x).to eq 2
         expect(square.bottom_right_block.y).to eq 2
         expect(square.bottom_right_block.unit_side).to eq 15
-        expect(square.bottom_right_block.color).to eq 'red'
+        expect(square.bottom_right_block.color).to eq Gosu::Color::RED
       end
     end
 

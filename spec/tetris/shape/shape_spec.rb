@@ -25,9 +25,9 @@ module Tetris
       end
 
       it 'assigns color to the shape' do
-        config = { color: 'red' }
+        config = { color: 'green' }
         shape = Shape.new(window, config)
-        expect(shape.color).to eq 'red'
+        expect(shape.color).to eq Gosu::Color::GREEN
       end
 
       it 'assigns default color to the shape' do
@@ -87,6 +87,20 @@ module Tetris
         direction = 'left'
         expect{shape.move(direction)}.
           to change{shape.x}.by(-1)
+      end
+    end
+
+    describe 'parse_color' do
+      it 'parses the gosu color constant for given color' do
+        shape = Shape.new window
+        color = shape.parse_color('blue')
+        expect(color).to eq Gosu::Color::BLUE
+      end
+
+      it 'returns red when the color can not be parsed' do
+        shape = Shape.new window
+        color = shape.parse_color('non recognizable color')
+        expect(color).to eq Gosu::Color::RED
       end
     end
 

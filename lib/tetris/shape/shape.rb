@@ -6,7 +6,7 @@ module Tetris
       @window = window
       @x = config[:x] || 1
       @y = config[:y] || 1
-      @color = config[:color] || Gosu::Color::RED
+      @color = parse_color(config[:color])
       @unit_side = config[:unit_side] || 10
     end
 
@@ -31,6 +31,19 @@ module Tetris
 
     def block_coordinates
       []
+    end
+
+    def parse_color(color)
+      case color
+      when 'blue'
+        Gosu::Color::BLUE
+      when 'green'
+        Gosu::Color::GREEN
+      when 'red'
+        Gosu::Color::RED
+      else
+        Gosu::Color::RED
+      end
     end
 
     def move(direction)
