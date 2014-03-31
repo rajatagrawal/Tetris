@@ -1,6 +1,3 @@
-require_relative '../shape/block.rb'
-require_relative '../shape/square.rb'
-
 module Tetris
   module GameStrategy
     module Window
@@ -24,9 +21,11 @@ module Tetris
         @tetris_map = {}
         (1..width).each do |n|
 
-          hsh = Hash.new{ |h,k| h[k] = true }
-          (1..height).each do |w|
-            hsh[w]
+          hsh = Hash.new do |h,k|
+            h[k] = [true, Gosu::Color::NONE]
+          end
+          (1..height).each do |h|
+            hsh[h]
           end
           @tetris_map[n] = hsh
         end
