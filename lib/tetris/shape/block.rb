@@ -15,7 +15,7 @@ module Tetris
     end
 
     def block_coordinates
-      [[x,y]]
+      [[x,y, color]]
     end
 
     def draw
