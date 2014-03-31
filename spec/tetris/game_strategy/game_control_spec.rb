@@ -83,14 +83,17 @@ module Tetris
           config = { height: 5, width: 5 }
           game_strategy = TestGameControl.new(window, config)
           square = Square.new window
-          block_coordinates = [[1,2],[2,2],[1,3],[2,3]]
+          block_coordinates = [[1, 2, 'blue'],
+                               [2, 2, 'blue'],
+                               [1, 3, 'blue'],
+                               [2, 3, 'blue']]
           allow(square).to receive(:block_coordinates).
             and_return(block_coordinates)
           game_strategy.freeze_shape square
-          expect(game_strategy.tetris_map[1][2]).to eq false
-          expect(game_strategy.tetris_map[2][2]).to eq false
-          expect(game_strategy.tetris_map[1][3]).to eq false
-          expect(game_strategy.tetris_map[2][3]).to eq false
+          expect(game_strategy.tetris_map[1][2]).to eq [false, 'blue']
+          expect(game_strategy.tetris_map[2][2]).to eq [false, 'blue']
+          expect(game_strategy.tetris_map[1][3]).to eq [false, 'blue']
+          expect(game_strategy.tetris_map[2][3]).to eq [false, 'blue']
         end
       end
 
