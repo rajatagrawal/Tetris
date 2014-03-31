@@ -59,9 +59,12 @@ module Tetris
 
     describe '#block_coordinates' do
       it 'returns coordinates of all four blocks' do
-        config = { x: 20, y: 20, unit_side: 15}
+        config = { x: 20, y: 20, unit_side: 15, color: 'blue'}
         square = Square.new(window, config)
-        block_coordinates = [[20,20],[21,20],[21,21],[20,21]]
+        block_coordinates = [[20,20, Gosu::Color::BLUE],
+                             [21,20, Gosu::Color::BLUE],
+                             [21,21, Gosu::Color::BLUE],
+                             [20,21, Gosu::Color::BLUE]]
         expect(square.block_coordinates).to match_array block_coordinates
       end
     end
