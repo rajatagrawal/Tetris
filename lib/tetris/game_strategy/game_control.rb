@@ -33,7 +33,8 @@ module Tetris
         shape.block_coordinates.each do |coordinate|
           x = coordinate[0]
           y = coordinate[1]
-          tetris_map[x][y] = false
+          color = coordinate[2]
+          tetris_map[x][y] = [false, color]
         end
       end
 
