@@ -32,10 +32,10 @@ module Tetris
     end
 
     def block_coordinates
-      [[x,y],
-       [x+1,y],
-       [x,y+1],
-       [x+1,y+1]]
+      [[x,y, color],
+       [x+1,y, color],
+       [x,y+1, color],
+       [x+1,y+1, color]]
     end
 
     private
