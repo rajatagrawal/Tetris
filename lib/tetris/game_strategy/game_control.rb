@@ -60,7 +60,7 @@ module Tetris
         shape.block_coordinates.each do |coordinate|
           x = coordinate[0]
           y = coordinate[1]
-          return false if tetris_map[x][y] == false
+          return false if tetris_map[x][y][0] == false
         end
         true
       end
