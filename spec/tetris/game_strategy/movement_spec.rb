@@ -33,7 +33,7 @@ module Tetris
         it 'returns false if the space to move is already occupied' do
           square.x = 2
           square.y = 13
-          game_strategy.tetris_map[2][15] = false
+          game_strategy.tetris_map[2][15] = [false, 'color']
           expect(game_strategy.space_in_bottom?(square)).to eq false
         end
       end
@@ -58,7 +58,7 @@ module Tetris
         it 'returns false if the space to move is already occupied' do
           square.x = 2
           square.y = 13
-          game_strategy.tetris_map[1][13] = false
+          game_strategy.tetris_map[1][13] = [false, 'color']
           expect(game_strategy.space_in_left?(square)).to eq false
         end
       end
@@ -83,7 +83,7 @@ module Tetris
         it 'returns false if the space to move is already occupied' do
           square.x = 13
           square.y = 13
-          game_strategy.tetris_map[15][13] = false
+          game_strategy.tetris_map[15][13] = [false, 'color']
           expect(game_strategy.space_in_right?(square)).to eq false
         end
       end
