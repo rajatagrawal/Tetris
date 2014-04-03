@@ -73,7 +73,7 @@ module Tetris
         end
 
         it 'returns false if there is no space to generate a shape' do
-          game_strategy.tetris_map[1][1] = false
+          game_strategy.tetris_map[1][1] = [false, 'color']
           expect(game_strategy.space_empty?(shape)).to eq false
         end
       end

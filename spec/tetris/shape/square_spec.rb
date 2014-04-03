@@ -8,38 +8,38 @@ module Tetris
     describe '#initialize' do
 
       it 'creates and configures top left block' do
-        config = { x: 10, y: 10, unit_side: 15, color: 'red' }
+        config = { x: 10, y: 10, unit_side: 15, color: 'blue' }
         square = Square.new(window, config)
         expect(square.top_left_block.x).to eq 10
         expect(square.top_left_block.y).to eq 10
-        expect(square.top_left_block.color).to eq Gosu::Color::RED
+        expect(square.top_left_block.color).to eq Gosu::Color::BLUE
       end
 
       it 'creates and configures top right block' do
-        config = { x: 1, y: 1, unit_side: 15, color: 'red' }
+        config = { x: 1, y: 1, unit_side: 15, color: 'blue' }
         square = Square.new(window, config)
         expect(square.top_right_block.x).to eq 2
         expect(square.top_right_block.y).to eq 1
         expect(square.top_right_block.unit_side).to eq 15
-        expect(square.top_right_block.color).to eq Gosu::Color::RED
+        expect(square.top_right_block.color).to eq Gosu::Color::BLUE
       end
 
       it 'creates and configures bottom left block' do
-        config = { x: 1, y: 1, unit_side: 15, color: 'red' }
+        config = { x: 1, y: 1, unit_side: 15, color: 'blue' }
         square = Square.new(window, config)
         expect(square.bottom_left_block.x).to eq 1
         expect(square.bottom_left_block.y).to eq 2
         expect(square.bottom_left_block.unit_side).to eq 15
-        expect(square.bottom_left_block.color).to eq Gosu::Color::RED
+        expect(square.bottom_left_block.color).to eq Gosu::Color::BLUE
       end
 
       it 'creates and configures bottom right block' do
-        config = { x: 1, y: 1, unit_side: 15, color: 'red' }
+        config = { x: 1, y: 1, unit_side: 15, color: 'blue' }
         square = Square.new(window, config)
         expect(square.bottom_right_block.x).to eq 2
         expect(square.bottom_right_block.y).to eq 2
         expect(square.bottom_right_block.unit_side).to eq 15
-        expect(square.bottom_right_block.color).to eq Gosu::Color::RED
+        expect(square.bottom_right_block.color).to eq Gosu::Color::BLUE
       end
     end
 

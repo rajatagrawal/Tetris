@@ -43,11 +43,13 @@ module Tetris
           generate_shape
         end
 
-        move_shape('down')
         if !space_to_move?('down', shapes.last)
           freeze_shape shapes.last
+          squeeze_rows(rows_to_squeeze)
           generate_shape
         end
+
+        move_shape('down')
       end
 
       def shape_x(shape_class)
@@ -60,7 +62,7 @@ module Tetris
         shape.block_coordinates.each do |coordinate|
           x = coordinate[0]
           y = coordinate[1]
-          return false if tetris_map[x][y] == false
+          return false if tetris_map[x][y][0] == false
         end
         true
       end

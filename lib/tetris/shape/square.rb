@@ -7,7 +7,7 @@ module Tetris
 
     def initialize(window, config={})
       super
-      initialize_blocks
+      initialize_blocks(config[:color])
     end
 
     def height
@@ -40,7 +40,7 @@ module Tetris
 
     private
 
-    def initialize_blocks
+    def initialize_blocks(color)
       @top_left_block = Block.new(window, { x: x,
                                            y: y,
                                            unit_side: unit_side,
