@@ -16,7 +16,7 @@ module Tetris
       end
 
       def squeeze_row(row)
-        ((row)..2).each do |r|
+        row.downto(2) do |r|
           (1..width).each do |w|
             @tetris_map[w][r] = @tetris_map[w][r-1]
           end

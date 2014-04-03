@@ -43,11 +43,13 @@ module Tetris
           generate_shape
         end
 
-        move_shape('down')
         if !space_to_move?('down', shapes.last)
           freeze_shape shapes.last
+          squeeze_rows(rows_to_squeeze)
           generate_shape
         end
+
+        move_shape('down')
       end
 
       def shape_x(shape_class)
