@@ -13,8 +13,6 @@ module Tetris
                          x_side, y_side + unit_side, color)
       end
 
-<<<<<<< HEAD
-=======
       def draw_vertice(x,y)
         x_side = x * unit_side
         y_side = y * unit_side
@@ -25,15 +23,12 @@ module Tetris
                          x_side, y_side + 2, color)
 
       end
->>>>>>> freeze_shapes_branch
+
       def draw_map
         (1..height).each do |h|
           (1..width).each do |w|
             draw_block(w,h)
-<<<<<<< HEAD
-=======
             draw_vertice(w,h)
->>>>>>> freeze_shapes_branch
           end
         end
       end
