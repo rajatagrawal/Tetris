@@ -25,9 +25,8 @@ module Tetris
     end
 
     def draw
-      @game_strategy.shapes.each do |shape|
-        shape.draw
-      end
+      @game_strategy.shapes.last.draw
+      @game_strategy.draw_map
     end
   end
 end
