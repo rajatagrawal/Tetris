@@ -13,10 +13,21 @@ module Tetris
                          x_side, y_side + unit_side, color)
       end
 
+      def draw_vertice(x,y)
+        x_side = x * unit_side
+        y_side = y * unit_side
+        color = Gosu::Color::CYAN
+        window.draw_quad(x_side, y_side, color,
+                         x_side + 2, y_side, color,
+                         x_side + 2, y_side + 2, color,
+                         x_side, y_side + 2, color)
+
+      end
       def draw_map
         (1..height).each do |h|
           (1..width).each do |w|
             draw_block(w,h)
+            draw_vertice(w,h)
           end
         end
       end
