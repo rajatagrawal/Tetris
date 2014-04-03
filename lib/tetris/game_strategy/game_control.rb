@@ -1,5 +1,6 @@
 require_relative 'window'
 require_relative 'movement'
+require_relative 'squeeze'
 
 module Tetris
   module GameStrategy

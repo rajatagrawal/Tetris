@@ -1,4 +1,4 @@
-require_relative 'main'
+require_relative 'window'
 module Tetris
   module GameStrategy
     module TetrisMap
@@ -32,7 +32,6 @@ module Tetris
           end
         end
       end
-
     end
   end
 end

@@ -7,6 +7,7 @@ module Tetris
       include Window
       include Movement
       include GameControl
+      include Squeeze
     end
 
     describe TestGameControl do

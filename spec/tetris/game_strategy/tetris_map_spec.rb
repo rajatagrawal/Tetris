@@ -5,7 +5,6 @@ module Tetris
   module GameStrategy
     class TestTetrisMap
       include Window
-      include GameControl
       include TetrisMap
     end
 
@@ -28,6 +27,7 @@ module Tetris
           it 'draws every block of the map' do
             config = { height: 2, width: 2}
             game_strategy = described_class.new(window, config)
+            allow(game_strategy).to receive(:draw_vertice)
             expect(game_strategy).to receive(:draw_block).with(1,1)
             expect(game_strategy).to receive(:draw_block).with(1,2)
             expect(game_strategy).to receive(:draw_block).with(2,1)
