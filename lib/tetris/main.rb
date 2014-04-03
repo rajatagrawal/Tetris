@@ -1,8 +1,10 @@
 require 'gosu'
 require_relative 'game_strategy/main'
+require_relative 'input_output/keyboard'
 
 module Tetris
   class GameWindow < Gosu::Window
+    include InputOutput::Keyboard
 
     def initialize
       super(1280,1080,false)
@@ -16,6 +18,10 @@ module Tetris
     def update
       sleep(0.1)
       @game_strategy.run_game
+    end
+
+    def button_down(id)
+      keyboard_listener(id)
     end
 
     def draw
