@@ -1,4 +1,4 @@
-require_relative 'main'
+require_relative 'window'
 module Tetris
   module GameStrategy
     module Squeeze
@@ -6,7 +6,7 @@ module Tetris
         squeeze_row = (1..height).to_a
         (1..height).each do |row|
           (1..width).each do |col|
-            if @tetris_map[col][row] == true
+            if @tetris_map[col][row][0] == true
               squeeze_row.delete(row)
               break
             end
@@ -23,7 +23,7 @@ module Tetris
         end
 
         (1..width).each do |w|
-          @tetris_map[w][1] = true
+          @tetris_map[w][1] = [true, Gosu::Color::NONE]
         end
       end
 

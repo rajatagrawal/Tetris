@@ -8,9 +8,6 @@ module Tetris
       include Squeeze
     end
 
-    def expected_map
-    end
-
     describe TestSqueeze do
       let(:window) { double 'window' }
       let(:config) { { width: 4, height: 3 } }
@@ -20,8 +17,8 @@ module Tetris
       describe '#rows_to_squeeze' do
         it 'returns rows that can be squeezed' do
           (1..game_strategy.width).each do |n|
-            tetris_map[n][3] = false
-            tetris_map[n][2] = false
+            tetris_map[n][3] = [false, 'blue']
+            tetris_map[n][2] = [false, 'blue']
           end
 
           expect(game_strategy.rows_to_squeeze).to eq [2,3]
@@ -30,15 +27,16 @@ module Tetris
 
       describe '#squeeze_row' do
         it 'collapes the row to squeeze and moves row on top of it down by 1 row' do
-          tetris_map[2][3] = false
+          tetris_map[2][3] = [false, 'yellow']
           (1..game_strategy.width).each do |n|
-            tetris_map[n][2] = false
+            tetris_map[n][2] = [false, 'blue']
           end
-          tetris_map[1][1] = false
-          expected_map = { 1 => { 1 => true, 2 => false, 3 => true  },
-                           2 => { 1 => true, 2 => true, 3 => false },
-                           3 => { 1 => true, 2 => true, 3 => true },
-                           4 => { 1 => true, 2 => true, 3 => true } }
+          tetris_map[1][1] = [false, 'cyan']
+          color = Gosu::Color::NONE
+          expected_map = { 1 => { 1 => [true, color], 2 => [false, 'cyan'], 3 => [true, color]  },
+                           2 => { 1 => [true, color], 2 => [true, color], 3 => [false, 'yellow'] },
+                           3 => { 1 => [true, color], 2 => [true, color], 3 => [true, color] },
+                           4 => { 1 => [true, color], 2 => [true, color], 3 => [true, color] } }
           game_strategy.squeeze_row(2)
           expect(tetris_map).to eq expected_map
         end
