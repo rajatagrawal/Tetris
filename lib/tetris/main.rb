@@ -16,12 +16,9 @@ module Tetris
     end
 
     def update
+      keyboard_listener
       sleep(0.1)
       @game_strategy.run_game
-    end
-
-    def button_down(id)
-      keyboard_listener(id)
     end
 
     def draw
