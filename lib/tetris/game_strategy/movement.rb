@@ -1,8 +1,3 @@
-require_relative '../shape/block'
-require_relative '../shape/square'
-require_relative 'window'
-require_relative 'game_control'
-
 module Tetris
   module GameStrategy
     module Movement

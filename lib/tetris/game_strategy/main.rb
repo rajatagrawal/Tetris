@@ -1,13 +1,13 @@
-# require_relative 'window'
-# require_relative 'movement'
-# require_relative 'game_control'
-# require_relative 'squeeze'
 require_relative 'tetris_map'
+require_relative 'movement'
+require_relative '../shape/square'
+require_relative '../shape/block'
 
 module Tetris
   module GameStrategy
     class Main
       include TetrisMap
+      include Movement
 
       attr_accessor :window, :tetris_map
       attr_accessor :width, :height
