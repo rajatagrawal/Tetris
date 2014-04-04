@@ -12,10 +12,12 @@ module Tetris
       attr_accessor :window, :tetris_map
       attr_accessor :width, :height
       attr_accessor :shapes, :unit_side
+      attr_accessor :speed
 
       def initialize(window, config={})
         @window = window
         @shapes = []
+        @speed = config[:speed] || 1
         @unit_side = config[:unit_side] || 10
         @width = config[:width] || 10
         @height = config[:height] || 10
