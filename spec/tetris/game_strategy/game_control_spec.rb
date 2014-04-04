@@ -1,22 +1,15 @@
 require 'spec_helper'
-require 'tetris/game_strategy/game_control'
+require 'tetris/game_strategy/main'
 
 module Tetris
   module GameStrategy
-    class TestGameControl
-      include Window
-      include Movement
-      include GameControl
-      include Squeeze
-    end
-
-    describe TestGameControl do
+    describe Main do
       let(:window) { double 'window' }
 
       describe '#shape_x' do
         it 'generates random x coordinate for a
           shape between 1 and (width - shape_width + 1 )' do
-          game_strategy = TestGameControl.new window
+          game_strategy = described_class.new window
           shape_width = Square.new(window).width
           max_value = game_strategy.width - shape_width + 1
           x = game_strategy.shape_x(Square)
@@ -25,7 +18,7 @@ module Tetris
       end
 
       describe '#generate_shape' do
-        let(:game_strategy) { TestGameControl.new window }
+        let(:game_strategy) { described_class.new window }
 
         it 'generates a random shape' do
           expect(game_strategy.shapes.size).to eq 0
@@ -44,7 +37,7 @@ module Tetris
 
         it 'assigns the unit side to the generated shape' do
           config = { unit_side: 50 }
-          game_strategy = TestGameControl.new(window, config)
+          game_strategy = described_class.new(window, config)
           game_strategy.generate_shape
           shape = game_strategy.shapes.last
           expect(shape.unit_side).to eq 50
@@ -66,7 +59,7 @@ module Tetris
 
       describe '#space_empty?' do
         let(:strategy_config) { { height: 2, width: 2 } }
-        let(:game_strategy) { TestGameControl.new(window, strategy_config) }
+        let(:game_strategy) { described_class.new(window, strategy_config) }
         let(:shape_config) { { x: 1, y: 1 } }
         let(:shape) { Square.new(window, shape_config) }
         it 'returns true if there is space to generate a shape' do
@@ -82,7 +75,7 @@ module Tetris
       describe 'freeze_shape' do
         it 'stores the coordinates of the shape in tetris map' do
           config = { height: 5, width: 5 }
-          game_strategy = TestGameControl.new(window, config)
+          game_strategy = described_class.new(window, config)
           square = Square.new window
           block_coordinates = [[1, 2, 'blue'],
                                [2, 2, 'blue'],
@@ -99,7 +92,7 @@ module Tetris
       end
 
       describe '#run_game' do
-        let(:game_strategy) { TestGameControl.new window }
+        let(:game_strategy) { described_class.new window }
         it 'initializes the game by generating a shape' do
           expect(game_strategy.shapes.size).to eq 0
           game_strategy.run_game

@@ -84,7 +84,7 @@ module Tetris
       describe '#move_shape' do
         let(:game_strategy) { described_class.new window }
 
-        xit 'moves a shape if there is space to move' do
+        it 'moves a shape if there is space to move' do
           allow(game_strategy).to receive(:space_to_move?).and_return(true)
           game_strategy.generate_shape
           shape = game_strategy.shapes.last
@@ -92,7 +92,7 @@ module Tetris
           game_strategy.move_shape('down')
         end
 
-        xit 'only moves the last shape' do
+        it 'only moves the last shape' do
           game_strategy.generate_shape
           shape = game_strategy.shapes.last
           game_strategy.generate_shape

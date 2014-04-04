@@ -1,7 +1,3 @@
-require_relative 'window'
-require_relative 'movement'
-require_relative 'squeeze'
-
 module Tetris
   module GameStrategy
     module GameControl
@@ -15,7 +11,6 @@ module Tetris
                      'yellow',
                      'cyan',
                      'fuchsia']
-
 
       def generate_shape
         shape_class = Shapes.sample
