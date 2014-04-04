@@ -1,7 +1,20 @@
-require_relative 'window'
 module Tetris
   module GameStrategy
     module TetrisMap
+
+      def initialize_tetris_map
+        @tetris_map = {}
+        (1..width).each do |n|
+
+          hsh = Hash.new do |h,k|
+            h[k] = [true, Gosu::Color::NONE]
+          end
+          (1..height).each do |h|
+            hsh[h]
+          end
+          @tetris_map[n] = hsh
+        end
+      end
 
       def draw_block(x,y)
         x_side = x * unit_side
