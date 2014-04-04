@@ -1,14 +1,9 @@
 require 'spec_helper'
-require 'tetris/game_strategy/tetris_map'
+require 'tetris/game_strategy/main'
 
 module Tetris
   module GameStrategy
-    class TestTetrisMap
-      include Window
-      include TetrisMap
-    end
-
-    describe TestTetrisMap do
+    describe Main do
       let(:window) { double 'window' }
       describe '#draw_block' do
         it 'draws a block of tetris map' do
