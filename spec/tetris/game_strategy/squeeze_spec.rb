@@ -1,17 +1,12 @@
 require 'spec_helper'
-require 'tetris/game_strategy/squeeze'
+require 'tetris/game_strategy/main'
 
 module Tetris
   module GameStrategy
-    class TestSqueeze
-      include Window
-      include Squeeze
-    end
-
-    describe TestSqueeze do
+    describe Main do
       let(:window) { double 'window' }
       let(:config) { { width: 4, height: 3 } }
-      let(:game_strategy) { TestSqueeze.new(window, config) }
+      let(:game_strategy) { described_class.new(window, config) }
       let(:tetris_map) { game_strategy.tetris_map }
 
       describe '#rows_to_squeeze' do

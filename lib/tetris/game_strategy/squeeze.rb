@@ -1,4 +1,3 @@
-require_relative 'window'
 module Tetris
   module GameStrategy
     module Squeeze

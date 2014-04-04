@@ -1,5 +1,6 @@
 require_relative 'tetris_map'
 require_relative 'movement'
+require_relative 'squeeze'
 require_relative '../shape/square'
 require_relative '../shape/block'
 
@@ -8,6 +9,7 @@ module Tetris
     class Main
       include TetrisMap
       include Movement
+      include Squeeze
 
       attr_accessor :window, :tetris_map
       attr_accessor :width, :height
