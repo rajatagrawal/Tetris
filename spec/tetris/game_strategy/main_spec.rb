@@ -61,6 +61,11 @@ module Tetris
           expect(game_strategy.speed).to eq 1
         end
 
+        it 'initializes game score to zero' do
+          game_strategy = described_class.new window
+          expect(game_strategy.score).to eq 0
+        end
+
         it 'stores the tetris map' do
           config = { width: 3, height: 2 }
           game_strategy = described_class.new(window, config)
