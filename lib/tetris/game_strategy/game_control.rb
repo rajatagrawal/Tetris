@@ -2,27 +2,11 @@ module Tetris
   module GameStrategy
     module GameControl
 
-      Shapes = [I_Shape,
-                J_Shape,
-                L_Shape,
-                O_Shape,
-                S_Shape,
-                T_Shape,
-                Z_Shape]
-
-      ShapeColors = ['blue',
-                     'red',
-                     'green',
-                     'aqua',
-                     'yellow',
-                     'cyan',
-                     'fuchsia']
-
       def generate_shape
-        shape_class = Shapes.sample
+        shape_class = Constants::Shapes.sample
         config = { x: shape_x(shape_class),
                    unit_side: unit_side,
-                   color: ShapeColors.sample }
+                   color: Constants::ShapeColors.sample }
         shape = shape_class.new(window, config)
         if space_empty?(shape)
           @shape = shape

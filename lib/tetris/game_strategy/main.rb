@@ -2,6 +2,7 @@ require_relative 'game_strategy'
 module Tetris
   module GameStrategy
     class Main
+      include Constants
       include TetrisMap
       include Movement
       include Squeeze
