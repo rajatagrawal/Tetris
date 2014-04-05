@@ -1,6 +1,7 @@
 require_relative '../shape/square'
 require_relative '../shape/block'
 require_relative '../shape/sshape'
+require_relative '../shape/z_shape'
 require_relative 'tetris_map'
 require_relative 'movement'
 require_relative 'squeeze'
