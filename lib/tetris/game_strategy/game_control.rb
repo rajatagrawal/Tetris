@@ -8,7 +8,8 @@ module Tetris
                 Z_Shape,
                 I_Shape,
                 J_Shape,
-                L_Shape]
+                L_Shape,
+                T_Shape]
 
       ShapeColors = ['blue',
                      'red',
