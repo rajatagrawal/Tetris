@@ -24,6 +24,7 @@ module Tetris
     def draw
       @game_strategy.shape.draw
       @game_strategy.draw_map
+      @game_strategy.show_score
     end
   end
 end

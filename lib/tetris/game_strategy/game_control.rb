@@ -41,6 +41,7 @@ module Tetris
 
         if !space_to_move?('down', shape)
           freeze_shape shape
+          rows_to_squeeze.size.times { increase_score(20) }
           squeeze_rows(rows_to_squeeze)
           generate_shape
         end
