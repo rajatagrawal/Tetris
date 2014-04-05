@@ -2,8 +2,8 @@ require_relative 'shape'
 require_relative 'block'
 module Tetris
   class S_Shape < Shape
-    attr_accessor :top_left_block, :bottom_left_block
-    attr_accessor :top_right_block, :bottom_right_block
+    attr_accessor :block_1, :block_2
+    attr_accessor :block_3, :block_4
 
     def initialize(window, config={})
       super
@@ -11,11 +11,11 @@ module Tetris
     end
 
     def height
-      3
+      2
     end
 
     def width
-      2
+      3
     end
 
     def block_coordinates
@@ -40,32 +40,33 @@ module Tetris
     private
 
     def blocks
-      [ top_left_block,
-        bottom_left_block,
-        top_right_block,
-        bottom_right_block]
+      [ block_1,
+        block_2,
+        block_3,
+        block_4]
     end
 
     def initialize_blocks(color)
-      @top_left_block = Block.new(window, { x: x,
-                                            y: y,
-                                            unit_side: unit_side,
-                                            color: color})
+      @block_1 = Block.new(window, { x: x,
+                                     y: y+1,
+                                     unit_side: unit_side,
+                                     color: color})
 
-      @bottom_left_block = Block.new(window, { x: x,
-                                            y: y+1,
-                                            unit_side: unit_side,
-                                            color: color})
+      @block_2 = Block.new(window, { x: x+1,
+                                     y: y+1,
+                                     unit_side: unit_side,
+                                     color: color})
 
-      @top_right_block = Block.new(window, { x: x+1,
-                                            y: y+1,
-                                            unit_side: unit_side,
-                                            color: color})
+      @block_3 = Block.new(window, { x: x+1,
+                                     y: y,
+                                     unit_side: unit_side,
+                                     color: color})
 
-      @bottom_right_block = Block.new(window, { x: x+1,
-                                            y: y+2,
-                                            unit_side: unit_side,
-                                            color: color})
+
+      @block_4 = Block.new(window, { x: x+2,
+                                     y: y,
+                                     unit_side: unit_side,
+                                     color: color})
     end
   end
 end
