@@ -1,7 +1,7 @@
 require_relative 'shape'
 require_relative 'block'
 module Tetris
-  class SShape < Shape
+  class S_Shape < Shape
     attr_accessor :top_left_block, :bottom_left_block
     attr_accessor :top_right_block, :bottom_right_block
 

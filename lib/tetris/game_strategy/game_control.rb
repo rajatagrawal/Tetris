@@ -2,7 +2,7 @@ module Tetris
   module GameStrategy
     module GameControl
 
-      Shapes = [Square, Block, SShape, Z_Shape]
+      Shapes = [Square, Block, S_Shape, Z_Shape]
 
       ShapeColors = ['blue',
                      'red',
