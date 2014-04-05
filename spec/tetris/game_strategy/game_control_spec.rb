@@ -21,13 +21,11 @@ module Tetris
         let(:game_strategy) { described_class.new window }
 
         it 'generates a random shape' do
-          expect(game_strategy.shapes.size).to eq 0
+          expect(game_strategy.shape).to eq nil
           expect(described_class::Shapes).to receive(:sample)
             .and_return(Square)
           game_strategy.generate_shape
-          expect(game_strategy.shapes.size).to eq 1
-          shape_class = game_strategy.shapes.last.class
-          expect(shape_class).to eq Square
+          expect(game_strategy.shape).to be_instance_of Square
         end
 
         it 'generates a shape with random x coordinate' do
@@ -39,14 +37,15 @@ module Tetris
           config = { unit_side: 50 }
           game_strategy = described_class.new(window, config)
           game_strategy.generate_shape
-          shape = game_strategy.shapes.last
+          shape = game_strategy.shape
           expect(shape.unit_side).to eq 50
         end
 
         it 'assigns a random color to each shape' do
           expect(described_class::ShapeColors).to receive(:sample)
             .and_return('blue')
-          shape1 = game_strategy.generate_shape.last
+          game_strategy.generate_shape
+          shape1 = game_strategy.shape
           expect(shape1.color).to eq Gosu::Color::BLUE
         end
 
@@ -94,9 +93,9 @@ module Tetris
       describe '#run_game' do
         let(:game_strategy) { described_class.new window }
         it 'initializes the game by generating a shape' do
-          expect(game_strategy.shapes.size).to eq 0
+          expect(game_strategy.shape).to eq nil
           game_strategy.run_game
-          expect(game_strategy.shapes.size).to eq 1
+          expect(game_strategy.shape).to_not eq nil
         end
 
         context 'when moving down and there is no space to move' do

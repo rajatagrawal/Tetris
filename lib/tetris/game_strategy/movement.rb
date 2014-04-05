@@ -3,8 +3,8 @@ module Tetris
     module Movement
 
       def move_shape(direction)
-        if space_to_move?(direction, shapes.last)
-          shapes.last.move(direction)
+        if space_to_move?(direction, shape)
+          shape.move(direction)
         end
       end
 

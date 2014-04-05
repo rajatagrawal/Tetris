@@ -84,24 +84,13 @@ module Tetris
       describe '#move_shape' do
         let(:game_strategy) { described_class.new window }
 
-        it 'moves a shape if there is space to move' do
+        it 'moves shape if there is space to move' do
           allow(game_strategy).to receive(:space_to_move?).and_return(true)
           game_strategy.generate_shape
-          shape = game_strategy.shapes.last
+          shape = game_strategy.shape
           expect(shape).to receive(:move).with('down')
           game_strategy.move_shape('down')
         end
-
-        it 'only moves the last shape' do
-          game_strategy.generate_shape
-          shape = game_strategy.shapes.last
-          game_strategy.generate_shape
-          shape2 = game_strategy.shapes.last
-          expect(shape).not_to receive(:move)
-          expect(shape2).to receive(:move).with('down')
-          game_strategy.move_shape('down')
-        end
-
       end
 
       describe '#space_to_move?' do

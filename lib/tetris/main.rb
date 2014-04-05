@@ -22,7 +22,7 @@ module Tetris
     end
 
     def draw
-      @game_strategy.shapes.last.draw
+      @game_strategy.shape.draw
       @game_strategy.draw_map
     end
   end

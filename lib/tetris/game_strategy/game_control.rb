@@ -19,7 +19,7 @@ module Tetris
                    color: ShapeColors.sample }
         shape = shape_class.new(window, config)
         if space_empty?(shape)
-          shapes << shape
+          @shape = shape
         else
           Kernel.exit
         end
@@ -35,12 +35,12 @@ module Tetris
       end
 
       def run_game
-        if shapes.size == 0
+        if shape == nil
           generate_shape
         end
 
-        if !space_to_move?('down', shapes.last)
-          freeze_shape shapes.last
+        if !space_to_move?('down', shape)
+          freeze_shape shape
           squeeze_rows(rows_to_squeeze)
           generate_shape
         end

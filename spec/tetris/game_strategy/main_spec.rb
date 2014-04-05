@@ -45,9 +45,9 @@ module Tetris
           expect(game_strategy.height).to eq 10
         end
 
-        it 'initializes the shape array' do
+        it 'initializes the shape property' do
           game_strategy = described_class.new window
-          expect(game_strategy.shapes).to eq []
+          expect(game_strategy.shape).to eq nil
         end
 
         it 'stores the speed of shape movements' do
