@@ -60,6 +60,13 @@ module Tetris
       end
     end
 
+    describe '#rotate' do
+      it 'is an abstract method to be implemented by subclasses' do
+        shape = Shape.new window
+        expect(shape.rotate).to eq nil
+      end
+    end
+
     describe '#move' do
       it 'moves the shape in down direction' do
         shape = Shape.new(window)

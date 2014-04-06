@@ -29,6 +29,9 @@ module Tetris
     def draw
     end
 
+    def rotate
+    end
+
     def block_coordinates
       []
     end
