@@ -51,6 +51,17 @@ module Tetris
         shape = Shape.new window
         expect(shape.unit_side).to eq 10
       end
+
+      it 'stores rotation state to shape' do
+        config = { state: 'rotation_state' }
+        shape = Shape.new(window, config)
+        expect(shape.state).to eq 'rotation_state'
+      end
+
+      it 'assigns default rotation state to shape' do
+        shape = Shape.new window
+        expect(shape.state).to eq '0_degrees'
+      end
     end
 
     describe '#draw' do
