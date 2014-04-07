@@ -1,69 +1,27 @@
-require_relative 'shape'
-require_relative 'block'
+require_relative 'complex_shape'
 module Tetris
-  class I_Shape < Shape
-    attr_accessor :top_left_block, :bottom_left_block
-    attr_accessor :top_right_block, :bottom_right_block
-
-    def initialize(window, config={})
-      super
-      initialize_blocks(config[:color])
-    end
-
-    def height
-      1
-    end
-
-    def width
-      4
-    end
-
-    def block_coordinates
-      blocks.map do |block|
-        [block.x, block.y, block.color]
-      end
-    end
-
-    def draw
-      blocks.each do |block|
-        block.draw
-      end
-    end
-
-    def move(direction)
-      super
-      blocks.each do |block|
-        block.move(direction)
-      end
-    end
+  class I_Shape < ComplexShape
 
     private
 
-    def blocks
-      [ top_left_block,
-        bottom_left_block,
-        top_right_block,
-        bottom_right_block]
-    end
-
     def initialize_blocks(color)
-      @top_left_block = Block.new(window, { x: x,
+      @block_1 = Block.new(window, { x: x,
                                             y: y,
                                             unit_side: unit_side,
                                             color: color})
 
-      @top_right_block = Block.new(window, { x: x+1,
+      @block_2 = Block.new(window, { x: x+1,
                                             y: y,
                                             unit_side: unit_side,
                                             color: color})
 
-      @bottom_left_block = Block.new(window, { x: x+2,
+      @block_3 = Block.new(window, { x: x+2,
                                             y: y,
                                             unit_side: unit_side,
                                             color: color})
 
 
-      @bottom_right_block = Block.new(window, { x: x+3,
+      @block_4 = Block.new(window, { x: x+3,
                                             y: y,
                                             unit_side: unit_side,
                                             color: color})
