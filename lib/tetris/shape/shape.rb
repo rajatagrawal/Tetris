@@ -34,8 +34,19 @@ module Tetris
     def rotate
     end
 
+    def rotated_coordinates(orientation)
+      []
+    end
+
+    def rotated_block_coordinates(orientation)
+      []
+    end
+
     def block_coordinates
       []
+    end
+
+    def block_coordinates=(coordinates)
     end
 
     def parse_color(color)
