@@ -40,12 +40,11 @@ module Tetris
         if !fits_in_map?(shape, '90_degrees')
           return false
         end
-        shape.rotated_block_coordinates('90_degrees').each do |coordinate|
-          x = coordinate[0]
-          y = coordinate[1]
+        shape.rotated_block_coordinates('90_degrees').each do |coordinates|
+          x, y = coordinates
 
           if tetris_map[x][y][0] == false
-            false
+            return false
           end
         end
         true
@@ -55,12 +54,11 @@ module Tetris
         if !fits_in_map?(shape, '180_degrees')
           return false
         end
-        shape.rotated_block_coordinates('180_degrees').each do |coordinate|
-          x = coordinate[0]
-          y = coordinate[1]
+        shape.rotated_block_coordinates('180_degrees').each do |coordinates|
+          x,y = coordinates
 
           if tetris_map[x][y][0] == false
-            false
+            return false
           end
         end
         true
@@ -70,12 +68,11 @@ module Tetris
         if !fits_in_map?(shape, '270_degrees')
           return false
         end
-        shape.rotated_block_coordinates('270_degrees').each do |coordinate|
-          x = coordinate[0]
-          y = coordinate[1]
+        shape.rotated_block_coordinates('270_degrees').each do |coordinates|
+          x,y = coordinates
 
           if tetris_map[x][y][0] == false
-            false
+            return false
           end
         end
         true
@@ -86,12 +83,11 @@ module Tetris
           return false
         end
 
-        shape.rotated_block_coordinates('0_degrees').each do |coordinate|
-          x = coordinate[0]
-          y = coordinate[1]
+        shape.rotated_block_coordinates('0_degrees').each do |coordinates|
+          x,y = coordinates[0]
 
           if tetris_map[x][y][0] == false
-            false
+            return false
           end
         end
         true
