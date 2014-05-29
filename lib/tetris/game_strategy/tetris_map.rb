@@ -41,7 +41,11 @@ module Tetris
         (1..height).each do |h|
           (1..width).each do |w|
             draw_block(w,h)
-            draw_vertice(w,h)
+          end
+        end
+        (1..(height + 1)).each do |h|
+          (1..(width + 1)).each do |w|
+            draw_vertice(w, h)
           end
         end
       end

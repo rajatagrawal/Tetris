@@ -1,6 +1,14 @@
 require_relative 'complex_shape'
 module Tetris
   class O_Shape < ComplexShape
+    def rotated_coordinates(orientation)
+      [@x, @y]
+    end
+
+    def rotated_block_coordinates(orientation)
+      block_coordinates
+    end
+
     private
 
     def initialize_blocks(color)

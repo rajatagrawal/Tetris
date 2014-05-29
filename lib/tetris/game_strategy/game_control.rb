@@ -4,7 +4,7 @@ module Tetris
 
       def generate_shape
         shape_class = Constants::Shapes.sample
-        config = { x: shape_x(shape_class),
+        config = { x: width/2,
                    unit_side: unit_side,
                    color: Constants::ShapeColors.sample }
         shape = shape_class.new(window, config)
@@ -37,12 +37,6 @@ module Tetris
         end
 
         move_shape('down')
-      end
-
-      def shape_x(shape_class)
-        shape_width = shape_class.new(window).width
-        max_x = width - shape_width + 1
-        (1..max_x).to_a.sample
       end
 
       def space_empty?(shape)

@@ -5,6 +5,7 @@ module Tetris
       include Constants
       include TetrisMap
       include Movement
+      include Rotation
       include Squeeze
       include Score
       include GameControl

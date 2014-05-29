@@ -19,6 +19,13 @@ module Tetris
       end
     end
 
+    def block_coordinates=(coordinates)
+      blocks.map!.with_index do |block, index|
+        block.x = coordinates[index][0]
+        block.y = coordinates[index][1]
+      end
+    end
+
     def height
       coordinates = blocks.map(&:y).minmax
       coordinates[1] - coordinates[0] + 1
@@ -40,6 +47,31 @@ module Tetris
       blocks.each do |block|
         block.move(direction)
       end
+    end
+
+    def rotate
+      case orientation
+      when '0_degrees'
+        coordinates = rotated_coordinates '90_degrees'
+        rotated_block = rotated_block_coordinates '90_degrees'
+        self.orientation = '90_degrees'
+      when '90_degrees'
+        coordinates = rotated_coordinates '180_degrees'
+        rotated_block = rotated_block_coordinates '180_degrees'
+        self.orientation = '180_degrees'
+      when '180_degrees'
+        coordinates = rotated_coordinates '270_degrees'
+        rotated_block = rotated_block_coordinates '270_degrees'
+        self.orientation = '270_degrees'
+      when '270_degrees'
+        coordinates = rotated_coordinates '0_degrees'
+        rotated_block = rotated_block_coordinates '0_degrees'
+        self.orientation = '0_degrees'
+      end
+
+      @x = coordinates[0]
+      @y = coordinates[1]
+      self.block_coordinates = rotated_block
     end
 
     private

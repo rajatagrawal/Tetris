@@ -8,6 +8,12 @@ module Tetris
         end
       end
 
+      def drop_shape
+        while space_to_move?('down', shape) do
+          shape.move('down')
+        end
+      end
+
       def space_to_move?(direction, shape)
         case direction
         when 'right'
