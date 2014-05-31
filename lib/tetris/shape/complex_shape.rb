@@ -21,8 +21,7 @@ module Tetris
 
     def block_coordinates=(coordinates)
       blocks.map!.with_index do |block, index|
-        block.x = coordinates[index][0]
-        block.y = coordinates[index][1]
+        block.x, block.y = coordinates[index]
       end
     end
 
@@ -69,19 +68,17 @@ module Tetris
         self.orientation = '0_degrees'
       end
 
-      @x = coordinates[0]
-      @y = coordinates[1]
+      @x, @y = coordinates
       self.block_coordinates = rotated_block
     end
 
     private
 
     def blocks
-      [ block_1,
-        block_2,
-        block_3,
-        block_4]
+      [ block_1, block_2,
+        block_3, block_4]
     end
+
     def initialize_blocks(color)
       @block_1 = Block.new(window, { x: x,
                                      y: y,

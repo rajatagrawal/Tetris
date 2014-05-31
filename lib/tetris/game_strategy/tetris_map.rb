@@ -5,7 +5,6 @@ module Tetris
       def initialize_tetris_map
         @tetris_map = {}
         (1..width).each do |n|
-
           hsh = Hash.new do |h,k|
             h[k] = [true, Gosu::Color::NONE]
           end

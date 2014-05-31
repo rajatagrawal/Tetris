@@ -16,12 +16,7 @@ module Tetris
       end
 
       def freeze_shape shape
-        shape.block_coordinates.each do |coordinate|
-          x = coordinate[0]
-          y = coordinate[1]
-          color = coordinate[2]
-          tetris_map[x][y] = [false, color]
-        end
+        shape.block_coordinates.each { |x,y,color| tetris_map[x][y] = [false, color] }
       end
 
       def run_game
@@ -40,9 +35,8 @@ module Tetris
       end
 
       def space_empty?(shape)
-        shape.block_coordinates.each do |coordinate|
-          x = coordinate[0]
-          y = coordinate[1]
+        shape.block_coordinates.each do |coordinates|
+          x,y = coordinates
           return false if tetris_map[x][y][0] == false
         end
         true
