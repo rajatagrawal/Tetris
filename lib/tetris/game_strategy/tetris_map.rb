@@ -13,6 +13,10 @@ module Tetris
           end
           @tetris_map[n] = hsh
         end
+
+        @background = Gosu::Image.new(window,
+                                      'assets/tetris_background.png',
+                                      false)
       end
 
       def draw_block(x,y)
@@ -37,6 +41,7 @@ module Tetris
       end
 
       def draw_map
+        @background.draw(0,0,-1)
         (1..height).each do |h|
           (1..width).each do |w|
             draw_block(w,h)
