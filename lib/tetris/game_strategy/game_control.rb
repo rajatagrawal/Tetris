@@ -2,47 +2,41 @@ module Tetris
   module GameStrategy
     module GameControl
 
-      def generate_shape
-        shape_class = Constants::Shapes.sample
+      def generate_shape(shape_class)
         config = { x: width/2,
                    unit_side: unit_side,
                    color: Constants::ShapeColors.sample }
-        shape = shape_class.new(window, config)
-        if space_empty?(shape)
-          @shape = shape
-        else
-          Kernel.exit
-        end
+        shape_class.new(window, config)
       end
 
       def freeze_shape shape
-        shape.block_coordinates.each do |coordinate|
-          x = coordinate[0]
-          y = coordinate[1]
-          color = coordinate[2]
-          tetris_map[x][y] = [false, color]
-        end
+        shape.block_coordinates.each { |x,y,color| tetris_map[x][y] = [false, color] }
       end
 
       def run_game
         if shape == nil
-          generate_shape
+          @shape = generate_shape Constants::Shapes.sample
+          @next_shape = generate_shape Constants::Shapes.sample
         end
 
         if !space_to_move?('down', shape)
           freeze_shape shape
           rows_to_squeeze.size.times { increase_score(20) }
           squeeze_rows(rows_to_squeeze)
-          generate_shape
+          if space_empty?(@next_shape)
+            @shape = @next_shape
+            @next_shape = generate_shape Constants::Shapes.sample
+          else
+            Kernel.exit
+          end
         end
 
         move_shape('down')
       end
 
       def space_empty?(shape)
-        shape.block_coordinates.each do |coordinate|
-          x = coordinate[0]
-          y = coordinate[1]
+        shape.block_coordinates.each do |coordinates|
+          x,y = coordinates
           return false if tetris_map[x][y][0] == false
         end
         true

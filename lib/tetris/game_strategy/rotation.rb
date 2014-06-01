@@ -21,19 +21,11 @@ module Tetris
       end
 
       def fits_in_map?(shape, orientation)
-        shape.rotated_block_coordinates(orientation).each do |coordinate|
-          x = coordinate[0]
-          y = coordinate[1]
-
-          if x < 1 || x > width
-            return false
-          end
-
-          if y < 1 || y > height
-            return false
-          end
+        shape.rotated_block_coordinates(orientation).all? do |x, y|
+          x_in_bounds = (1..width).cover?(x)
+          y_in_bounds = (1..height).cover?(y)
+          x_in_bounds && y_in_bounds
         end
-        return true
       end
 
       def can_rotate_90_degrees?(shape)

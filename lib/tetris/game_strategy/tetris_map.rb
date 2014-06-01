@@ -5,7 +5,6 @@ module Tetris
       def initialize_tetris_map
         @tetris_map = {}
         (1..width).each do |n|
-
           hsh = Hash.new do |h,k|
             h[k] = [true, Gosu::Color::NONE]
           end
@@ -14,6 +13,10 @@ module Tetris
           end
           @tetris_map[n] = hsh
         end
+
+        @background = Gosu::Image.new(window,
+                                      'assets/tetris_background.png',
+                                      false)
       end
 
       def draw_block(x,y)
@@ -38,6 +41,7 @@ module Tetris
       end
 
       def draw_map
+        @background.draw(0,0,-1)
         (1..height).each do |h|
           (1..width).each do |w|
             draw_block(w,h)
@@ -46,6 +50,16 @@ module Tetris
         (1..(height + 1)).each do |h|
           (1..(width + 1)).each do |w|
             draw_vertice(w, h)
+          end
+        end
+        draw_next_shape
+      end
+
+      def draw_next_shape
+        @window.translate((@width + 1) * unit_side , 0) do
+          @score_font.draw('Next Shape', 200,0,0)
+          @window.translate(0,50) do
+            @next_shape.draw
           end
         end
       end

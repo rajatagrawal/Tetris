@@ -10,7 +10,7 @@ module Tetris
       super(1280,1080,false, 1)
       self.caption=('Tetris')
       config = { width: 10,
-                 height: 25,
+                 height: 20,
                  unit_side: 40 }
       @game_strategy = GameStrategy::Main.new(self, config)
       @counter = 0
