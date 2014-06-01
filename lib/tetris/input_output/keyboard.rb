@@ -24,7 +24,7 @@ module Tetris
           end
           @keyboard_press +=1
         elsif button_down? Gosu::KbSpace
-          if (@keyboard_press % (@keyboard_press_interval + 4)) == 0
+          if (@keyboard_press % (@keyboard_press_interval + 5)) == 0
             @game_strategy.drop_shape
           end
           @keyboard_press += 1
