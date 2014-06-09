@@ -35,7 +35,7 @@ module Tetris
         shape.rotated_block_coordinates('90_degrees').each do |coordinates|
           x, y = coordinates
 
-          if tetris_map[x][y][0] == false
+          if @tetris_map.map[x][y][0] == false
             return false
           end
         end
@@ -49,7 +49,7 @@ module Tetris
         shape.rotated_block_coordinates('180_degrees').each do |coordinates|
           x,y = coordinates
 
-          if tetris_map[x][y][0] == false
+          if @tetris_map.map[x][y][0] == false
             return false
           end
         end
@@ -63,7 +63,7 @@ module Tetris
         shape.rotated_block_coordinates('270_degrees').each do |coordinates|
           x,y = coordinates
 
-          if tetris_map[x][y][0] == false
+          if @tetris_map.map[x][y][0] == false
             return false
           end
         end
@@ -78,7 +78,7 @@ module Tetris
         shape.rotated_block_coordinates('0_degrees').each do |coordinates|
           x,y = coordinates[0]
 
-          if tetris_map[x][y][0] == false
+          if @tetris_map.map[x][y][0] == false
             return false
           end
         end

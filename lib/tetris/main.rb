@@ -32,7 +32,7 @@ module Tetris
 
     def draw
       @game_strategy.player.shape.draw
-      @game_strategy.draw_map
+      @game_strategy.tetris_map.draw
       @game_strategy.show_score
     end
 

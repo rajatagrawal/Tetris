@@ -3,7 +3,6 @@ module Tetris
   module GameStrategy
     class Main
       include Constants
-      include TetrisMap
       include Movement
       include Rotation
       include Squeeze
@@ -25,8 +24,11 @@ module Tetris
         @width = config[:width] || 10
         @height = config[:height] || 10
         @score_font = Gosu::Font.new(window, 'Arial', 30)
-        initialize_tetris_map
         @player = Player.new
+        @tetris_map = TetrisMap.new(window,
+                                    @height,
+                                    @width,
+                                    @unit_side)
       end
     end
   end

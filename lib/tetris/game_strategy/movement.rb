@@ -36,7 +36,7 @@ module Tetris
             return false
           end
 
-          if tetris_map[x][y][0] == false
+          if @tetris_map.map[x][y][0] == false
             return false
           end
         end
@@ -52,7 +52,7 @@ module Tetris
             return false
           end
 
-          if tetris_map[x][y][0] == false
+          if @tetris_map.map[x][y][0] == false
             return false
           end
         end
@@ -68,7 +68,7 @@ module Tetris
             return false
           end
 
-          if tetris_map[x][y][0] == false
+          if @tetris_map.map[x][y][0] == false
             return false
           end
         end

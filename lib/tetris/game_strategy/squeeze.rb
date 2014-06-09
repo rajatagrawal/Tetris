@@ -5,7 +5,7 @@ module Tetris
         squeeze_row = (1..height).to_a
         (1..height).each do |row|
           (1..width).each do |col|
-            if @tetris_map[col][row][0] == true
+            if @tetris_map.map[col][row][0] == true
               squeeze_row.delete(row)
               break
             end
@@ -17,12 +17,12 @@ module Tetris
       def squeeze_row(row)
         row.downto(2) do |r|
           (1..width).each do |w|
-            @tetris_map[w][r] = @tetris_map[w][r-1]
+            @tetris_map.map[w][r] = @tetris_map.map[w][r-1]
           end
         end
 
         (1..width).each do |w|
-          @tetris_map[w][1] = [true, Gosu::Color::NONE]
+          @tetris_map.map[w][1] = [true, Gosu::Color::NONE]
         end
       end
 
