@@ -6,7 +6,6 @@ module Tetris
       @score = 0
       @shape = nil
       @next_shape = nil
-      puts 'in the player constructor'
     end
 
     def increase_score(score)
