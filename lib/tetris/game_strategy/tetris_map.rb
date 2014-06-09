@@ -1,6 +1,8 @@
+require_relative 'squeeze'
 module Tetris
   module GameStrategy
     class TetrisMap
+      include Squeeze
 
       attr_accessor :map
 
