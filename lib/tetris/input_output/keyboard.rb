@@ -20,7 +20,7 @@ module Tetris
           @keyboard_press +=1
         elsif button_down? Gosu::KbUp
           if (@keyboard_press % (@keyboard_press_interval+5)) == 0
-            @game_strategy.rotate_shape
+            @game_strategy.rotation_handler.rotate_shape @game_strategy.player.shape
           end
           @keyboard_press +=1
         elsif button_down? Gosu::KbSpace
