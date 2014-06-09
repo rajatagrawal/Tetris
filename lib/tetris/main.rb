@@ -31,9 +31,7 @@ module Tetris
     end
 
     def draw
-      @game_strategy.player.shape.draw
-      @game_strategy.tetris_map.draw
-      @game_strategy.show_score
+      @game_strategy.game_screen.draw_screen
     end
 
     def button_up(id)

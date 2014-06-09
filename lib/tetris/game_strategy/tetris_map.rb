@@ -62,17 +62,7 @@ module Tetris
             draw_vertice(w, h)
           end
         end
-        # draw_next_shape
       end
-
-      # def draw_next_shape
-        # @window.translate((@width + 1) * unit_side , 0) do
-          # @score_font.draw('Next Shape', 200,0,0)
-          # @window.translate(0,50) do
-            # @player.next_shape.draw
-          # end
-        # end
-      # end
     end
   end
 end
