@@ -19,7 +19,7 @@ module Tetris
           @player.next_shape = generate_shape Constants::Shapes.sample
         end
 
-        if !space_to_move?('down', @player.shape)
+        if !@movement_handler.space_to_move?('down', @player.shape)
           freeze_shape @player.shape
           @tetris_map.rows_to_squeeze.size.times { @player.increase_score(20) }
           @tetris_map.squeeze_rows(@tetris_map.rows_to_squeeze)
@@ -31,7 +31,7 @@ module Tetris
           end
         end
 
-        move_shape('down')
+        @movement_handler.move_shape('down', @player.shape)
       end
 
       def space_empty?(shape)

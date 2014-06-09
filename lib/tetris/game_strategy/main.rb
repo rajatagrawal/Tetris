@@ -3,7 +3,6 @@ module Tetris
   module GameStrategy
     class Main
       include Constants
-      include Movement
       include Score
       include GameControl
 
@@ -13,7 +12,7 @@ module Tetris
       attr_accessor :speed, :score
       attr_accessor :score_font
       attr_accessor :player
-      attr_accessor :rotation_handler
+      attr_accessor :rotation_handler, :movement_handler
 
       def initialize(window, config={})
         @window = window
@@ -29,6 +28,7 @@ module Tetris
                                     @width,
                                     @unit_side)
         @rotation_handler = Rotation.new(@tetris_map, @height, @width)
+        @movement_handler = Movement.new(@tetris_map, @height, @width)
       end
     end
   end

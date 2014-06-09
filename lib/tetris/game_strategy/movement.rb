@@ -1,16 +1,22 @@
 module Tetris
   module GameStrategy
-    module Movement
+    class Movement
 
-      def move_shape(direction)
-        if space_to_move?(direction, @player.shape)
-          @player.shape.move(direction)
+      def initialize(tetris_map, height, width)
+        @map = tetris_map
+        @height = height
+        @width = width
+      end
+
+      def move_shape(direction, shape)
+        if space_to_move?(direction, shape)
+          shape.move(direction)
         end
       end
 
-      def drop_shape
-        while space_to_move?('down', @player.shape) do
-          @player.shape.move('down')
+      def drop_shape(shape)
+        while space_to_move?('down', shape) do
+          shape.move('down')
         end
       end
 
@@ -32,11 +38,11 @@ module Tetris
           x = coordinate[0]
           y = coordinate[1] + 1
 
-          if y > height
+          if y > @height
             return false
           end
 
-          if @tetris_map.map[x][y][0] == false
+          if @map.map[x][y][0] == false
             return false
           end
         end
@@ -48,11 +54,11 @@ module Tetris
           x = coordinate[0] + 1
           y = coordinate[1]
 
-          if x > width
+          if x > @width
             return false
           end
 
-          if @tetris_map.map[x][y][0] == false
+          if @map.map[x][y][0] == false
             return false
           end
         end
@@ -68,7 +74,7 @@ module Tetris
             return false
           end
 
-          if @tetris_map.map[x][y][0] == false
+          if @map.map[x][y][0] == false
             return false
           end
         end
