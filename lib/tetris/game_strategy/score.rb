@@ -7,7 +7,7 @@ module Tetris
       end
 
       def show_score
-        score_font.draw("Score : #{score}",0,0,0)
+        score_font.draw("Score : #{@player.score}",0,0,0)
       end
     end
   end

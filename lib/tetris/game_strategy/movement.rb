@@ -3,14 +3,14 @@ module Tetris
     module Movement
 
       def move_shape(direction)
-        if space_to_move?(direction, shape)
-          shape.move(direction)
+        if space_to_move?(direction, @player.shape)
+          @player.shape.move(direction)
         end
       end
 
       def drop_shape
-        while space_to_move?('down', shape) do
-          shape.move('down')
+        while space_to_move?('down', @player.shape) do
+          @player.shape.move('down')
         end
       end
 

@@ -14,18 +14,18 @@ module Tetris
       end
 
       def run_game
-        if shape == nil
-          @shape = generate_shape Constants::Shapes.sample
-          @next_shape = generate_shape Constants::Shapes.sample
+        if @player.shape == nil
+          @player.shape = generate_shape Constants::Shapes.sample
+          @player.next_shape = generate_shape Constants::Shapes.sample
         end
 
-        if !space_to_move?('down', shape)
-          freeze_shape shape
-          rows_to_squeeze.size.times { increase_score(20) }
+        if !space_to_move?('down', @player.shape)
+          freeze_shape @player.shape
+          rows_to_squeeze.size.times { @player.increase_score(20) }
           squeeze_rows(rows_to_squeeze)
-          if space_empty?(@next_shape)
-            @shape = @next_shape
-            @next_shape = generate_shape Constants::Shapes.sample
+          if space_empty?(@player.next_shape)
+            @player.shape = @player.next_shape
+            @player.next_shape = generate_shape Constants::Shapes.sample
           else
             Kernel.exit
           end

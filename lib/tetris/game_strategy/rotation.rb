@@ -3,7 +3,7 @@ module Tetris
     module Rotation
 
       def rotate_shape
-        shape.rotate if space_to_rotate? shape
+        @player.shape.rotate if space_to_rotate? @player.shape
       end
 
       def space_to_rotate?(shape)

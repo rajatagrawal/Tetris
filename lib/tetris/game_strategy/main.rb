@@ -15,6 +15,7 @@ module Tetris
       attr_accessor :shape, :unit_side
       attr_accessor :speed, :score
       attr_accessor :score_font
+      attr_accessor :player
 
       def initialize(window, config={})
         @window = window
@@ -25,6 +26,7 @@ module Tetris
         @height = config[:height] || 10
         @score_font = Gosu::Font.new(window, 'Arial', 30)
         initialize_tetris_map
+        @player = Player.new
       end
     end
   end
