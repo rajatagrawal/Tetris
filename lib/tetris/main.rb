@@ -1,10 +1,9 @@
 require 'gosu'
 require_relative 'game_strategy/main'
-require_relative 'input_output/keyboard'
+require_relative 'input/keyboard'
 
 module Tetris
   class GameWindow < Gosu::Window
-    include InputOutput::Keyboard
 
     def initialize
       super(1280,1080,false, 1)
@@ -13,15 +12,13 @@ module Tetris
                  height: 20,
                  unit_side: 40 }
       @game_strategy = GameStrategy::Main.new(self, config)
+      @keyboard = Input::Keyboard.new(self, @game_strategy, 5)
       @counter = 0
       @time_interval = 17
-      @keyboard_interval = 5
-      @keyboard_press_interval = 5
-      @keyboard_press = 0
     end
 
     def update
-      keyboard_listener
+      @keyboard.listener
 
       if (@counter % @time_interval) == 0
         @counter = 0
@@ -35,9 +32,10 @@ module Tetris
     end
 
     def button_up(id)
-      @keyboard_press = 0
+      @keyboard.reset_ticker
     end
   end
 end
+
 game = Tetris::GameWindow.new
 game.show
