@@ -1,6 +1,6 @@
 require_relative 'squeeze'
 module Tetris
-  module GameStrategy
+  module Engine
     class TetrisMap
       include Squeeze
 

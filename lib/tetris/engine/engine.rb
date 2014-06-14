@@ -1,0 +1,8 @@
+require_relative 'shape/shape_files'
+require_relative 'player/player'
+require_relative 'constants'
+require_relative 'tetris_map'
+require_relative 'movement'
+require_relative 'rotation'
+require_relative '../ui/game_screen'
+require 'pry'

@@ -1,5 +1,5 @@
 module Tetris
-  module GameStrategy
+  module Engine
     module Squeeze
       def rows_to_squeeze
         squeeze_row = (1..@height).to_a

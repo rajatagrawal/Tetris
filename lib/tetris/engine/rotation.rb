@@ -1,5 +1,5 @@
 module Tetris
-  module GameStrategy
+  module Engine
     class Rotation
 
       def initialize(tetris_map, height, width)
