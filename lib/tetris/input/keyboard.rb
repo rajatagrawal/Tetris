@@ -21,17 +21,20 @@ module Tetris
 
         if @window.button_down? Gosu::KbLeft
           movement_handler.move_shape('left', shape) if time_to_move?
+          @ticker +=1
         elsif @window.button_down? Gosu::KbRight
           movement_handler.move_shape('right', shape) if time_to_move?
+          @ticker +=1
         elsif @window.button_down? Gosu::KbDown
           movement_handler.move_shape('down', shape) if time_to_move?
+          @ticker +=1
         elsif @window.button_down? Gosu::KbUp
           rotation_handler.rotate_shape shape if time_to_rotate?
+          @ticker +=1
         elsif @window.button_down? Gosu::KbSpace
           movement_handler.drop_shape shape if time_to_rotate?
+          @ticker +=1
         end
-
-        @ticker += 1
       end
 
       private
