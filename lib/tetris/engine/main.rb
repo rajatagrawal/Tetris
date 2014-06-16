@@ -10,7 +10,6 @@ module Tetris
       attr_accessor :speed
       attr_accessor :player
       attr_accessor :rotation_handler, :movement_handler
-      attr_accessor :game_screen
 
       def initialize(config={})
         @window = config[:window]
@@ -25,9 +24,6 @@ module Tetris
                                     @unit_side)
         @rotation_handler = Rotation.new(@tetris_map, @height, @width)
         @movement_handler = Movement.new(@tetris_map, @height, @width)
-        @game_screen = UI::GameScreen.new(@window,
-                                          @tetris_map,
-                                          @player)
       end
 
       def run_game

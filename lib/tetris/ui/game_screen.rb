@@ -1,12 +1,15 @@
+require_relative 'map_renderer'
 module Tetris
   module UI
     class GameScreen
 
       def initialize(window, tetris_map, player)
         @window = window
-        @map = tetris_map
         @player = player
         @score_font = Gosu::Font.new(@window, 'Arial', 30)
+        config = { canvas: @window,
+                   tetris_map: tetris_map }
+        @map_renderer = MapRenderer.new(config)
       end
 
       def draw_screen
@@ -19,7 +22,7 @@ module Tetris
       private
 
       def draw_map
-        @map.draw
+        @map_renderer.draw_map
       end
 
       def draw_score
