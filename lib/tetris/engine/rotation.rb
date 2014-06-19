@@ -1,8 +1,14 @@
 module Tetris
-  module GameStrategy
-    module Rotation
+  module Engine
+    class Rotation
 
-      def rotate_shape
+      def initialize(tetris_map, height, width)
+        @map = tetris_map
+        @height = height
+        @width = width
+      end
+
+      def rotate_shape shape
         shape.rotate if space_to_rotate? shape
       end
 
@@ -22,8 +28,8 @@ module Tetris
 
       def fits_in_map?(shape, orientation)
         shape.rotated_block_coordinates(orientation).all? do |x, y|
-          x_in_bounds = (1..width).cover?(x)
-          y_in_bounds = (1..height).cover?(y)
+          x_in_bounds = (1..@width).cover?(x)
+          y_in_bounds = (1..@height).cover?(y)
           x_in_bounds && y_in_bounds
         end
       end
@@ -35,7 +41,7 @@ module Tetris
         shape.rotated_block_coordinates('90_degrees').each do |coordinates|
           x, y = coordinates
 
-          if tetris_map[x][y][0] == false
+          if @map.map[x][y][0] == false
             return false
           end
         end
@@ -49,7 +55,7 @@ module Tetris
         shape.rotated_block_coordinates('180_degrees').each do |coordinates|
           x,y = coordinates
 
-          if tetris_map[x][y][0] == false
+          if @map.map[x][y][0] == false
             return false
           end
         end
@@ -63,7 +69,7 @@ module Tetris
         shape.rotated_block_coordinates('270_degrees').each do |coordinates|
           x,y = coordinates
 
-          if tetris_map[x][y][0] == false
+          if @map.map[x][y][0] == false
             return false
           end
         end
@@ -78,7 +84,7 @@ module Tetris
         shape.rotated_block_coordinates('0_degrees').each do |coordinates|
           x,y = coordinates[0]
 
-          if tetris_map[x][y][0] == false
+          if @map.map[x][y][0] == false
             return false
           end
         end

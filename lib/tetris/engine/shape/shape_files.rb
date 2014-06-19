@@ -1,0 +1,7 @@
+require_relative 'i_shape'
+require_relative 'j_shape'
+require_relative 'l_shape'
+require_relative 'o_shape'
+require_relative 's_shape'
+require_relative 't_shape'
+require_relative 'z_shape'

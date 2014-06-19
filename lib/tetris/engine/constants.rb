@@ -1,5 +1,5 @@
 module Tetris
-  module GameStrategy
+  module Engine
     module Constants
 
       Shapes = [I_Shape,

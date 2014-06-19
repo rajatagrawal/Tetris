@@ -1,45 +1,46 @@
 require 'gosu'
-require_relative 'game_strategy/main'
-require_relative 'input_output/keyboard'
+require_relative 'engine/main'
+require_relative 'ui/game_screen'
+require_relative 'input/keyboard'
 
 module Tetris
   class GameWindow < Gosu::Window
-    include InputOutput::Keyboard
 
     def initialize
       super(1280,1080,false, 1)
       self.caption=('Tetris')
-      config = { width: 10,
+      config = { window: self,
+                 width: 10,
                  height: 20,
+                 speed: 17,
                  unit_side: 40 }
-      @game_strategy = GameStrategy::Main.new(self, config)
+      @game_engine = Engine::Main.new config
+      @keyboard = Input::Keyboard.new(self, @game_engine, 5)
       @counter = 0
-      @time_interval = 17
-      @keyboard_interval = 5
-      @keyboard_press_interval = 5
-      @keyboard_press = 0
+      @game_screen = UI::GameScreen.new(self,
+                                        @game_engine.tetris_map,
+                                        @game_engine.player)
     end
 
     def update
-      keyboard_listener
+      @keyboard.listener
 
-      if (@counter % @time_interval) == 0
+      if (@counter % @game_engine.speed) == 0
         @counter = 0
-        @game_strategy.run_game
+        @game_engine.run_game
       end
       @counter +=1
     end
 
     def draw
-        @game_strategy.shape.draw
-        @game_strategy.draw_map
-        @game_strategy.show_score
+      @game_screen.draw_screen
     end
 
     def button_up(id)
-      @keyboard_press = 0
+      @keyboard.reset_ticker
     end
   end
 end
+
 game = Tetris::GameWindow.new
 game.show
