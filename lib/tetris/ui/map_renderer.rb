@@ -1,3 +1,4 @@
+require_relative 'color_parser'
 module Tetris
   module UI
     class MapRenderer
@@ -30,7 +31,7 @@ module Tetris
         side = @map.unit_side
         x = map_x * side
         y = map_y * side
-        color = @map.map[map_x][map_y][1]
+        color = ColorParser.parse_color @map.map[map_x][map_y][1]
         @canvas.draw_quad(x,y,color,
                           x+side, y, color,
                           x+side, y+side, color,

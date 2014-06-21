@@ -1,9 +1,14 @@
-require_relative 'shape'
 module Tetris
-  class Block < Shape
+  class Block
 
-    def initialize(window, config={})
-      super
+    attr_accessor :x, :y, :color
+    attr_accessor :unit_side
+
+    def initialize(config={})
+      @x = config[:x] || 1
+      @y = config[:y] || 1
+      @color = config[:color]
+      @unit_side = config[:unit_side] || 10
     end
 
     def height
@@ -18,13 +23,17 @@ module Tetris
       [[x,y, color]]
     end
 
-    def draw
-      x_value = x * unit_side
-      y_value = y * unit_side
-      window.draw_quad(x_value, y_value, color,
-                       x_value + unit_side, y_value, color,
-                       x_value + unit_side, y_value + unit_side, color,
-                       x_value, y_value + unit_side, color)
+    def move(direction)
+      case direction
+      when 'down'
+        @y+= 1
+      when 'up'
+        @y -= 1
+      when 'right'
+        @x += 1
+      when 'left'
+        @x -= 1
+      end
     end
   end
 end

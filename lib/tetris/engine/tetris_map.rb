@@ -6,8 +6,7 @@ module Tetris
 
       attr_accessor :map, :height, :width, :unit_side
 
-      def initialize(window, height, width, unit_side)
-        @window = window
+      def initialize(height, width, unit_side)
         @height = height
         @width = width
         @unit_side = unit_side
@@ -20,12 +19,11 @@ module Tetris
       def initialize_tetris_map
         (1..@width).each do |n|
           hsh = Hash.new do |h,k|
-            h[k] = [true, Gosu::Color::NONE]
+            h[k] = [true, 'none']
           end
           (1..@height).each { |h| hsh[h] }
           @map[n] = hsh
         end
-
       end
     end
   end
