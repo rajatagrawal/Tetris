@@ -18,10 +18,7 @@ module Tetris
         @width = config[:width] || 10
         @height = config[:height] || 10
         @player = Player.new
-        @tetris_map = TetrisMap.new(@window,
-                                    @height,
-                                    @width,
-                                    @unit_side)
+        @tetris_map = TetrisMap.new(@height, @width, @unit_side)
         @rotation_handler = Rotation.new(@tetris_map, @height, @width)
         @movement_handler = Movement.new(@tetris_map, @height, @width)
       end
@@ -53,7 +50,7 @@ module Tetris
         config = { x: width/2,
                    unit_side: unit_side,
                    color: Constants::ShapeColors.sample }
-        shape_class.new(window, config)
+        shape_class.new(config)
       end
 
       def freeze_shape shape

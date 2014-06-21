@@ -1,4 +1,5 @@
 require_relative 'map_renderer'
+require_relative 'shape/piece'
 module Tetris
   module UI
     class GameScreen
@@ -30,14 +31,14 @@ module Tetris
       end
 
       def draw_current_shape
-        @player.shape.draw
+        Shape::Piece.new(@window, @player.shape).draw
       end
 
       def draw_next_shape
         @window.translate(440, 0) do
           @score_font.draw('Next Shape', 200,0,0)
           @window.translate(0,50) do
-            @player.next_shape.draw
+            Shape::Piece.new(@window, @player.next_shape).draw
           end
         end
       end

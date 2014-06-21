@@ -6,8 +6,7 @@ module Tetris
 
       attr_accessor :map, :height, :width, :unit_side
 
-      def initialize(window, height, width, unit_side)
-        @window = window
+      def initialize(height, width, unit_side)
         @height = height
         @width = width
         @unit_side = unit_side

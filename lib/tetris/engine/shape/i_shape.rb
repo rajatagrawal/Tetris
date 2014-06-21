@@ -31,23 +31,23 @@ module Tetris
     private
 
     def initialize_blocks(color)
-      @block_1 = Block.new(window, { x: x,
+      @block_1 = Block.new( { x: x,
                                      y: y,
                                      unit_side: unit_side,
                                      color: color})
 
-      @block_2 = Block.new(window, { x: x+1,
+      @block_2 = Block.new( { x: x+1,
                                      y: y,
                                      unit_side: unit_side,
                                      color: color})
 
-      @block_3 = Block.new(window, { x: x+2,
+      @block_3 = Block.new( { x: x+2,
                                      y: y,
                                      unit_side: unit_side,
                                      color: color})
 
 
-      @block_4 = Block.new(window, { x: x+3,
+      @block_4 = Block.new( { x: x+3,
                                      y: y,
                                      unit_side: unit_side,
                                      color: color})
