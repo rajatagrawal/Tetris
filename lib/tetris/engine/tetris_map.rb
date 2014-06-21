@@ -1,10 +1,9 @@
-require_relative 'squeeze'
 module Tetris
   module Engine
     class TetrisMap
-      include Squeeze
 
-      attr_accessor :map, :height, :width, :unit_side
+      attr_accessor :map, :unit_side
+      attr_accessor :height, :width
 
       def initialize(height, width, unit_side)
         @height = height
