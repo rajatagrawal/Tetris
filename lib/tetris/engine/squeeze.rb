@@ -22,7 +22,7 @@ module Tetris
         end
 
         (1..@width).each do |w|
-          @map[w][1] = [true, Gosu::Color::NONE]
+          @map[w][1] = [true, 'none']
         end
       end
 

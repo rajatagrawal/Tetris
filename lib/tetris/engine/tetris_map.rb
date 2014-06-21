@@ -19,12 +19,11 @@ module Tetris
       def initialize_tetris_map
         (1..@width).each do |n|
           hsh = Hash.new do |h,k|
-            h[k] = [true, Gosu::Color::NONE]
+            h[k] = [true, 'none']
           end
           (1..@height).each { |h| hsh[h] }
           @map[n] = hsh
         end
-
       end
     end
   end
