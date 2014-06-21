@@ -2,10 +2,10 @@ module Tetris
   module Engine
     class Movement
 
-      def initialize(tetris_map, height, width)
-        @map = tetris_map
-        @height = height
-        @width = width
+      def initialize(tetris_map)
+        @map = tetris_map.map
+        @height = tetris_map.height
+        @width = tetris_map.width
       end
 
       def move_shape(direction, shape)
@@ -42,7 +42,7 @@ module Tetris
             return false
           end
 
-          if @map.map[x][y][0] == false
+          if @map[x][y][0] == false
             return false
           end
         end
@@ -58,7 +58,7 @@ module Tetris
             return false
           end
 
-          if @map.map[x][y][0] == false
+          if @map[x][y][0] == false
             return false
           end
         end
@@ -74,7 +74,7 @@ module Tetris
             return false
           end
 
-          if @map.map[x][y][0] == false
+          if @map[x][y][0] == false
             return false
           end
         end
