@@ -4,15 +4,12 @@ module Tetris
     class Main
       include Constants
 
-      attr_accessor :window, :tetris_map
-      attr_accessor :width, :height
-      attr_accessor :shape, :unit_side
+      attr_accessor :tetris_map
       attr_accessor :speed
       attr_accessor :player
       attr_accessor :rotation_handler, :movement_handler
 
       def initialize(config={})
-        @window = config[:window]
         @speed = config[:speed] || 1
         @unit_side = config[:unit_side] || 10
         @width = config[:width] || 10
@@ -48,8 +45,8 @@ module Tetris
       private
 
       def generate_shape(shape_class)
-        config = { x: width/2,
-                   unit_side: unit_side,
+        config = { x: @width/2,
+                   unit_side: @unit_side,
                    color: Constants::ShapeColors.sample }
         shape_class.new(config)
       end
