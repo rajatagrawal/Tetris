@@ -1,16 +1,17 @@
-require_relative 'shape'
 require_relative 'block'
 
 module Tetris
-  class ComplexShape < Shape
+  class ComplexShape
+
+    attr_accessor :x, :y, :color
+    attr_accessor :unit_side, :orientation
 
     attr_accessor :block_1, :block_2
     attr_accessor :block_3, :block_4
 
-    def initialize(window, config={})
-      super
+    def initialize(config={})
+      assign_config config
       initialize_blocks(config[:color])
-
     end
 
     def block_coordinates
@@ -35,14 +36,8 @@ module Tetris
       coordinates[1] - coordinates[0] + 1
     end
 
-    def draw
-      blocks.each do |block|
-        block.draw
-      end
-    end
-
     def move(direction)
-      super
+      move_piece direction
       blocks.each do |block|
         block.move(direction)
       end
@@ -72,34 +67,52 @@ module Tetris
       self.block_coordinates = rotated_block
     end
 
-    private
 
     def blocks
       [ block_1, block_2,
         block_3, block_4]
     end
 
+    private
+
+    def assign_config config
+      @x = config[:x] || 1
+      @y = config[:y] || 1
+      @color = config[:color]
+      @unit_side = config[:unit_side] || 10
+      @orientation = config[:orientation] || '0_degrees'
+    end
+
     def initialize_blocks(color)
-      @block_1 = Block.new(window, { x: x,
-                                     y: y,
-                                     unit_side: unit_side,
-                                     color: color})
+      @block_1 = Block.new({ x: x, y: y,
+                             unit_side: unit_side,
+                             color: color})
 
-      @block_2 = Block.new(window, { x: x,
-                                     y: y,
-                                     unit_side: unit_side,
-                                     color: color})
+      @block_2 = Block.new({ x: x, y: y,
+                             unit_side: unit_side,
+                             color: color})
 
-      @block_3 = Block.new(window, { x: x,
-                                     y: y,
-                                     unit_side: unit_side,
-                                     color: color})
+      @block_3 = Block.new({ x: x, y: y,
+                             unit_side: unit_side,
+                             color: color})
 
 
-      @block_4 = Block.new(window, { x: x,
-                                     y: y,
-                                     unit_side: unit_side,
-                                     color: color})
+      @block_4 = Block.new({ x: x, y: y,
+                             unit_side: unit_side,
+                             color: color})
+    end
+
+    def move_piece(direction)
+      case direction
+      when 'down'
+        @y+= 1
+      when 'up'
+        @y -= 1
+      when 'right'
+        @x += 1
+      when 'left'
+        @x -= 1
+      end
     end
   end
 end
