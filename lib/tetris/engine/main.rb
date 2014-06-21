@@ -19,7 +19,7 @@ module Tetris
         @height = config[:height] || 10
         @player = Player.new
         @tetris_map = TetrisMap.new(@height, @width, @unit_side)
-        @rotation_handler = Rotation.new(@tetris_map, @height, @width)
+        @rotation_handler = Rotation.new(@tetris_map)
         @movement_handler = Movement.new(@tetris_map)
         @squeeze_handler = Squeeze.new(@tetris_map)
       end

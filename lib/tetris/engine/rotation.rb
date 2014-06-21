@@ -2,10 +2,10 @@ module Tetris
   module Engine
     class Rotation
 
-      def initialize(tetris_map, height, width)
-        @map = tetris_map
-        @height = height
-        @width = width
+      def initialize(tetris_map)
+        @map = tetris_map.map
+        @height = tetris_map.height
+        @width = tetris_map.width
       end
 
       def rotate_shape shape
@@ -41,7 +41,7 @@ module Tetris
         shape.rotated_block_coordinates('90_degrees').each do |coordinates|
           x, y = coordinates
 
-          if @map.map[x][y][0] == false
+          if @map[x][y][0] == false
             return false
           end
         end
@@ -55,7 +55,7 @@ module Tetris
         shape.rotated_block_coordinates('180_degrees').each do |coordinates|
           x,y = coordinates
 
-          if @map.map[x][y][0] == false
+          if @map[x][y][0] == false
             return false
           end
         end
@@ -69,7 +69,7 @@ module Tetris
         shape.rotated_block_coordinates('270_degrees').each do |coordinates|
           x,y = coordinates
 
-          if @map.map[x][y][0] == false
+          if @map[x][y][0] == false
             return false
           end
         end
@@ -84,7 +84,7 @@ module Tetris
         shape.rotated_block_coordinates('0_degrees').each do |coordinates|
           x,y = coordinates[0]
 
-          if @map.map[x][y][0] == false
+          if @map[x][y][0] == false
             return false
           end
         end
