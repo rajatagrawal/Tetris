@@ -4,9 +4,9 @@ module Tetris
   module UI
     class GameScreen
 
-      def initialize(window, tetris_map, player)
+      def initialize(window, tetris_map, players)
         @window = window
-        @player = player
+        @players = players
         @score_font = Gosu::Font.new(@window, 'Arial', 30)
         config = { canvas: @window,
                    tetris_map: tetris_map }
@@ -27,18 +27,24 @@ module Tetris
       end
 
       def draw_score
-        @score_font.draw("Score : #{@player.score}",0,0,0)
+        @players.each.with_index do |player, index|
+          @score_font.draw("Score : #{player.score}",0,100 * index,0)
+        end
       end
 
       def draw_current_shape
-        Shape::Piece.new(@window, @player.shape).draw
+        @players.each do |player|
+          Shape::Piece.new(@window, player.shape).draw
+        end
       end
 
       def draw_next_shape
         @window.translate(440, 0) do
-          @score_font.draw('Next Shape', 200,0,0)
-          @window.translate(0,50) do
-            Shape::Piece.new(@window, @player.next_shape).draw
+          @players.each.with_index do |player, index|
+            @score_font.draw('Next Shape', 200,300 * index,0)
+            @window.translate(0,350 * index) do
+              Shape::Piece.new(@window, player.next_shape).draw
+            end
           end
         end
       end

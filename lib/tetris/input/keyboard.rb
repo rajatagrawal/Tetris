@@ -17,27 +17,51 @@ module Tetris
       def listener
         movement_handler = @game_engine.movement_handler
         rotation_handler = @game_engine.rotation_handler
-        shape = @game_engine.player.shape
+        player1_shape = @game_engine.players.first.shape
+        player2_shape = @game_engine.players.last.shape
+        player1_listener(player1_shape, player2_shape, movement_handler, rotation_handler)
+        player2_listener(player2_shape, player1_shape, movement_handler, rotation_handler)
+      end
 
+      private
+
+      def player1_listener(shape, other_shape, movement_handler, rotation_handler)
         if @window.button_down? Gosu::KbLeft
-          movement_handler.move_shape('left', shape) if time_to_move?
+          movement_handler.move_shape('left', shape, other_shape) if time_to_move?
           @ticker +=1
         elsif @window.button_down? Gosu::KbRight
-          movement_handler.move_shape('right', shape) if time_to_move?
+          movement_handler.move_shape('right', shape, other_shape) if time_to_move?
           @ticker +=1
         elsif @window.button_down? Gosu::KbDown
-          movement_handler.move_shape('down', shape) if time_to_move?
+          movement_handler.move_shape('down', shape, other_shape) if time_to_move?
           @ticker +=1
         elsif @window.button_down? Gosu::KbUp
           rotation_handler.rotate_shape shape if time_to_rotate?
           @ticker +=1
         elsif @window.button_down? Gosu::KbSpace
-          movement_handler.drop_shape shape if time_to_rotate?
+          movement_handler.drop_shape(shape, other_shape)if time_to_rotate?
           @ticker +=1
         end
       end
 
-      private
+      def player2_listener(shape, other_shape, movement_handler, rotation_handler)
+        if @window.button_down? Gosu::KbA
+          movement_handler.move_shape('left', shape, other_shape) if time_to_move?
+          @ticker +=1
+        elsif @window.button_down? Gosu::KbD
+          movement_handler.move_shape('right', shape, other_shape) if time_to_move?
+          @ticker +=1
+        elsif @window.button_down? Gosu::KbS
+          movement_handler.move_shape('down', shape, other_shape) if time_to_move?
+          @ticker +=1
+        elsif @window.button_down? Gosu::KbW
+          rotation_handler.rotate_shape shape if time_to_rotate?
+          @ticker +=1
+        elsif @window.button_down? Gosu::KbLeftShift
+          movement_handler.drop_shape(shape, other_shape) if time_to_rotate?
+          @ticker +=1
+        end
+      end
 
       def time_to_move?
         (@ticker % @responsiveness) == 0

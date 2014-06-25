@@ -19,7 +19,7 @@ module Tetris
       @counter = 0
       @game_screen = UI::GameScreen.new(self,
                                         @game_engine.tetris_map,
-                                        @game_engine.player)
+                                        @game_engine.players)
     end
 
     def update
