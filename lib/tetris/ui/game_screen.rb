@@ -14,22 +14,25 @@ module Tetris
       end
 
       def draw_screen
+        draw_player_information
         draw_map
-        draw_score
         draw_current_shape
-        draw_next_shape
       end
 
       private
 
-      def draw_map
-        @map_renderer.draw_map
+      def draw_player_information
+        @players.each.with_index do |player, index|
+          offset = (400 * index) + 40
+          @score_font.draw("Player #{index + 1}",900,offset,0)
+          @score_font.draw("Score : #{player.score}", 900, offset + 40, 0)
+          @score_font.draw("Next Shape", 900, offset + 80, 0)
+          draw_next_shape(900, offset + 120, player)
+        end
       end
 
-      def draw_score
-        @players.each.with_index do |player, index|
-          @score_font.draw("Score : #{player.score}",0,100 * index,0)
-        end
+      def draw_map
+        @map_renderer.draw_map
       end
 
       def draw_current_shape
@@ -38,14 +41,12 @@ module Tetris
         end
       end
 
-      def draw_next_shape
-        @window.translate(440, 0) do
-          @players.each.with_index do |player, index|
-            @score_font.draw('Next Shape', 200,300 * index,0)
-            @window.translate(0,350 * index) do
-              Shape::Piece.new(@window, player.next_shape).draw
-            end
-          end
+      def draw_next_shape(x,y, player)
+        shape = player.next_shape
+        x = x - ( shape.x * shape.unit_side)
+        y = y - ( shape.y * shape.unit_side)
+        @window.translate(x, y) do
+          Shape::Piece.new(@window, player.next_shape).draw
         end
       end
     end
