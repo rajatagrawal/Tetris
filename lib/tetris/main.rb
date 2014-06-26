@@ -10,7 +10,7 @@ module Tetris
       super(1280,1080,false, 1)
       self.caption=('Tetris')
       config = { window: self,
-                 width: 10,
+                 width: 20,
                  height: 20,
                  speed: 17,
                  unit_side: 40 }

@@ -1,6 +1,17 @@
 module Tetris
   module UI
     class ColorParser
+
+      def self.parse_file_name color
+        if color == 'red'
+          'assets/red_shape.tiff'
+        elsif color == 'blue'
+          'assets/blue_shape.tiff'
+        elsif color == 'none'
+          'assets/background_block.tiff'
+        end
+      end
+
       def self.parse_color color
         case color
         when 'blue'

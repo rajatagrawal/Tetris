@@ -52,7 +52,7 @@ module Tetris
       def generate_shape(shape_class, index)
         config = { x: @width/3 + (index * @width/3),
                    unit_side: @unit_side,
-                   color: Constants::ShapeColors.sample }
+                   color: Constants::ShapeColors[index] }
         shape_class.new(config)
       end
 

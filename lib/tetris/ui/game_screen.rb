@@ -1,4 +1,4 @@
-require_relative 'map_renderer'
+require_relative 'map/map_renderer'
 require_relative 'shape/piece'
 module Tetris
   module UI
@@ -10,7 +10,7 @@ module Tetris
         @score_font = Gosu::Font.new(@window, 'Arial', 30)
         config = { canvas: @window,
                    tetris_map: tetris_map }
-        @map_renderer = MapRenderer.new(config)
+        @map_renderer = Map::MapRenderer.new(config)
       end
 
       def draw_screen
