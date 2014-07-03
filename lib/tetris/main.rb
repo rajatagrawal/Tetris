@@ -1,7 +1,7 @@
 require 'gosu'
 require_relative 'engine/main'
 require_relative 'ui/game_screen'
-require_relative 'input/keyboard'
+require_relative 'input/keyboard/manager'
 
 module Tetris
   class GameWindow < Gosu::Window
@@ -15,7 +15,7 @@ module Tetris
                  speed: 17,
                  unit_side: 40 }
       @game_engine = Engine::Main.new config
-      @keyboard = Input::Keyboard.new(self, @game_engine, 5)
+      @keyboard = Input::Keyboard::Manager.new(self, @game_engine, 5)
       @counter = 0
       @game_screen = UI::GameScreen.new(self,
                                         @game_engine.tetris_map,
@@ -36,8 +36,8 @@ module Tetris
       @game_screen.draw_screen
     end
 
-    def button_up(id)
-      @keyboard.reset_ticker
+    def button_up(key)
+      @keyboard.reset_ticker key
     end
   end
 end
