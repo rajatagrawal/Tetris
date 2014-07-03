@@ -39,7 +39,7 @@ module Tetris
             @movement_handler.move_shape('down', shape, other_shape) if time_to_move?
             @ticker +=1
           elsif @window.button_down? @keys_config[:rotate]
-            @rotation_handler.rotate_shape shape if time_to_rotate?
+            @rotation_handler.rotate_shape(shape, other_shape) if time_to_rotate?
             @ticker +=1
           elsif @window.button_down? @keys_config[:drop]
             @movement_handler.drop_shape(shape, other_shape)if time_to_rotate?
