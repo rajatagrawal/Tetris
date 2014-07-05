@@ -2,6 +2,7 @@ require 'gosu'
 require_relative 'engine/main'
 require_relative 'ui/game_screen'
 require_relative 'input/keyboard/manager'
+require_relative 'output/background_music'
 
 module Tetris
   class GameWindow < Gosu::Window
@@ -20,6 +21,10 @@ module Tetris
       @game_screen = UI::GameScreen.new(self,
                                         @game_engine.tetris_map,
                                         @game_engine.players)
+
+      @background_music = Output::BackgroundMusic.new(self,
+                                                      './assets/tetris_music.mp3')
+      @background_music.play_music
     end
 
     def update
