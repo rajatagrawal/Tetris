@@ -46,10 +46,11 @@ module Tetris
             return false
           end
 
-          if @map[x][y][0] == false
+          if @map[x][y] != 'none'
             return false
           end
         end
+
         return true
       end
 
@@ -66,7 +67,7 @@ module Tetris
             return false
           end
 
-          if @map[x][y][0] == false
+          if @map[x][y] != 'none'
             return false
           end
         end
@@ -86,7 +87,7 @@ module Tetris
             return false
           end
 
-          if @map[x][y][0] == false
+          if @map[x][y] != 'none'
             return false
           end
         end

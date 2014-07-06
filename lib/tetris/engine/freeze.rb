@@ -17,7 +17,7 @@ module Tetris
 
       def freeze_shape shape
         shape.block_coordinates.each do |x,y,color|
-          @tetris_map.map[x][y] = [false, color]
+          @tetris_map.map[x][y] = color
         end
       end
 
@@ -28,7 +28,7 @@ module Tetris
       end
 
       def space_occupied?(x,y)
-        @tetris_map.map[x][y+1][0] == false
+        @tetris_map.map[x][y+1] != 'none'
       end
     end
   end

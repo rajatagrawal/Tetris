@@ -12,7 +12,7 @@ module Tetris
         squeeze_row = (1..@height).to_a
         (1..@height).each do |row|
           (1..@width).each do |col|
-            if @map[col][row][0] == true
+            if @map[col][row] == 'none'
               squeeze_row.delete(row)
               break
             end
@@ -38,7 +38,7 @@ module Tetris
         end
 
         (1..@width).each do |w|
-          @map[w][1] = [true, 'none']
+          @map[w][1] = 'none'
         end
       end
     end

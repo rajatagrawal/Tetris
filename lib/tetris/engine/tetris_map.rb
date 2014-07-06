@@ -9,19 +9,20 @@ module Tetris
         @height = height
         @width = width
         @unit_side = unit_side
-        @map = {}
         initialize_tetris_map
       end
 
       private
 
       def initialize_tetris_map
-        (1..@width).each do |n|
-          hsh = Hash.new do |h,k|
-            h[k] = [true, 'none']
+        @map = Array.new(@width + 1) do |index|
+          if index != 0
+            Array.new(@height + 1) do |height_index|
+              if height_index != 0
+                'none'
+              end
+            end
           end
-          (1..@height).each { |h| hsh[h] }
-          @map[n] = hsh
         end
       end
     end
