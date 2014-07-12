@@ -20,78 +20,56 @@ module Tetris
         end
       end
 
+      private
+
       def space_to_move?(direction, shape, other_shape)
         case direction
         when 'right'
-          space_in_right?(shape, other_shape)
+          coordinates = shape.block_coordinates.map do |x,y|
+            [x+1,y]
+          end
         when 'left'
-          space_in_left?(shape, other_shape)
+          coordinates = shape.block_coordinates.map do |x,y|
+            [x-1,y]
+          end
         when 'down'
-          space_in_bottom?(shape, other_shape)
+          coordinates = shape.block_coordinates.map do |x,y|
+            [x,y+1]
+          end
         when 'up'
-          false
+          return false
+        end
+
+        satisfy_criterias?(coordinates, other_shape)
+      end
+
+      def satisfy_criterias?(coordinates, other_shape)
+        return false if !shape_fits_in_map?(coordinates) ||
+                        colliding_with_other_shape?(coordinates, other_shape) ||
+                        !space_in_map?(coordinates)
+        true
+      end
+
+      def space_in_map?(coordinates)
+        coordinates.all? { |x,y| @map[x][y] == 'none' }
+      end
+
+      def colliding_with_other_shape?(coordinates, other_shape)
+        coordinates.any? do |x,y|
+          other_shape.block_coordinates.include? [x,y,other_shape.color]
         end
       end
 
-      def space_in_bottom?(shape, other_shape)
-        shape.block_coordinates.each do |coordinate|
-          x = coordinate[0]
-          y = coordinate[1] + 1
-
-          if y > @height
-            return false
-          end
-
-          if other_shape.block_coordinates.include? [x,y, other_shape.color]
-            return false
-          end
-
-          if @map[x][y] != 'none'
-            return false
-          end
-        end
-
-        return true
+      def shape_fits_in_map?(coordinates)
+        coordinates.all? { |x,y| x_in_bounds?(x) && y_in_bounds?(y) }
       end
 
-      def space_in_right?(shape, other_shape)
-        shape.block_coordinates.each do |coordinate|
-          x = coordinate[0] + 1
-          y = coordinate[1]
-
-          if x > @width
-            return false
-          end
-
-          if other_shape.block_coordinates.include? [x,y, other_shape.color]
-            return false
-          end
-
-          if @map[x][y] != 'none'
-            return false
-          end
-        end
-        return true
+      def x_in_bounds?(x)
+        x > 0 && x <= @width
       end
 
-      def space_in_left?(shape, other_shape)
-        shape.block_coordinates.each do |coordinate|
-          x = coordinate[0] - 1
-          y = coordinate[1]
-
-          if x < 1
-            return false
-          end
-
-          if other_shape.block_coordinates.include? [x,y, other_shape.color]
-            return false
-          end
-
-          if @map[x][y] != 'none'
-            return false
-          end
-        end
-        return true
+      def y_in_bounds?(y)
+        y > 0 && y <= @height
       end
     end
   end
