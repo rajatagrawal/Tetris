@@ -94,7 +94,7 @@ module Tetris
         end
 
         shape.rotated_block_coordinates('0_degrees').each do |coordinates|
-          x,y = coordinates[0]
+          x,y = coordinates
 
           if other_shape.block_coordinates.include? [x,y, other_shape.color]
             return false
