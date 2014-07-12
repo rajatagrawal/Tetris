@@ -6,9 +6,6 @@ module Tetris
     attr_accessor :x, :y, :color
     attr_accessor :unit_side, :orientation
 
-    attr_accessor :block_1, :block_2
-    attr_accessor :block_3, :block_4
-
     def initialize(config={})
       assign_config config
       initialize_blocks(config[:color])
@@ -69,8 +66,8 @@ module Tetris
 
 
     def blocks
-      [ block_1, block_2,
-        block_3, block_4]
+      [ @block_1, @block_2,
+        @block_3, @block_4]
     end
 
     private
