@@ -6,7 +6,7 @@ module Tetris
     end
 
     def rotated_block_coordinates(orientation)
-      block_coordinates
+      coordinates
     end
 
     private

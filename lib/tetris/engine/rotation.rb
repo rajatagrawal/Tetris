@@ -45,7 +45,7 @@ module Tetris
 
       def colliding_with_other_shape?(coordinates, other_shape)
         coordinates.any? do |x,y|
-          other_shape.block_coordinates.include? [x,y,other_shape.color]
+          other_shape.coordinates.include? [x,y,other_shape.color]
         end
       end
 

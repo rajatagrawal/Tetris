@@ -14,13 +14,13 @@ module Tetris
       initialize_blocks(config[:color])
     end
 
-    def block_coordinates
+    def coordinates
       blocks.map do |block|
         [block.x, block.y, block.color]
       end
     end
 
-    def block_coordinates=(coordinates)
+    def coordinates=(coordinates)
       blocks.map!.with_index do |block, index|
         block.x, block.y = coordinates[index]
       end
@@ -64,7 +64,7 @@ module Tetris
       end
 
       @x, @y = coordinates
-      self.block_coordinates = rotated_block
+      self.coordinates = rotated_block
     end
 
 

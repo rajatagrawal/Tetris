@@ -7,7 +7,7 @@ module Tetris
       end
 
       def can_freeze_shape? shape
-        shape.block_coordinates.each do |x,y, color|
+        shape.coordinates.each do |x,y, color|
           if reached_bottom_of_map?(y) || space_occupied?(x,y)
             return true
           end
@@ -16,7 +16,7 @@ module Tetris
       end
 
       def freeze_shape shape
-        shape.block_coordinates.each do |x,y,color|
+        shape.coordinates.each do |x,y,color|
           @tetris_map.map[x][y] = color
         end
       end

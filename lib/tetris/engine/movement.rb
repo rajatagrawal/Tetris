@@ -25,15 +25,15 @@ module Tetris
       def space_to_move?(direction, shape, other_shape)
         case direction
         when 'right'
-          coordinates = shape.block_coordinates.map do |x,y|
+          coordinates = shape.coordinates.map do |x,y|
             [x+1,y]
           end
         when 'left'
-          coordinates = shape.block_coordinates.map do |x,y|
+          coordinates = shape.coordinates.map do |x,y|
             [x-1,y]
           end
         when 'down'
-          coordinates = shape.block_coordinates.map do |x,y|
+          coordinates = shape.coordinates.map do |x,y|
             [x,y+1]
           end
         when 'up'
@@ -56,7 +56,7 @@ module Tetris
 
       def colliding_with_other_shape?(coordinates, other_shape)
         coordinates.any? do |x,y|
-          other_shape.block_coordinates.include? [x,y,other_shape.color]
+          other_shape.coordinates.include? [x,y,other_shape.color]
         end
       end
 
