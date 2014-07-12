@@ -16,95 +16,41 @@ module Tetris
         orientation = shape.orientation
         case orientation
         when '0_degrees'
-          can_rotate_90_degrees?(shape, other_shape)
+          coordinates = shape.rotated_block_coordinates '90_degrees'
         when '90_degrees'
-          can_rotate_180_degrees?(shape, other_shape)
+          coordinates = shape.rotated_block_coordinates '180_degrees'
         when '180_degrees'
-          can_rotate_270_degrees?(shape, other_shape)
+          coordinates = shape.rotated_block_coordinates '270_degrees'
         when '270_degrees'
-          can_rotate_0_degrees?(shape, other_shape)
+          coordinates = shape.rotated_block_coordinates '0_degrees'
         end
+
+        can_rotate?(coordinates, other_shape)
       end
 
-      def fits_in_map?(shape, orientation)
-        shape.rotated_block_coordinates(orientation).all? do |x, y|
+      def can_rotate?(coordinates, other_shape)
+        return false if !fits_in_map?(coordinates) ||
+          colliding_with_other_shape?(coordinates, other_shape) ||
+          !space_in_map?(coordinates)
+        true
+      end
+
+      def fits_in_map?(coordinates)
+        coordinates.all? do |x,y|
           x_in_bounds = (1..@width).cover?(x)
           y_in_bounds = (1..@height).cover?(y)
           x_in_bounds && y_in_bounds
         end
       end
 
-      def can_rotate_90_degrees?(shape, other_shape)
-        if !fits_in_map?(shape, '90_degrees')
-          return false
+      def colliding_with_other_shape?(coordinates, other_shape)
+        coordinates.any? do |x,y|
+          other_shape.block_coordinates.include? [x,y,other_shape.color]
         end
-        shape.rotated_block_coordinates('90_degrees').each do |coordinates|
-          x, y = coordinates
-
-          if other_shape.block_coordinates.include? [x,y, other_shape.color]
-            return false
-          end
-
-          if @map[x][y] != 'none'
-            return false
-          end
-        end
-        true
       end
 
-      def can_rotate_180_degrees?(shape, other_shape)
-        if !fits_in_map?(shape, '180_degrees')
-          return false
-        end
-        shape.rotated_block_coordinates('180_degrees').each do |coordinates|
-          x,y = coordinates
-
-          if other_shape.block_coordinates.include? [x,y, other_shape.color]
-            return false
-          end
-
-          if @map[x][y] != 'none'
-            return false
-          end
-        end
-        true
-      end
-
-      def can_rotate_270_degrees?(shape, other_shape)
-        if !fits_in_map?(shape, '270_degrees')
-          return false
-        end
-        shape.rotated_block_coordinates('270_degrees').each do |coordinates|
-          x,y = coordinates
-
-          if other_shape.block_coordinates.include? [x,y, other_shape.color]
-            return false
-          end
-
-          if @map[x][y] != 'none'
-            return false
-          end
-        end
-        true
-      end
-
-      def can_rotate_0_degrees?(shape, other_shape)
-        if !fits_in_map?(shape, '0_degrees')
-          return false
-        end
-
-        shape.rotated_block_coordinates('0_degrees').each do |coordinates|
-          x,y = coordinates
-
-          if other_shape.block_coordinates.include? [x,y, other_shape.color]
-            return false
-          end
-
-          if @map[x][y] != 'none'
-            return false
-          end
-        end
-        true
+      def space_in_map?(coordinates)
+        coordinates.all? { |x,y| @map[x][y] == 'none' }
       end
     end
   end
