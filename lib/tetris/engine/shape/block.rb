@@ -19,10 +19,6 @@ module Tetris
       1
     end
 
-    def block_coordinates
-      [[x,y, color]]
-    end
-
     def move(direction)
       case direction
       when 'down'
