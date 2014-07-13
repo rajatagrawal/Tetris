@@ -1,4 +1,5 @@
-require_relative 'block'
+require 'ui/shape/block'
+
 module Tetris
   module UI
     module Shape

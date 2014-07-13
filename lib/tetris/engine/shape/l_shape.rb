@@ -1,4 +1,5 @@
-require_relative 'complex_shape'
+require 'complex_shape'
+
 module Tetris
   class L_Shape < ComplexShape
 

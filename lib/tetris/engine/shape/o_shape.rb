@@ -1,4 +1,5 @@
-require_relative 'complex_shape'
+require 'complex_shape'
+
 module Tetris
   class O_Shape < ComplexShape
     def rotated_coordinates(orientation)

@@ -1,5 +1,8 @@
-require_relative 'config'
-require_relative 'player'
+dirname = File.expand_path File.dirname __FILE__
+$LOAD_PATH.unshift(dirname) unless $LOAD_PATH.include? dirname
+
+require 'config'
+require 'player'
 
 module Tetris
   module Input

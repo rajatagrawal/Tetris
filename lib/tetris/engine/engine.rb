@@ -1,9 +1,12 @@
-require_relative 'shape/shape_files'
-require_relative 'player/player'
-require_relative 'constants'
-require_relative 'tetris_map'
-require_relative 'movement'
-require_relative 'rotation'
-require_relative 'squeeze'
-require_relative 'freeze'
+dirname = File.expand_path File.dirname __FILE__
+$LOAD_PATH.unshift(dirname) unless $LOAD_PATH.include? dirname
+
+require 'shape/shape_files'
+require 'player/player'
+require 'constants'
+require 'tetris_map'
+require 'movement'
+require 'rotation'
+require 'squeeze'
+require 'freeze'
 require 'pry'

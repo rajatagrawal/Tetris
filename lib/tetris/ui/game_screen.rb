@@ -1,5 +1,9 @@
-require_relative 'map/map_renderer'
-require_relative 'shape/piece'
+dirname = File.expand_path File.dirname __FILE__
+$LOAD_PATH.unshift(dirname) unless $LOAD_PATH.include? dirname
+
+require 'map/map_renderer'
+require 'shape/piece'
+
 module Tetris
   module UI
     class GameScreen
