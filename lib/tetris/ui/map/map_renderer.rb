@@ -38,7 +38,7 @@ module Tetris
 
           (1..width).each do |w|
             (1..height).each do |h|
-              @ui_map[w][h].draw(@map.map[w][h])
+              @ui_map[w][h].draw(@map[w, h])
             end
           end
         end

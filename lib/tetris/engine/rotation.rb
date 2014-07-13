@@ -3,7 +3,7 @@ module Tetris
     class Rotation
 
       def initialize(tetris_map)
-        @map = tetris_map.map
+        @map = tetris_map
         @height = tetris_map.height
         @width = tetris_map.width
       end
@@ -50,7 +50,7 @@ module Tetris
       end
 
       def space_in_map?(coordinates)
-        coordinates.all? { |x,y| @map[x][y] == 'none' }
+        coordinates.all? { |x,y| @map[x,y] == 'none' }
       end
     end
   end

@@ -60,7 +60,7 @@ module Tetris
       def space_empty?(shape)
         shape.coordinates.each do |coordinates|
           x,y = coordinates
-          return false if @tetris_map.map[x][y] != 'none'
+          return false if @tetris_map[x,y] != 'none'
         end
         true
       end
