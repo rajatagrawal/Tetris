@@ -1,4 +1,4 @@
-require_relative 'block'
+require 'map/block'
 
 module Tetris
   module UI

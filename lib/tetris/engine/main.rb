@@ -1,4 +1,5 @@
-require_relative 'engine'
+require 'engine/engine'
+
 module Tetris
   module Engine
     class Main

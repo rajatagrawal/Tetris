@@ -1,4 +1,5 @@
-require_relative '../color_parser'
+require 'color_parser'
+
 module Tetris
   module UI
     module Shape

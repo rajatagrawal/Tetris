@@ -1,4 +1,4 @@
-require_relative 'block'
+require 'block'
 
 module Tetris
   class ComplexShape

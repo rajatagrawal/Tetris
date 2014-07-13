@@ -1,8 +1,11 @@
+dirname = File.expand_path File.dirname __FILE__
+$LOAD_PATH.unshift(dirname) unless $LOAD_PATH.include?(dirname)
+
 require 'gosu'
-require_relative 'engine/main'
-require_relative 'ui/game_screen'
-require_relative 'input/keyboard/manager'
-require_relative 'output/background_music'
+require 'engine/main'
+require 'ui/game_screen'
+require 'input/keyboard/manager'
+require 'output/background_music'
 
 module Tetris
   class GameWindow < Gosu::Window

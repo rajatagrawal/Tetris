@@ -1,7 +1,10 @@
-require_relative 'i_shape'
-require_relative 'j_shape'
-require_relative 'l_shape'
-require_relative 'o_shape'
-require_relative 's_shape'
-require_relative 't_shape'
-require_relative 'z_shape'
+dirname = File.expand_path File.dirname __FILE__
+$LOAD_PATH.unshift(dirname) unless $LOAD_PATH.include? dirname
+
+require 'i_shape'
+require 'j_shape'
+require 'l_shape'
+require 'o_shape'
+require 's_shape'
+require 't_shape'
+require 'z_shape'
