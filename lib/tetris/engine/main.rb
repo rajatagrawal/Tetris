@@ -24,14 +24,14 @@ module Tetris
       end
 
       def run_game
-        @players.cycle(1).with_index do |player, index|
-          if player.shape == nil
-            player.shape = generate_shape(Constants::Shapes.sample, index)
-            player.next_shape = generate_shape(Constants::Shapes.sample, index)
-          end
+        @players.select do |player|
+          player.shape.nil?
+        end.each.with_index do |player, index|
+          player.shape = generate_shape(Constants::Shapes.sample, index)
+          player.next_shape = generate_shape(Constants::Shapes.sample, index)
         end
 
-        @players.cycle(1).with_index do |player, index|
+        @players.each.with_index do |player, index|
           if @freeze_handler.can_freeze_shape? player.shape
             @freeze_handler.freeze_shape player.shape
             @squeeze.no_of_rows.times { player.increase_score(20) }
