@@ -13,18 +13,26 @@ module Tetris
       end
 
       def [](x,y)
-        @map[x-1][y-1]
+        if x.nil?
+          @map[y-1]
+        else
+          @map[y-1][x-1]
+        end
       end
 
-      def []=(x,y,color)
-        @map[x-1][y-1] = color
+      def []=(x,y,value)
+        if x.nil?
+          @map[y-1] = value
+        else
+          @map[y-1][x-1] = value
+        end
       end
 
       private
 
       def initialize_tetris_map
-        @map = Array.new(@width) do |index|
-          Array.new(@height) do |height_index|
+        @map = Array.new(@height) do |h|
+          Array.new(@width) do |w|
             'none'
           end
         end

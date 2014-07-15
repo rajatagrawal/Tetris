@@ -24,14 +24,14 @@ module Tetris
       end
 
       def run_game
-        @players.each.with_index do |player, index|
+        @players.cycle(1).with_index do |player, index|
           if player.shape == nil
             player.shape = generate_shape(Constants::Shapes.sample, index)
             player.next_shape = generate_shape(Constants::Shapes.sample, index)
           end
         end
 
-        @players.each.with_index do |player, index|
+        @players.cycle(1).with_index do |player, index|
           if @freeze_handler.can_freeze_shape? player.shape
             @freeze_handler.freeze_shape player.shape
             @squeeze.no_of_rows.times { player.increase_score(20) }
@@ -58,11 +58,7 @@ module Tetris
       end
 
       def space_empty?(shape)
-        shape.coordinates.each do |coordinates|
-          x,y = coordinates
-          return false if @tetris_map[x,y] != 'none'
-        end
-        true
+        shape.coordinates.all? { |x,y| @tetris_map[x,y] == 'none' }
       end
     end
   end
