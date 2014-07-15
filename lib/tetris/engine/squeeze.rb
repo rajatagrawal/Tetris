@@ -1,47 +1,20 @@
 module Tetris
   module Engine
     class Squeeze
-
-      def initialize(tetris_map)
-        @map = tetris_map
-        @height = tetris_map.height
-        @width = tetris_map.width
+      def self.squeeze_rows map
+        new_grid = map.grid.reject(&method(:row_filled?))
+        num_squeezed = map.grid.size - new_grid.size
+        new_rows = (1..num_squeezed).map { new_row(map.width) }
+        map.grid = new_rows + new_grid
+        num_squeezed
       end
 
-      def no_of_rows
-        rows_to_squeeze.count
+      def self.row_filled?(row)
+        row.all? { |column| column != 'none' }
       end
 
-      def squeeze_rows
-        rows = absolute_row_positions rows_to_squeeze
-        rows.each { |row| squeeze_row row }
-      end
-
-      private
-
-      def row_filled?(h)
-        (1..@width).all? { |w| @map[w,h] != 'none' }
-      end
-
-      def rows_to_squeeze
-        rows = (1..@height).select { |row| row_filled? row  }
-      end
-
-      def absolute_row_positions(rows)
-        rows.reverse.map.with_index {|r,i| r + i }
-      end
-
-      def squeeze_row(row)
-        row.downto(2) { |r| copy_row(r, r-1) }
-        @map[nil, 1] = new_row
-      end
-
-      def copy_row(r1, r2)
-        (1..@width).each { |w| @map[w,r1] = @map[w, r2] }
-      end
-
-      def new_row
-        Array.new(@width, 'none')
+      def self.new_row width
+        Array.new(width, 'none')
       end
     end
   end

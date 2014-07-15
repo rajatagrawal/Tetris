@@ -4,6 +4,7 @@ module Tetris
 
       attr_accessor :unit_side
       attr_accessor :height, :width
+      attr_accessor :grid
 
       def initialize(height, width, unit_side)
         @height = height
