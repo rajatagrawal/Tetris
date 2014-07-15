@@ -13,7 +13,7 @@ module Tetris
       end
 
       def freeze_shape shape
-        shape.coordinates.cycle(1) do |x,y,color|
+        shape.coordinates.each do |x,y,color|
           @tetris_map[x,y] = color
         end
       end

@@ -35,7 +35,7 @@ module Tetris
 
     def move(direction)
       move_piece direction
-      blocks.cycle(1) { |block| block.move(direction) }
+      blocks.each { |block| block.move(direction) }
     end
 
     def rotate

@@ -14,7 +14,7 @@ module Tetris
 
       def squeeze_rows
         rows = absolute_row_positions rows_to_squeeze
-        rows.cycle(1) { |row| squeeze_row row }
+        rows.each { |row| squeeze_row row }
       end
 
       private
@@ -37,7 +37,7 @@ module Tetris
       end
 
       def copy_row(r1, r2)
-        (1..@width).cycle(1) { |w| @map[w,r1] = @map[w, r2] }
+        (1..@width).each { |w| @map[w,r1] = @map[w, r2] }
       end
 
       def new_row

@@ -10,7 +10,7 @@ module Tetris
         end
 
         def draw
-          @piece.blocks.cycle(1) { |block| Block.new(@canvas, block).draw }
+          @piece.blocks.each { |block| Block.new(@canvas, block).draw }
         end
       end
     end
