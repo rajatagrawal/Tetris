@@ -26,9 +26,9 @@ module Tetris
       private
 
       def draw_player_information
-        @players.cycle(1).with_index do |player, index|
-          offset = (400 * index) + 40
-          @score_font.draw("Player #{index + 1}",900,offset,0)
+        @players.each do |player|
+          offset = (400 * player.number) + 40
+          @score_font.draw("Player #{player.number + 1}",900,offset,0)
           @score_font.draw("Score : #{player.score}", 900, offset + 40, 0)
           @score_font.draw("Next Shape", 900, offset + 80, 0)
           draw_next_shape(900, offset + 120, player)

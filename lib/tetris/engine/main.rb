@@ -26,25 +26,26 @@ module Tetris
       def run_game
         @players.select do |player|
           player.shape.nil?
-        end.each.with_index do |player, index|
-          player.shape = generate_shape(Constants::Shapes.sample, index)
-          player.next_shape = generate_shape(Constants::Shapes.sample, index)
+        end.each do |player|
+          player.shape = generate_shape(Constants::Shapes.sample, player.number)
+          player.next_shape = generate_shape(Constants::Shapes.sample, player.number)
         end
 
-        @players.each.with_index do |player, index|
+        @players.each do |player|
           if @freeze_handler.can_freeze_shape? player.shape
             @freeze_handler.freeze_shape player.shape
             @squeeze.no_of_rows.times { player.increase_score(20) }
             @squeeze.squeeze_rows
             if space_empty?(player.next_shape)
               player.shape = player.next_shape
-              player.next_shape = generate_shape(Constants::Shapes.sample, index)
+              player.next_shape = generate_shape(Constants::Shapes.sample, player.number)
             else
               Kernel.exit
             end
           end
 
-          @movement_handler.move_shape('down', player.shape, @players[(index + 1) % 2].shape)
+          other_shapes = @players.map(&:shape) - [player.shape]
+          @movement_handler.move_shape('down', player.shape, other_shapes)
         end
       end
 

@@ -8,39 +8,41 @@ module Tetris
         @width = tetris_map.width
       end
 
-      def move_shape(direction, shape, other_shape)
-        if space_to_move?(direction, shape, other_shape)
+      def move_shape(direction, shape, other_shapes)
+        if space_to_move?(direction, shape, other_shapes)
           shape.move(direction)
         end
       end
 
-      def drop_shape(shape, other_shape)
-        while space_to_move?('down', shape, other_shape) do
+      def drop_shape(shape, other_shapes)
+        while space_to_move?('down', shape, other_shapes) do
           shape.move('down')
         end
       end
 
       private
 
-      def space_to_move?(direction, shape, other_shape)
-        case direction
-        when 'right'
-          coordinates = shape.coordinates.map do |x,y|
-            [x+1,y]
+      def space_to_move?(direction, shape, other_shapes)
+        other_shapes.all? do |other_shape|
+          case direction
+          when 'right'
+            coordinates = shape.coordinates.map do |x,y|
+              [x+1,y]
+            end
+          when 'left'
+            coordinates = shape.coordinates.map do |x,y|
+              [x-1,y]
+            end
+          when 'down'
+            coordinates = shape.coordinates.map do |x,y|
+              [x,y+1]
+            end
+          when 'up'
+            return false
           end
-        when 'left'
-          coordinates = shape.coordinates.map do |x,y|
-            [x-1,y]
-          end
-        when 'down'
-          coordinates = shape.coordinates.map do |x,y|
-            [x,y+1]
-          end
-        when 'up'
-          return false
-        end
 
-        satisfy_criterias?(coordinates, other_shape)
+          satisfy_criterias?(coordinates, other_shape)
+        end
       end
 
       def satisfy_criterias?(coordinates, other_shape)
