@@ -14,24 +14,24 @@ module Tetris
 
       def [](x,y)
         if x.nil?
-          @map[y-1]
+          @grid[y-1]
         else
-          @map[y-1][x-1]
+          @grid[y-1][x-1]
         end
       end
 
       def []=(x,y,value)
         if x.nil?
-          @map[y-1] = value
+          @grid[y-1] = value
         else
-          @map[y-1][x-1] = value
+          @grid[y-1][x-1] = value
         end
       end
 
       private
 
       def initialize_tetris_map
-        @map = Array.new(@height) do |h|
+        @grid = Array.new(@height) do |h|
           Array.new(@width) do |w|
             'none'
           end
