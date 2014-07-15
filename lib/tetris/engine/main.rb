@@ -40,7 +40,7 @@ module Tetris
               player.shape = player.next_shape
               player.next_shape = generate_shape(Constants::Shapes.sample, player.number)
             else
-              Kernel.exit
+              raise 'fucked'
             end
           end
 
