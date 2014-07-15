@@ -8,38 +8,40 @@ module Tetris
         @width = tetris_map.width
       end
 
-      def rows_to_squeeze
-        squeeze_row = (1..@height).to_a
-        (1..@height).each do |row|
-          (1..@width).each do |col|
-            if @map[col, row] == 'none'
-              squeeze_row.delete(row)
-              break
-            end
-          end
-        end
-        squeeze_row.sort
+      def no_of_rows
+        rows_to_squeeze.count
       end
 
-
-      def squeeze_rows(rows)
-        rows.each do |row|
-          squeeze_row row
-        end
+      def squeeze_rows
+        rows = absolute_row_positions rows_to_squeeze
+        rows.cycle(1) { |row| squeeze_row row }
       end
 
       private
 
-      def squeeze_row(row)
-        row.downto(2) do |r|
-          (1..@width).each do |w|
-            @map[w, r] = @map[w, r-1]
-          end
-        end
+      def row_filled?(h)
+        (1..@width).all? { |w| @map[w,h] != 'none' }
+      end
 
-        (1..@width).each do |w|
-          @map[w, 1] = 'none'
-        end
+      def rows_to_squeeze
+        rows = (1..@height).select { |row| row_filled? row  }
+      end
+
+      def absolute_row_positions(rows)
+        rows.reverse.map.with_index {|r,i| r + i }
+      end
+
+      def squeeze_row(row)
+        row.downto(2) { |r| copy_row(r, r-1) }
+        @map[nil, 1] = new_row
+      end
+
+      def copy_row(r1, r2)
+        (1..@width).cycle(1) { |w| @map[w,r1] = @map[w, r2] }
+      end
+
+      def new_row
+        Array.new(@width, 'none')
       end
     end
   end

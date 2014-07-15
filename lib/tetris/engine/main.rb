@@ -19,7 +19,7 @@ module Tetris
         @tetris_map = TetrisMap.new(@height, @width, @unit_side)
         @rotation_handler = Rotation.new(@tetris_map)
         @movement_handler = Movement.new(@tetris_map)
-        @squeeze_handler = Squeeze.new(@tetris_map)
+        @squeeze = Squeeze.new(@tetris_map)
         @freeze_handler = Freeze.new(@tetris_map)
       end
 
@@ -34,8 +34,8 @@ module Tetris
         @players.each.with_index do |player, index|
           if @freeze_handler.can_freeze_shape? player.shape
             @freeze_handler.freeze_shape player.shape
-            @squeeze_handler.rows_to_squeeze.size.times { player.increase_score(20) }
-            @squeeze_handler.squeeze_rows(@squeeze_handler.rows_to_squeeze)
+            @squeeze.no_of_rows.times { player.increase_score(20) }
+            @squeeze.squeeze_rows
             if space_empty?(player.next_shape)
               player.shape = player.next_shape
               player.next_shape = generate_shape(Constants::Shapes.sample, index)
