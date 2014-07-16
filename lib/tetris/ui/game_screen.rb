@@ -1,7 +1,7 @@
 dirname = File.expand_path File.dirname __FILE__
 $LOAD_PATH.unshift(dirname) unless $LOAD_PATH.include? dirname
 
-require 'map/map_renderer'
+require 'map/map'
 require 'shape/piece'
 
 module Tetris
@@ -14,7 +14,7 @@ module Tetris
         @score_font = Gosu::Font.new(@window, 'Arial', 30)
         config = { canvas: @window,
                    tetris_map: tetris_map }
-        @map_renderer = Map::MapRenderer.new(config)
+        @map = Map::Map.new(config)
       end
 
       def draw_screen
@@ -36,7 +36,7 @@ module Tetris
       end
 
       def draw_map
-        @map_renderer.draw_map
+        @map.draw
       end
 
       def draw_current_shape
