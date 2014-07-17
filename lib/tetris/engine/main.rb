@@ -17,26 +17,26 @@ module Tetris
         @height = config[:height] || 10
         @players = [Player.new, Player.new]
         @tetris_map = TetrisMap.new(@height, @width, @unit_side)
-        @rotation = Rotation.new(@tetris_map)
-        @movement = Movement.new(@tetris_map)
-        @freeze = Freeze.new(@tetris_map)
-        @shape_generator = ShapeGenerator.new(@width, @unit_side)
+        @rotation = Handlers::Rotation.new(@tetris_map)
+        @movement = Handlers::Movement.new(@tetris_map)
+        @freeze = Handlers::Freeze.new(@tetris_map)
+        @shape = Handlers::Shape.new(@width, @unit_side)
       end
 
       def run_game
         @players.select do |player|
           player.shape.nil?
         end.each do |player|
-          @shape_generator.generate_shape player
+          @shape.generate_shape player
         end
 
         @players.each do |player|
           if @freeze.can_freeze_shape? player.shape
             @freeze.freeze_shape player.shape
-            num_squeezed = Squeeze.squeeze_rows(@tetris_map)
+            num_squeezed = Handlers::Squeeze.squeeze_rows(@tetris_map)
             player.increase_score(num_squeezed * 20)
             if @tetris_map.space_for? (player.next_shape)
-              @shape_generator.generate_shape player
+              @shape.generate_shape player
             else
               raise 'fucked'
             end
