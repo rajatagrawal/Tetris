@@ -20,14 +20,14 @@ module Tetris
         @rotation = Rotation.new(@tetris_map)
         @movement = Movement.new(@tetris_map)
         @freeze = Freeze.new(@tetris_map)
+        @shape_generator = ShapeGenerator.new(@width, @unit_side)
       end
 
       def run_game
         @players.select do |player|
           player.shape.nil?
         end.each do |player|
-          player.shape = generate_shape(Constants::Shapes.sample, player.number)
-          player.next_shape = generate_shape(Constants::Shapes.sample, player.number)
+          @shape_generator.generate_shape player
         end
 
         @players.each do |player|
@@ -35,9 +35,8 @@ module Tetris
             @freeze.freeze_shape player.shape
             num_squeezed = Squeeze.squeeze_rows(@tetris_map)
             player.increase_score(num_squeezed * 20)
-            if space_empty?(player.next_shape)
-              player.shape = player.next_shape
-              player.next_shape = generate_shape(Constants::Shapes.sample, player.number)
+            if @tetris_map.space_for? (player.next_shape)
+              @shape_generator.generate_shape player
             else
               raise 'fucked'
             end
@@ -49,14 +48,6 @@ module Tetris
       end
 
       private
-
-      def generate_shape(shape_class, index)
-        config = { x: @width/3 + (index * @width/3),
-                   unit_side: @unit_side,
-                   color: Constants::ShapeColors[index] }
-        shape_class.new(config)
-      end
-
       def space_empty?(shape)
         shape.coordinates.all? { |x,y| @tetris_map[x,y] == 'none' }
       end
