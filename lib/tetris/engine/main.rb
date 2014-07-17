@@ -8,7 +8,7 @@ module Tetris
       attr_accessor :tetris_map
       attr_accessor :speed
       attr_accessor :players
-      attr_accessor :rotation_handler, :movement_handler
+      attr_accessor :rotation, :movement
 
       def initialize(config={})
         @speed = config[:speed] || 1
@@ -17,9 +17,9 @@ module Tetris
         @height = config[:height] || 10
         @players = [Player.new, Player.new]
         @tetris_map = TetrisMap.new(@height, @width, @unit_side)
-        @rotation_handler = Rotation.new(@tetris_map)
-        @movement_handler = Movement.new(@tetris_map)
-        @freeze_handler = Freeze.new(@tetris_map)
+        @rotation = Rotation.new(@tetris_map)
+        @movement = Movement.new(@tetris_map)
+        @freeze = Freeze.new(@tetris_map)
       end
 
       def run_game
@@ -31,8 +31,8 @@ module Tetris
         end
 
         @players.each do |player|
-          if @freeze_handler.can_freeze_shape? player.shape
-            @freeze_handler.freeze_shape player.shape
+          if @freeze.can_freeze_shape? player.shape
+            @freeze.freeze_shape player.shape
             num_squeezed = Squeeze.squeeze_rows(@tetris_map)
             player.increase_score(num_squeezed * 20)
             if space_empty?(player.next_shape)
@@ -44,7 +44,7 @@ module Tetris
           end
 
           other_shapes = @players.map(&:shape) - [player.shape]
-          @movement_handler.move_shape('down', player.shape, other_shapes)
+          @movement.move_shape('down', player.shape, other_shapes)
         end
       end
 
