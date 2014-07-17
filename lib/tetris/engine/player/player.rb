@@ -1,16 +1,17 @@
 module Tetris
   class Player
 
-    attr_reader :score, :number
+    attr_reader :score, :number, :color
     attr_accessor :shape, :next_shape
 
-    @@next_number = 0
+    @@next_number = -1
 
     def initialize
       @score = 0
       @shape = nil
       @next_shape = nil
       @number = player_number
+      @color = Engine::Constants::ShapeColors[@number]
     end
 
     def increase_score(score)
