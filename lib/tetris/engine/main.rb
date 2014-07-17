@@ -46,11 +46,6 @@ module Tetris
           @movement.move_shape('down', player.shape, other_shapes)
         end
       end
-
-      private
-      def space_empty?(shape)
-        shape.coordinates.all? { |x,y| @tetris_map[x,y] == 'none' }
-      end
     end
   end
 end

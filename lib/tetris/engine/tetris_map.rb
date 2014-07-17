@@ -29,6 +29,10 @@ module Tetris
         end
       end
 
+      def space_for?(shape)
+        shape.coordinates.all? { |x,y| self[x,y] == 'none' }
+      end
+
       private
 
       def initialize_tetris_map
