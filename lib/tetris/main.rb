@@ -21,9 +21,9 @@ module Tetris
       @game_engine = Engine::Main.new config
       @keyboard = Input::Keyboard::Manager.new(self, @game_engine, 5)
       @counter = 0
-      @game_screen = UI::GameScreen.new(self,
-                                        @game_engine.tetris_map,
-                                        @game_engine.players)
+      @game_screen = UI::GameScreen.new({context: self,
+                                         players: @game_engine.players,
+                                         tetris_map: @game_engine.tetris_map})
 
       @background_music = Output::BackgroundMusic.new(self,
                                                       './assets/tetris_music.mp3')
