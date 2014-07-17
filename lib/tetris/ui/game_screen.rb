@@ -1,6 +1,7 @@
 dirname = File.expand_path File.dirname __FILE__
 $LOAD_PATH.unshift(dirname) unless $LOAD_PATH.include? dirname
 
+require 'font/font'
 require 'map/map'
 require 'shape/piece'
 
@@ -28,9 +29,9 @@ module Tetris
       def draw_player_information
         @players.each do |player|
           offset = (400 * player.number) + 40
-          @score_font.draw("Player #{player.number + 1}",900,offset,0)
-          @score_font.draw("Score : #{player.score}", 900, offset + 40, 0)
-          @score_font.draw("Next Shape", 900, offset + 80, 0)
+          @font.draw("Player #{player.number + 1}",900,offset,0)
+          @font.draw("Score : #{player.score}", 900, offset + 40, 0)
+          @font.draw("Next Shape", 900, offset + 80, 0)
           draw_next_shape(900, offset + 120, player)
         end
       end
