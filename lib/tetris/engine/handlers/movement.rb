@@ -3,52 +3,59 @@ module Tetris
     module Handlers
       class Movement
 
-        def initialize(tetris_map)
+        def initialize(tetris_map, players)
           @map = tetris_map
+          @players = players
           @height = tetris_map.height
           @width = tetris_map.width
         end
 
-        def move_shape(direction, shape, other_shapes)
-          if space_to_move?(direction, shape, other_shapes)
-            shape.move(direction)
-          end
+        def move_shape(player, direction)
+          shape = player.shape
+          shape.move(direction) if space_to_move?(direction,
+                                                  shape,
+                                                  other_player_shapes(player))
         end
 
-        def drop_shape(shape, other_shapes)
-          while space_to_move?('down', shape, other_shapes) do
+        def drop_shape player
+          shape = player.shape
+          while space_to_move?('down',
+                               shape,
+                               other_player_shapes(player)) do
             shape.move('down')
           end
         end
 
         private
 
-        def space_to_move?(direction, shape, other_shapes)
-          other_shapes.all? do |other_shape|
-            case direction
-            when 'right'
-              coordinates = shape.coordinates.map do |x,y|
-                [x+1,y]
-              end
-            when 'left'
-              coordinates = shape.coordinates.map do |x,y|
-                [x-1,y]
-              end
-            when 'down'
-              coordinates = shape.coordinates.map do |x,y|
-                [x,y+1]
-              end
-            when 'up'
-              return false
-            end
-
-            satisfy_criterias?(coordinates, other_shape)
-          end
+        def other_player_shapes player
+          (@players - [player]).map(&:shape)
         end
 
-        def satisfy_criterias?(coordinates, other_shape)
+        def space_to_move?(direction, shape, other_shapes)
+          case direction
+          when 'right'
+            coordinates = shape.coordinates.map do |x,y|
+              [x+1,y]
+            end
+          when 'left'
+            coordinates = shape.coordinates.map do |x,y|
+              [x-1,y]
+            end
+          when 'down'
+            coordinates = shape.coordinates.map do |x,y|
+              [x,y+1]
+            end
+          when 'up'
+            return false
+          end
+
+          satisfy_criterias?(coordinates, other_shapes)
+        end
+
+        def satisfy_criterias?(coordinates, other_shapes)
           return false if !shape_fits_in_map?(coordinates) ||
-            colliding_with_other_shape?(coordinates, other_shape) ||
+            colliding_with_other_shapes?(coordinates, other_shapes) ||
             !space_in_map?(coordinates)
           true
         end
@@ -57,9 +64,11 @@ module Tetris
           coordinates.all? { |x,y| @map[x,y] == 'none' }
         end
 
-        def colliding_with_other_shape?(coordinates, other_shape)
+        def colliding_with_other_shapes?(coordinates, other_shapes)
           coordinates.any? do |x,y|
-            other_shape.coordinates.include? [x,y,other_shape.color]
+            other_shapes.any? do |other_shape|
+              other_shape.coordinates.include? [x,y,other_shape.color]
+            end
           end
         end
 
@@ -75,7 +84,6 @@ module Tetris
           y > 0 && y <= @height
         end
       end
-
     end
   end
 end
