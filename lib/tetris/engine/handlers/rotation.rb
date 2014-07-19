@@ -3,17 +3,25 @@ module Tetris
     module Handlers
       class Rotation
 
-        def initialize(tetris_map)
+        def initialize(tetris_map, players)
           @map = tetris_map
+          @players = players
           @height = tetris_map.height
           @width = tetris_map.width
         end
 
-        def rotate_shape(shape, other_shape)
-          shape.rotate if space_to_rotate?(shape, other_shape)
+        def rotate_shape player
+          shape = player.shape
+          shape.rotate if space_to_rotate?(shape, other_player_shapes(player))
         end
 
-        def space_to_rotate?(shape, other_shape)
+        private
+
+        def other_player_shapes player
+          (@players - [player]).map(&:shape)
+        end
+
+        def space_to_rotate?(shape, other_shapes)
           orientation = shape.orientation
           case orientation
           when '0_degrees'
@@ -26,12 +34,12 @@ module Tetris
             coordinates = shape.rotated_block_coordinates '0_degrees'
           end
 
-          can_rotate?(coordinates, other_shape)
+          can_rotate?(coordinates, other_shapes)
         end
 
-        def can_rotate?(coordinates, other_shape)
+        def can_rotate?(coordinates, other_shapes)
           return false if !fits_in_map?(coordinates) ||
-            colliding_with_other_shape?(coordinates, other_shape) ||
+            colliding_with_other_shapes?(coordinates, other_shapes) ||
             !space_in_map?(coordinates)
           true
         end
@@ -44,9 +52,9 @@ module Tetris
           end
         end
 
-        def colliding_with_other_shape?(coordinates, other_shape)
+        def colliding_with_other_shapes?(coordinates, other_shapes)
           coordinates.any? do |x,y|
-            other_shape.coordinates.include? [x,y,other_shape.color]
+            other_shapes.any? { |shape| shape.coordinates.include? [x,y,shape.color] }
           end
         end
 
@@ -54,7 +62,6 @@ module Tetris
           coordinates.all? { |x,y| @map[x,y] == 'none' }
         end
       end
-
     end
   end
 end
