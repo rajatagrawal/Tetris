@@ -13,6 +13,8 @@ module Tetris
                      right: Gosu::KbD,
                      rotate: Gosu::KbW,
                      drop: Gosu::KbLeftShift }
+
+        PLAYER_CONFIGS = [ PLAYER_1, PLAYER_2 ]
       end
     end
   end

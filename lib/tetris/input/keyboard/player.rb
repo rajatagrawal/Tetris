@@ -3,10 +3,12 @@ module Tetris
     module Keyboard
       class Player
 
+        attr_reader :keys_config
+
         def initialize(config)
           assign_config config
-          @movement_handler = @game_engine.movement_handler
-          @rotation_handler = @game_engine.rotation_handler
+          @movement = @game_engine.movement
+          @rotation = @game_engine.rotation
           @rotation_responsiveness = @responsiveness + 5
           @ticker = 0
         end
@@ -15,8 +17,8 @@ module Tetris
           @ticker = 0
         end
 
-        def listener(shape, other_shape)
-          keyboard_actor(shape, other_shape)
+        def listener
+          keyboard_actor
         end
 
         private
@@ -26,24 +28,39 @@ module Tetris
           @game_engine = config[:game_engine]
           @responsiveness = config[:responsiveness]
           @keys_config = config[:keys_config]
+          @player = config[:player]
         end
 
-        def keyboard_actor(shape, other_shape)
+        def keyboard_actor
+          key_for = button_pressed
+
+          case key_for
+          when 'left'
+            @movement.move_shape(@player, 'left') if time_to_move?
+          when 'right'
+            @movement.move_shape(@player, 'right') if time_to_move?
+          when 'down'
+            @movement.move_shape(@player, 'down') if time_to_move?
+          when 'rotate'
+            @rotation.rotate_shape(@player) if time_to_rotate?
+          when 'drop'
+            @movement.drop_shape(@player) if time_to_rotate?
+          end
+
+          @ticker +=1 if key_for
+        end
+
+        def button_pressed
           if @window.button_down? @keys_config[:left]
-            @movement_handler.move_shape('left', shape, other_shape) if time_to_move?
-            @ticker +=1
+            'left'
           elsif @window.button_down? @keys_config[:right]
-            @movement_handler.move_shape('right', shape, other_shape) if time_to_move?
-            @ticker +=1
+            'right'
           elsif @window.button_down? @keys_config[:down]
-            @movement_handler.move_shape('down', shape, other_shape) if time_to_move?
-            @ticker +=1
+            'down'
           elsif @window.button_down? @keys_config[:rotate]
-            @rotation_handler.rotate_shape(shape, other_shape) if time_to_rotate?
-            @ticker +=1
+            'rotate'
           elsif @window.button_down? @keys_config[:drop]
-            @movement_handler.drop_shape(shape, other_shape)if time_to_rotate?
-            @ticker +=1
+            'drop'
           end
         end
 

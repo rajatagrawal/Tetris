@@ -4,6 +4,7 @@ module Tetris
 
       attr_accessor :unit_side
       attr_accessor :height, :width
+      attr_accessor :grid
 
       def initialize(height, width, unit_side)
         @height = height
@@ -13,18 +14,30 @@ module Tetris
       end
 
       def [](x,y)
-        @map[x-1][y-1]
+        if x.nil?
+          @grid[y-1]
+        else
+          @grid[y-1][x-1]
+        end
       end
 
-      def []=(x,y,color)
-        @map[x-1][y-1] = color
+      def []=(x,y,value)
+        if x.nil?
+          @grid[y-1] = value
+        else
+          @grid[y-1][x-1] = value
+        end
+      end
+
+      def has_space_for?(shape)
+        shape.coordinates.all? { |x,y| self[x,y] == 'none' }
       end
 
       private
 
       def initialize_tetris_map
-        @map = Array.new(@width) do |index|
-          Array.new(@height) do |height_index|
+        @grid = Array.new(@height) do |h|
+          Array.new(@width) do |w|
             'none'
           end
         end
