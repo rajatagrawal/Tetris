@@ -23,7 +23,7 @@ module Tetris
       @counter = 0
       @game_screen = UI::GameScreen.new({context: self,
                                          players: @game_engine.players,
-                                         tetris_map: @game_engine.tetris_map})
+                                         tetris_map: @game_engine.grid})
 
       @background_music = Output::BackgroundMusic.new(self,
                                                       './assets/tetris_music.mp3')

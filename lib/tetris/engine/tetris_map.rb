@@ -29,7 +29,7 @@ module Tetris
         end
       end
 
-      def space_for?(shape)
+      def has_space_for?(shape)
         shape.coordinates.all? { |x,y| self[x,y] == 'none' }
       end
 
