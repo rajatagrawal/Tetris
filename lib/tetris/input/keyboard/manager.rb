@@ -29,7 +29,7 @@ module Tetris
 
         def reset_ticker(key)
           player = player_associated_with key
-          player.reset_ticker
+          player.reset_ticker if player
         end
 
         private
