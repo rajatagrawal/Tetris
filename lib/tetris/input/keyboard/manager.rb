@@ -18,34 +18,35 @@ module Tetris
                      game_engine: game_engine,
                      responsiveness: responsiveness }
 
-          @player_1 = Player.new(config.merge(keys_config: Config::PLAYER_1))
-
-          @player_2 = Player.new(config.merge(keys_config: Config::PLAYER_2))
+          @players = Array.new(no_of_players) do |index|
+            Player.new(prepare_player_config(config, index))
+          end
         end
 
         def listener
-          player_1_shape = @game_engine.players.first.shape
-          player_2_shape = @game_engine.players.last.shape
-          @player_1.listener(player_1_shape, player_2_shape)
-          @player_2.listener(player_2_shape, player_1_shape)
+          @players.each { |player| player.listener }
         end
 
         def reset_ticker(key)
-          case player_config_for_key key
-          when Config::PLAYER_1
-            @player_1.reset_ticker
-          when Config::PLAYER_2
-            @player_2.reset_ticker
-          end
+          player = player_associated_with key
+          player.reset_ticker
         end
 
         private
 
-        def player_config_for_key(key)
-          return Config::PLAYER_1 if Config::PLAYER_1.values.include? key
-          return Config::PLAYER_2 if Config::PLAYER_2.values.include? key
+        def prepare_player_config(config, index)
+          config.merge(keys_config: Config::PLAYER_CONFIGS[index],
+                       player: @game_engine.players[index])
         end
 
+        def no_of_players
+          @game_engine.players.count
+        end
+
+        def player_associated_with key
+          config = Config::PLAYER_CONFIGS.detect { |cfg| cfg.values.include? key }
+          @players.detect { |player| player.keys_config == config }
+        end
       end
     end
   end
