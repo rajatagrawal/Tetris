@@ -9,10 +9,7 @@ module Tetris
     DEGREES_180 = '180_degrees'
     DEGREES_270 = '270_degrees'
 
-    ORIENTATIONS = [DEGREES_0,
-                    DEGREES_90,
-                    DEGREES_180,
-                    DEGREES_270]
+    ORIENTATIONS = [DEGREES_0, DEGREES_90, DEGREES_180, DEGREES_270]
 
     attr_reader :blocks
     attr_accessor :x, :y, :color
@@ -24,30 +21,28 @@ module Tetris
     end
 
     def coordinates
-      blocks.map do |block|
-        [block.x, block.y, block.color]
-      end
+      @blocks.map { |block| [block.x, block.y] }
     end
 
     def coordinates=(coordinates)
-      blocks.each_with_index do |block, index|
+      @blocks.each_with_index do |block, index|
         block.x, block.y = coordinates[index]
       end
     end
 
     def height
-      coordinates = blocks.map(&:y).minmax
+      coordinates = @blocks.map(&:y).minmax
       coordinates[1] - coordinates[0] + 1
     end
 
     def width
-      coordinates = blocks.map(&:x).minmax
+      coordinates = @blocks.map(&:x).minmax
       coordinates[1] - coordinates[0] + 1
     end
 
     def move(direction)
       move_piece direction
-      blocks.each { |block| block.move(direction) }
+      @blocks.each { |block| block.move(direction) }
     end
 
     def next_orientation

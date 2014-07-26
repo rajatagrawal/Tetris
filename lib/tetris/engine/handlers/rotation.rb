@@ -43,7 +43,7 @@ module Tetris
 
         def colliding_with_other_shapes?(coordinates, other_shapes)
           coordinates.any? do |x,y|
-            other_shapes.any? { |shape| shape.coordinates.include? [x,y,shape.color] }
+            other_shapes.any? { |shape| shape.coordinates.include? [x,y] }
           end
         end
 
