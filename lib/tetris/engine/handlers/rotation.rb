@@ -22,18 +22,7 @@ module Tetris
         end
 
         def space_to_rotate?(shape, other_shapes)
-          orientation = shape.orientation
-          case orientation
-          when '0_degrees'
-            coordinates = shape.rotated_block_coordinates '90_degrees'
-          when '90_degrees'
-            coordinates = shape.rotated_block_coordinates '180_degrees'
-          when '180_degrees'
-            coordinates = shape.rotated_block_coordinates '270_degrees'
-          when '270_degrees'
-            coordinates = shape.rotated_block_coordinates '0_degrees'
-          end
-
+          coordinates = shape.coordinates_for shape.next_orientation
           can_rotate?(coordinates, other_shapes)
         end
 

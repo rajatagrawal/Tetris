@@ -3,12 +3,24 @@ require 'block'
 module Tetris
   class ComplexShape
 
+
+    DEGREES_0 = '0_degrees'
+    DEGREES_90 = '90_degrees'
+    DEGREES_180 = '180_degrees'
+    DEGREES_270 = '270_degrees'
+
+    ORIENTATIONS = [DEGREES_0,
+                    DEGREES_90,
+                    DEGREES_180,
+                    DEGREES_270]
+
+    attr_reader :blocks
     attr_accessor :x, :y, :color
     attr_accessor :unit_side, :orientation
 
     def initialize(config={})
       assign_config config
-      initialize_blocks(config[:color])
+      initialize_blocks config[:color]
     end
 
     def coordinates
@@ -18,7 +30,7 @@ module Tetris
     end
 
     def coordinates=(coordinates)
-      blocks.map!.with_index do |block, index|
+      blocks.each_with_index do |block, index|
         block.x, block.y = coordinates[index]
       end
     end
@@ -38,34 +50,14 @@ module Tetris
       blocks.each { |block| block.move(direction) }
     end
 
-    def rotate
-      case orientation
-      when '0_degrees'
-        coordinates = rotated_coordinates '90_degrees'
-        rotated_block = rotated_block_coordinates '90_degrees'
-        self.orientation = '90_degrees'
-      when '90_degrees'
-        coordinates = rotated_coordinates '180_degrees'
-        rotated_block = rotated_block_coordinates '180_degrees'
-        self.orientation = '180_degrees'
-      when '180_degrees'
-        coordinates = rotated_coordinates '270_degrees'
-        rotated_block = rotated_block_coordinates '270_degrees'
-        self.orientation = '270_degrees'
-      when '270_degrees'
-        coordinates = rotated_coordinates '0_degrees'
-        rotated_block = rotated_block_coordinates '0_degrees'
-        self.orientation = '0_degrees'
-      end
-
-      @x, @y = coordinates
-      self.coordinates = rotated_block
+    def next_orientation
+      index = ORIENTATIONS.index orientation
+      ORIENTATIONS.rotate(index+1).first
     end
 
-
-    def blocks
-      [ @block_1, @block_2,
-        @block_3, @block_4]
+    def rotate
+      @orientation = next_orientation
+      self.coordinates = coordinates_for(@orientation)
     end
 
     private
@@ -75,26 +67,15 @@ module Tetris
       @y = config[:y] || 1
       @color = config[:color]
       @unit_side = config[:unit_side] || 10
-      @orientation = config[:orientation] || '0_degrees'
+      @orientation = config[:orientation] || ORIENTATIONS.first
     end
 
     def initialize_blocks(color)
-      @block_1 = Block.new({ x: x, y: y,
-                             unit_side: unit_side,
-                             color: color})
-
-      @block_2 = Block.new({ x: x, y: y,
-                             unit_side: unit_side,
-                             color: color})
-
-      @block_3 = Block.new({ x: x, y: y,
-                             unit_side: unit_side,
-                             color: color})
-
-
-      @block_4 = Block.new({ x: x, y: y,
-                             unit_side: unit_side,
-                             color: color})
+      @blocks = Array.new(4) do
+                  Block.new({ unit_side: unit_side,
+                              color: color})
+      end
+      self.coordinates = coordinates_for @orientation
     end
 
     def move_piece(direction)

@@ -2,33 +2,9 @@ require 'complex_shape'
 
 module Tetris
   class O_Shape < ComplexShape
-    def rotated_coordinates(orientation)
-      [@x, @y]
-    end
 
-    def rotated_block_coordinates(orientation)
-      coordinates
-    end
-
-    private
-
-    def initialize_blocks(color)
-      @block_1 = Block.new({ x: x, y: y,
-                             unit_side: unit_side,
-                             color: color})
-
-      @block_2 = Block.new({ x: x+1, y: y,
-                             unit_side: unit_side,
-                             color: color})
-
-      @block_3 = Block.new({ x: x, y: y+1,
-                             unit_side: unit_side,
-                             color: color})
-
-
-      @block_4 = Block.new({ x: x+1, y: y+1,
-                             unit_side: unit_side,
-                             color: color})
+    def coordinates_for(orientation)
+      [[@x, @y], [@x+1, @y], [@x+1, @y+1], [@x, @y+1]]
     end
   end
 end
