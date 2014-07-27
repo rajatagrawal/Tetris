@@ -2,7 +2,7 @@ module Tetris
   module Engine
     module Constants
 
-      Shapes = [I_Shape,
+      SHAPES = [I_Shape,
                 J_Shape,
                 L_Shape,
                 O_Shape,
@@ -10,13 +10,16 @@ module Tetris
                 T_Shape,
                 Z_Shape]
 
-      ShapeColors = ['blue',
-                     'red',
-                     'green',
-                     'aqua',
-                     'yellow',
-                     'cyan',
-                     'fuchsia']
+      BLUE = 'blue'
+      RED = 'red'
+      GREEN = 'green'
+      AQUA = 'aqua'
+      YELLOW = 'yellow'
+      CYAN = 'cyan'
+      FUCHSIA = 'fuchsia'
+      NONE = 'none'
+
+      SHAPE_COLORS = [BLUE, RED, GREEN, AQUA, YELLOW, CYAN, FUCHSIA]
     end
   end
 end

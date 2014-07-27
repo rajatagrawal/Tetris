@@ -11,7 +11,7 @@ module Tetris
       @shape = nil
       @next_shape = nil
       @number = player_number
-      @color = Engine::Constants::ShapeColors[@number]
+      @color = Engine::Constants::SHAPE_COLORS[@number]
     end
 
     def increase_score(score)

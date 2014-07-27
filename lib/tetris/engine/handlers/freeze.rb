@@ -26,10 +26,9 @@ module Tetris
         end
 
         def space_occupied?(x,y)
-          @tetris_map[x,y+1] != 'none'
+          !@tetris_map.empty?(x,y+1)
         end
       end
-
     end
   end
 end

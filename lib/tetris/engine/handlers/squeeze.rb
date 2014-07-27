@@ -20,11 +20,12 @@ module Tetris
         private
 
         def row_filled?(row)
-          row.all? { |column| column != 'none' }
+          binding.pry
+          row.all? { |column| column != Constants::NONE }
         end
 
         def new_row width
-          Array.new(width, 'none')
+          Array.new(width, Constants::NONE)
         end
       end
     end

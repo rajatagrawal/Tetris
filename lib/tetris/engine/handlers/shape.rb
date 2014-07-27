@@ -25,7 +25,7 @@ module Tetris
                      unit_side: @unit_side,
                      color: player.color }
 
-          Constants::Shapes.sample.new(config)
+          Constants::SHAPES.sample.new(config)
         end
 
         def position(number)

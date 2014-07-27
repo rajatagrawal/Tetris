@@ -48,7 +48,7 @@ module Tetris
         end
 
         def space_in_map?(coordinates)
-          coordinates.all? { |x,y| @map[x,y] == 'none' }
+          coordinates.all? { |x,y| @map.empty?(x,y) }
         end
       end
     end
