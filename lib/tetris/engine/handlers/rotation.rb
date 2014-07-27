@@ -22,18 +22,7 @@ module Tetris
         end
 
         def space_to_rotate?(shape, other_shapes)
-          orientation = shape.orientation
-          case orientation
-          when '0_degrees'
-            coordinates = shape.rotated_block_coordinates '90_degrees'
-          when '90_degrees'
-            coordinates = shape.rotated_block_coordinates '180_degrees'
-          when '180_degrees'
-            coordinates = shape.rotated_block_coordinates '270_degrees'
-          when '270_degrees'
-            coordinates = shape.rotated_block_coordinates '0_degrees'
-          end
-
+          coordinates = shape.coordinates_for shape.next_orientation
           can_rotate?(coordinates, other_shapes)
         end
 
@@ -54,12 +43,12 @@ module Tetris
 
         def colliding_with_other_shapes?(coordinates, other_shapes)
           coordinates.any? do |x,y|
-            other_shapes.any? { |shape| shape.coordinates.include? [x,y,shape.color] }
+            other_shapes.any? { |shape| shape.coordinates.include? [x,y] }
           end
         end
 
         def space_in_map?(coordinates)
-          coordinates.all? { |x,y| @map[x,y] == 'none' }
+          coordinates.all? { |x,y| @map.empty?(x,y) }
         end
       end
     end

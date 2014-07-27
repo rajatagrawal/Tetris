@@ -61,13 +61,13 @@ module Tetris
         end
 
         def space_in_map?(coordinates)
-          coordinates.all? { |x,y| @map[x,y] == 'none' }
+          coordinates.all? { |x,y| @map.empty?(x,y) }
         end
 
         def colliding_with_other_shapes?(coordinates, other_shapes)
           coordinates.any? do |x,y|
             other_shapes.any? do |other_shape|
-              other_shape.coordinates.include? [x,y,other_shape.color]
+              other_shape.coordinates.include? [x,y]
             end
           end
         end

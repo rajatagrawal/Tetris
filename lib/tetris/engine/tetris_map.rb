@@ -30,7 +30,11 @@ module Tetris
       end
 
       def has_space_for?(shape)
-        shape.coordinates.all? { |x,y| self[x,y] == 'none' }
+        shape.coordinates.all? { |x,y| empty?(x,y)  }
+      end
+
+      def empty?(x,y)
+        self[x,y] == Constants::NONE
       end
 
       private
@@ -38,7 +42,7 @@ module Tetris
       def initialize_tetris_map
         @grid = Array.new(@height) do |h|
           Array.new(@width) do |w|
-            'none'
+            Constants::NONE
           end
         end
       end
