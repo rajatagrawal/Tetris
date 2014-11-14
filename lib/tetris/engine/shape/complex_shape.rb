@@ -1,4 +1,4 @@
-require 'block'
+require 'tetris/engine/shape/block'
 
 module Tetris
   class ComplexShape
@@ -9,7 +9,10 @@ module Tetris
     DEGREES_180 = '180_degrees'
     DEGREES_270 = '270_degrees'
 
-    ORIENTATIONS = [DEGREES_0, DEGREES_90, DEGREES_180, DEGREES_270]
+    ORIENTATIONS = [DEGREES_0,
+                    DEGREES_90,
+                    DEGREES_180,
+                    DEGREES_270]
 
     attr_reader :blocks
     attr_accessor :x, :y, :color

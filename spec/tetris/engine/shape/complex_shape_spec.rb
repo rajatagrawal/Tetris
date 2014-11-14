@@ -1,147 +1,87 @@
-require 'spec_helper'
-require 'tetris/shape/complex_shape'
+require 'tetris/engine/shape/complex_shape'
+
 module Tetris
   describe ComplexShape do
-    let(:window) { double 'window' }
+    let(:initial_coordinates) { [[1,1],[1,1],[1,1],[1,2]] }
+    let(:complex_shape) { ComplexShape.new }
 
-    describe '#initialize' do
-      it 'creates and configures block_1' do
-        config = { x: 10, y: 10, unit_side: 15, color: 'blue' }
-        shape = ComplexShape.new(window, config)
-        expect(shape.block_1.x).to eq 10
-        expect(shape.block_1.y).to eq 10
-        expect(shape.block_1.color).to eq Gosu::Color::BLUE
-      end
+    before do
+      allow_any_instance_of(ComplexShape).to receive(:coordinates_for).
+        and_return(initial_coordinates)
+    end
 
-      it 'creates and configures block_2' do
-        config = { x: 10, y: 10, unit_side: 15, color: 'blue' }
-        shape = ComplexShape.new(window, config)
-        expect(shape.block_2.x).to eq 10
-        expect(shape.block_2.y).to eq 10
-        expect(shape.block_2.color).to eq Gosu::Color::BLUE
-      end
-
-      it 'creates and configures block_3' do
-        config = { x: 10, y: 10, unit_side: 15, color: 'blue' }
-        shape = ComplexShape.new(window, config)
-        expect(shape.block_3.x).to eq 10
-        expect(shape.block_3.y).to eq 10
-        expect(shape.block_3.color).to eq Gosu::Color::BLUE
-      end
-
-
-      it 'creates and configures block_4' do
-        config = { x: 10, y: 10, unit_side: 15, color: 'blue' }
-        shape = ComplexShape.new(window, config)
-        expect(shape.block_4.x).to eq 10
-        expect(shape.block_4.y).to eq 10
-        expect(shape.block_4.color).to eq Gosu::Color::BLUE
+    describe '#coordinates' do
+      it 'returns the coordinates of all the blocks' do
+        expect(complex_shape.coordinates).to eq initial_coordinates
       end
     end
 
-    describe '#block_coordinates' do
-      it 'returns coordinates of all four blocks' do
-        config = { x: 15, y: 15, unit_side: 15, color: 'blue'}
-        shape = ComplexShape.new(window, config)
-        block_coordinates = [[15,15, Gosu::Color::BLUE],
-                             [15,15, Gosu::Color::BLUE],
-                             [15,15, Gosu::Color::BLUE],
-                             [15,15, Gosu::Color::BLUE]]
-        expect(shape.block_coordinates).to match_array block_coordinates
-      end
-    end
-
-    describe '#draw' do
-      it 'draws blocks of the Complex Shape' do
-        shape = ComplexShape.new window
-        expect(shape.block_1).to receive(:draw)
-        expect(shape.block_2).to receive(:draw)
-        expect(shape.block_3).to receive(:draw)
-        expect(shape.block_4).to receive(:draw)
-        shape.draw
+    describe '#coordinates=' do
+      it 'sets the coordinates for the the blocks' do
+        coordinates = [[1,2],[3,4],[5,6],[7,8]]
+        complex_shape.coordinates = coordinates
+        expect(complex_shape.coordinates).to eq coordinates
       end
     end
 
     describe '#height' do
-      it 'returns  difference of max and min y value of block coordinates' do
-        config = { x: 1, y: 1 }
-        shape = ComplexShape.new(window, config)
-        shape.block_1.y = 4
-        shape.block_2.y = 1
-        shape.block_3.y = 1
-        shape.block_4.y = 1
-        expect(shape.height).to eq 4
+      it 'returns no of blocks from the top most to the bottom most block' do
+        coordinates = [[1,2],[1,2],[1,3],[1,7]]
+        complex_shape.coordinates = coordinates
+        expect(complex_shape.height).to eq 6
       end
     end
 
     describe '#width' do
-      it 'returns  difference of max and min x value of block coordinates' do
-        config = { x: 1, y: 1 }
-        shape = ComplexShape.new(window, config)
-        shape.block_1.x = 4
-        shape.block_2.x = 1
-        shape.block_3.x = 1
-        shape.block_4.x = 1
-        expect(shape.width).to eq 4
+      it 'returns no of blocks from left to right in the shape' do
+        coordinates = [[3,2],[4,2],[1,3],[5,7]]
+        complex_shape.coordinates = coordinates
+        expect(complex_shape.width).to eq 5
       end
     end
 
     describe '#move' do
-      it 'moves itself down' do
-        shape = ComplexShape.new window
-
-        expect{shape.move('down')}.
-          to change{shape.y}.by(1)
-        expect{shape.move('down')}.
-          to change{shape.block_1.y}.by(1)
-        expect{shape.move('down')}.
-          to change{shape.block_2.y}.by(1)
-        expect{shape.move('down')}.
-          to change{shape.block_3.y}.by(1)
-        expect{shape.move('down')}.
-          to change{shape.block_4.y}.by(1)
+      it 'calls move method on each block with specified direction' do
+        complex_shape.blocks.each do |block|
+          expect(block).to receive(:move).with('right')
+        end
+        complex_shape.move('right')
       end
 
-      it 'moves itself up' do
-        shape = ComplexShape.new window
-        expect{shape.move('up')}.
-          to change{shape.y}.by(-1)
-        expect{shape.move('up')}.
-          to change{shape.block_1.y}.by(-1)
-        expect{shape.move('up')}.
-          to change{shape.block_2.y}.by(-1)
-        expect{shape.move('up')}.
-          to change{shape.block_3.y}.by(-1)
-        expect{shape.move('up')}.
-          to change{shape.block_4.y}.by(-1)
+      it 'increases/decreases shapes x,y appropriate to the direction' do
+        expect { complex_shape.move('right') }.
+          to change{ complex_shape.x }.by(1)
+        expect { complex_shape.move('left') }.
+          to change{ complex_shape.x }.by(-1)
+        expect { complex_shape.move('up') }.
+          to change{ complex_shape.y }.by(-1)
+        expect { complex_shape.move('down') }.
+          to change{ complex_shape.y }.by(1)
+      end
+    end
+
+    describe '#next_orientation' do
+      it 'gets the next orientation' do
+        expect(complex_shape.next_orientation).to eq '90_degrees'
+        complex_shape.orientation = '270_degrees'
+        expect(complex_shape.next_orientation).to eq '0_degrees'
+      end
+    end
+
+    describe '#rotate' do
+      it 'changes the orientation of the shape' do
+        expect(complex_shape.orientation).to eq '0_degrees'
+        complex_shape.rotate
+        expect(complex_shape.orientation).to eq '90_degrees'
       end
 
-      it 'moves itself right' do
-        shape = ComplexShape.new window
-        expect{shape.move('right')}.
-          to change{shape.x}.by(1)
-        expect{shape.move('right')}.
-          to change{shape.block_1.x}.by(1)
-        expect{shape.move('right')}.
-          to change{shape.block_2.x}.by(1)
-        expect{shape.move('right')}.
-          to change{shape.block_3.x}.by(1)
-        expect{shape.move('right')}.
-          to change{shape.block_4.x}.by(1)
-      end
-
-      it 'moves itself left' do
-        shape = ComplexShape.new window
-        expect{shape.move('left')}.
-          to change{shape.x}.by(-1)
-        expect{shape.move('left')}.
-          to change{shape.block_1.x}.by(-1)
-        expect{shape.move('left')}.
-          to change{shape.block_2.x}.by(-1)
-        expect{shape.move('left')}.
-          to change{shape.block_3.x}.by(-1)
-        expect{shape.move('left')}.
-          to change{shape.block_4.x}.by(-1)
+      it 'sets appropriate block coordinates' do
+        coordinates = [[1,2],[3,4],[5,6],[7,8]]
+        allow(complex_shape).to receive(:coordinates_for).
+          with('90_degrees').and_return(coordinates)
+        expect(complex_shape.orientation).to eq ('0_degrees')
+        complex_shape.rotate
+        expect(complex_shape.coordinates).to eq coordinates
       end
     end
   end

@@ -20,7 +20,6 @@ module Tetris
         private
 
         def row_filled?(row)
-          binding.pry
           row.all? { |column| column != Constants::NONE }
         end
 
