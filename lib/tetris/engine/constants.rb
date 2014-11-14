@@ -1,3 +1,5 @@
+require 'tetris/engine/shape/shape_files'
+
 module Tetris
   module Engine
     module Constants

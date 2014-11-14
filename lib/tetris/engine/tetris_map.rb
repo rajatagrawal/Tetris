@@ -1,10 +1,12 @@
+require 'tetris/engine/constants'
+
 module Tetris
   module Engine
     class TetrisMap
 
+      attr_accessor :grid
       attr_accessor :unit_side
       attr_accessor :height, :width
-      attr_accessor :grid
 
       def initialize(height, width, unit_side)
         @height = height
@@ -13,7 +15,7 @@ module Tetris
         initialize_tetris_map
       end
 
-      def [](x,y)
+      def [](x=nil,y)
         if x.nil?
           @grid[y-1]
         else
@@ -21,7 +23,7 @@ module Tetris
         end
       end
 
-      def []=(x,y,value)
+      def []=(x=nil,y,value)
         if x.nil?
           @grid[y-1] = value
         else
