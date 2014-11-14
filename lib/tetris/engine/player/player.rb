@@ -1,3 +1,5 @@
+require 'tetris/engine/constants'
+
 module Tetris
   class Player
 
