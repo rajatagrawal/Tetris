@@ -2,7 +2,7 @@ module Tetris
   module Engine
     module Calculations
       class Coordinates
-        def coordinates_for(shape, direction)
+        def xy_for(shape, direction)
           case direction
           when 'right'
             shape.coordinates.map { |x,y| [x+1,y]}
@@ -15,8 +15,12 @@ module Tetris
           end
         end
 
-        def other_shapes_coordinates(shape, shapes)
+        def other_shapes_xy(shape, shapes)
           shapes.reject { |s| s == shape }.map(&:coordinates)
+        end
+
+        def rotated_xy_for(shape)
+          shape.coordinates_for(shape.next_orientation)
         end
       end
     end

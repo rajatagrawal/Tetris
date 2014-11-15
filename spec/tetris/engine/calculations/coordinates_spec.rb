@@ -4,39 +4,49 @@ module Tetris
   module Engine
     module Calculations
       describe Coordinates do
-        let(:coordinates_calculator) { Coordinates.new }
+        let(:xy_calculator) { Coordinates.new }
 
-        describe '#coordinates_for' do
+        describe '#xy_for' do
           it 'returns to be coordinates for shape if it were to move' do
             shape = double(:shape, coordinates: [[1,1],[1,1],[1,1],[1,1]])
 
-            coordinates = coordinates_calculator.coordinates_for(shape,'right')
+            coordinates = xy_calculator.xy_for(shape,'right')
             expect(coordinates).to eq ([[2,1],[2,1],[2,1],[2,1]])
 
-            coordinates = coordinates_calculator.coordinates_for(shape,'left')
+            coordinates = xy_calculator.xy_for(shape,'left')
             expect(coordinates).to eq ([[0,1],[0,1],[0,1],[0,1]])
 
-            coordinates = coordinates_calculator.coordinates_for(shape,'up')
+            coordinates = xy_calculator.xy_for(shape,'up')
             expect(coordinates).to eq ([[1,0],[1,0],[1,0],[1,0]])
 
-            coordinates = coordinates_calculator.coordinates_for(shape,'down')
+            coordinates = xy_calculator.xy_for(shape,'down')
             expect(coordinates).to eq ([[1,2],[1,2],[1,2],[1,2]])
           end
         end
 
-        describe '#other_shapes_coordinates' do
+        describe '#other_shapes_xy' do
           it 'returns the coordinates of other shapes than current one' do
-            shape_1_coordinates = double(:shape_1_coordinates)
-            shape_2_coordinates = double(:shape_2_coordinates)
-            shape_3_coordinates = double(:shape_3_coordinates)
-            shape1 = double(:shape, coordinates: shape_1_coordinates)
-            shape2 = double(:shape, coordinates: shape_2_coordinates)
-            shape3 = double(:shape, coordinates: shape_3_coordinates)
+            shape_1_xy = double(:shape_1_xy)
+            shape_2_xy = double(:shape_2_xy)
+            shape_3_xy = double(:shape_3_xy)
+            shape1 = double(:shape, coordinates: shape_1_xy)
+            shape2 = double(:shape, coordinates: shape_2_xy)
+            shape3 = double(:shape, coordinates: shape_3_xy)
 
-            coordinates = coordinates_calculator.
-              other_shapes_coordinates(shape1,[shape1, shape2, shape3])
-            expect(coordinates).to match_array([shape_2_coordinates,
-                                                shape_3_coordinates])
+            xy = xy_calculator.other_shapes_xy(shape1,[shape1, shape2, shape3])
+            expect(xy).to match_array([shape_2_xy, shape_3_xy])
+          end
+        end
+
+        describe '#rotated_xy_for' do
+          it 'returns shape coordinates for next rotation' do
+            shape = double(:shape, next_orientation: '90_degrees')
+            coordinates = double
+            allow(shape).to receive(:coordinates_for).with('90_degrees').
+              and_return(coordinates)
+
+            rotation_xy = xy_calculator.rotated_xy_for(shape)
+            expect(rotation_xy).to eq coordinates
           end
         end
       end
