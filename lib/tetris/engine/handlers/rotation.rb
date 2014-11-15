@@ -1,54 +1,30 @@
+require 'tetris/engine/calculations/space'
+require 'tetris/engine/calculations/coordinates'
+
 module Tetris
   module Engine
     module Handlers
       class Rotation
-
         def initialize(tetris_map, players)
-          @map = tetris_map
           @players = players
-          @height = tetris_map.height
-          @width = tetris_map.width
+          @space_cal = Calculations::Space.new(tetris_map)
+          @xy_cal = Calculations::Coordinates.new
         end
 
-        def rotate_shape player
-          shape = player.shape
-          shape.rotate if space_to_rotate?(shape, other_player_shapes(player))
+        def rotate_shape(player)
+          player.shape.rotate if space_to_rotate?(player)
         end
 
         private
 
-        def other_player_shapes player
-          (@players - [player]).map(&:shape)
-        end
+        def space_to_rotate?(player)
+          player_xy = @xy_cal.rotated_xy_for(player.shape)
+          other_shapes_xy = @xy_cal.other_shapes_xy(player.shape,
+                                                    @players.map(&:shape))
 
-        def space_to_rotate?(shape, other_shapes)
-          coordinates = shape.coordinates_for shape.next_orientation
-          can_rotate?(coordinates, other_shapes)
-        end
-
-        def can_rotate?(coordinates, other_shapes)
-          return false if !fits_in_map?(coordinates) ||
-            colliding_with_other_shapes?(coordinates, other_shapes) ||
-            !space_in_map?(coordinates)
-          true
-        end
-
-        def fits_in_map?(coordinates)
-          coordinates.all? do |x,y|
-            x_in_bounds = (1..@width).cover?(x)
-            y_in_bounds = (1..@height).cover?(y)
-            x_in_bounds && y_in_bounds
-          end
-        end
-
-        def colliding_with_other_shapes?(coordinates, other_shapes)
-          coordinates.any? do |x,y|
-            other_shapes.any? { |shape| shape.coordinates.include? [x,y] }
-          end
-        end
-
-        def space_in_map?(coordinates)
-          coordinates.all? { |x,y| @map.empty?(x,y) }
+          @space_cal.coordinates_in_bounds?(player_xy) &&
+            !@space_cal.collides_with_other_shape?(player_xy, other_shapes_xy) &&
+            @space_cal.space_in_map?(player_xy)
         end
       end
     end
