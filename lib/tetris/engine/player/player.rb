@@ -6,7 +6,7 @@ module Tetris
     attr_reader :score, :number, :color
     attr_accessor :shape, :next_shape
 
-    @@next_number = -1
+    @@next_number = 0
 
     def initialize
       @score = 0
@@ -18,6 +18,10 @@ module Tetris
 
     def increase_score(score)
       @score += score
+    end
+
+    def self.no_of_players
+      @@next_number
     end
 
     private
