@@ -1,4 +1,4 @@
-require 'engine/engine'
+require 'tetris/engine/engine'
 
 module Tetris
   module Engine
@@ -19,16 +19,14 @@ module Tetris
 
       def run_game
         @players.each do |player|
-          @movement.move_shape(player, 'down')
-          if cannot_move_further? player
-            @freeze.freeze_shape player.shape
+          unless @movement.move_shape(player,'down')
+            @freeze.freeze_shape(player.shape)
             @squeeze.squeeze_rows
-            Handlers::Score.increase_score player, @squeeze.no_of_squeezed_rows
-
-            if @grid.has_space_for? (player.next_shape)
+            Handlers::Score.increase_score(player, @squeeze.no_of_squeezed_rows)
+            if @grid.has_space_for?(player.next_shape)
               @shape.new_shape player
             else
-              game_over
+              raise 'game over'
             end
           end
         end
@@ -41,27 +39,19 @@ module Tetris
         @unit_side = config[:unit_side] || 10
         @width = config[:width] || 10
         @height = config[:height] || 10
+        @players = Array.new(config[:players]) { Player.new }
       end
 
       def initialize_handlers
         @rotation = Handlers::Rotation.new(@grid, @players)
         @movement = Handlers::Movement.new(@grid, @players)
         @freeze = Handlers::Freeze.new(@grid)
-        @shape = Handlers::Shape.new(@width, @unit_side)
+        @shape = Handlers::Shape::Shape.new(@width, @unit_side)
         @squeeze = Handlers::Squeeze.new(@grid)
       end
 
       def initializations
-        @players = Array.new(2) { Player.new }
         @grid = TetrisMap.new(@height, @width, @unit_side)
-      end
-
-      def game_over
-        raise 'fucked'
-      end
-
-      def cannot_move_further? player
-        @freeze.can_freeze_shape? player.shape
       end
 
       def initial_shapes_for_players

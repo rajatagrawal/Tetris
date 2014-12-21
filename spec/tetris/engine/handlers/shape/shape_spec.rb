@@ -15,6 +15,7 @@ module Tetris
               before do
                 player.shape = nil
               end
+
               it 'generates shape for the player if its shape is nil' do
                 shape_handler.new_shape(player)
                 expect(player.shape).to be_kind_of ComplexShape
@@ -22,8 +23,14 @@ module Tetris
 
               it 'generates the proper config for the shape' do
                 expect(Handlers::Shape::Generator).to receive(:generate_shape).
-                  with(player, 1, 1)
+                  with(player, 1, 1).twice
                 shape_handler.new_shape(player)
+              end
+
+              it 'generates the next shape for the player' do
+                expect(player.next_shape).to eq nil
+                shape_handler.new_shape(player)
+                expect(player.next_shape).to be_kind_of ComplexShape
               end
             end
 
