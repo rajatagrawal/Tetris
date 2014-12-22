@@ -12,7 +12,12 @@ module Tetris
         end
 
         def move_shape(player, direction)
-          player.shape.move(direction) if space_to_move?(player, direction)
+          if space_to_move?(player, direction)
+            player.shape.move(direction)
+            true
+          else
+            false
+          end
         end
 
         def drop_shape player

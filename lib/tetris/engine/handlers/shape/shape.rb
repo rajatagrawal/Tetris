@@ -14,6 +14,7 @@ module Tetris
           def new_shape(player)
             if player.shape == nil
               player.shape = generate_shape(player)
+              player.next_shape = generate_shape(player)
             else
               player.shape = player.next_shape
               player.next_shape = generate_shape(player)
