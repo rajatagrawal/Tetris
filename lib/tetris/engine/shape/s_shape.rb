@@ -1,4 +1,4 @@
-require 'tetris/engine/shape/complex_shape'
+require 'shape/complex_shape'
 
 module Tetris
   class S_Shape < ComplexShape

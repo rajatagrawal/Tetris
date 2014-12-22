@@ -1,4 +1,6 @@
-require 'tetris/engine/shape/z_shape'
+require 'spec_helper'
+require 'shape/z_shape'
+
 module Tetris
   describe Z_Shape do
     let(:z_shape) { Z_Shape.new }

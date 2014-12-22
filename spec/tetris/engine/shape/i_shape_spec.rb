@@ -1,4 +1,5 @@
-require 'tetris/engine/shape/i_shape'
+require 'spec_helper'
+require 'shape/i_shape'
 
 module Tetris
   describe I_Shape do

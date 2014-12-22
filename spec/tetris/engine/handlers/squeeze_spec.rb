@@ -1,5 +1,6 @@
-require 'tetris/engine/handlers/squeeze'
-require 'tetris/engine/tetris_map'
+require 'spec_helper'
+require 'handlers/squeeze'
+require 'tetris_map'
 
 module Tetris
   module Engine

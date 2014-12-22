@@ -1,4 +1,6 @@
-require 'tetris/engine/main'
+require 'spec_helper'
+require 'main'
+
 module Tetris
   module Engine
     describe Main do

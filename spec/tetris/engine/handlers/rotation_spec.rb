@@ -1,5 +1,6 @@
-require 'tetris/engine/handlers/rotation'
-require 'tetris/engine/player/player'
+require 'spec_helper'
+require 'handlers/rotation'
+require 'player/player'
 
 module Tetris
   module Engine

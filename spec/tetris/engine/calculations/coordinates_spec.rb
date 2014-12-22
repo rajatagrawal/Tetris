@@ -1,4 +1,5 @@
-require 'tetris/engine/calculations/coordinates'
+require 'spec_helper'
+require 'calculations/coordinates'
 
 module Tetris
   module Engine

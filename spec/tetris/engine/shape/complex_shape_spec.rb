@@ -1,4 +1,5 @@
-require 'tetris/engine/shape/complex_shape'
+require 'spec_helper'
+require 'shape/complex_shape'
 
 module Tetris
   describe ComplexShape do

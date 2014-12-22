@@ -1,4 +1,6 @@
-require 'tetris/engine/shape/l_shape'
+require 'spec_helper'
+require 'shape/l_shape'
+
 module Tetris
   describe L_Shape do
     let(:l_shape) { L_Shape.new }

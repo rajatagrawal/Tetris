@@ -1,6 +1,7 @@
-require 'tetris/engine/handlers/shape/generator'
-require 'tetris/engine/player/player'
-require 'tetris/engine/shape/complex_shape'
+require 'spec_helper'
+require 'handlers/shape/generator'
+require 'player/player'
+require 'shape/complex_shape'
 
 module Tetris
   module Engine

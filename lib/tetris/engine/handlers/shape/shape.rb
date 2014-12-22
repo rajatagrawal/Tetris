@@ -1,4 +1,4 @@
-require 'tetris/engine/handlers/shape/generator'
+require 'handlers/shape/generator'
 
 module Tetris
   module Engine

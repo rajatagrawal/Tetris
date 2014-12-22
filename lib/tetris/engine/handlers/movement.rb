@@ -1,5 +1,5 @@
-require 'tetris/engine/calculations/space'
-require 'tetris/engine/calculations/coordinates'
+require 'calculations/space'
+require 'calculations/coordinates'
 
 module Tetris
   module Engine

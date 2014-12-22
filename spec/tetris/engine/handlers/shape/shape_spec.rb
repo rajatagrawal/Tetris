@@ -1,5 +1,6 @@
-require 'tetris/engine/handlers/shape/shape'
-require 'tetris/engine/player/player'
+require 'spec_helper'
+require 'handlers/shape/shape'
+require 'player/player'
 
 module Tetris
   module Engine

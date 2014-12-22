@@ -17,7 +17,8 @@ module Tetris
                  width: 20,
                  height: 20,
                  speed: 17,
-                 unit_side: 40 }
+                 unit_side: 40,
+                 players: 3}
       @game_engine = Engine::Main.new config
       @keyboard = Input::Keyboard::Manager.new(self, @game_engine, 5)
       @counter = 0

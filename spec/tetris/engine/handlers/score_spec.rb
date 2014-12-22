@@ -1,4 +1,5 @@
-require 'tetris/engine/handlers/score'
+require 'spec_helper'
+require 'handlers/score'
 
 module Tetris
   module Engine

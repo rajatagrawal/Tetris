@@ -1,4 +1,4 @@
-require 'tetris/engine/constants'
+require 'constants'
 
 module Tetris
   class Player
@@ -13,7 +13,7 @@ module Tetris
       @shape = nil
       @next_shape = nil
       @number = player_number
-      @color = Engine::Constants::SHAPE_COLORS[@number]
+      @color = Engine::Constants::SHAPE_COLORS[@number-1]
     end
 
     def increase_score(score)

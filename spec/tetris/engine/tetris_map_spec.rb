@@ -1,4 +1,5 @@
-require 'tetris/engine/tetris_map'
+require 'spec_helper'
+require 'tetris_map'
 
 module Tetris
   module Engine

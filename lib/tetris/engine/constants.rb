@@ -1,4 +1,4 @@
-require 'tetris/engine/shape/shape_files'
+require 'shape/shape_files'
 
 module Tetris
   module Engine

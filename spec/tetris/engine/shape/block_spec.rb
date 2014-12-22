@@ -1,4 +1,5 @@
-require 'tetris/engine/shape/block'
+require 'spec_helper'
+require 'shape/block'
 
 module Tetris
   describe Block do

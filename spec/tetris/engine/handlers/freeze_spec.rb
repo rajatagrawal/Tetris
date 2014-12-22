@@ -1,5 +1,6 @@
-require 'tetris/engine/handlers/freeze'
-require 'tetris/engine/tetris_map'
+require 'spec_helper'
+require 'handlers/freeze'
+require 'tetris_map'
 
 module Tetris
   module Engine

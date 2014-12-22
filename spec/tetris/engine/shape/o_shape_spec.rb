@@ -1,4 +1,6 @@
-require 'tetris/engine/shape/o_shape'
+require 'spec_helper'
+require 'shape/o_shape'
+
 module Tetris
   describe O_Shape do
     let(:o_shape) { O_Shape.new }

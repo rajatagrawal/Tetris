@@ -1,4 +1,4 @@
-require 'tetris/engine/shape/block'
+require 'shape/block'
 
 module Tetris
   class ComplexShape

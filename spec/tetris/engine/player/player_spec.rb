@@ -1,4 +1,5 @@
-require 'tetris/engine/player/player'
+require 'spec_helper'
+require 'player/player'
 
 module Tetris
   describe Player do

@@ -1,4 +1,6 @@
-require 'tetris/engine/shape/j_shape'
+require 'spec_helper'
+require 'shape/j_shape'
+
 module Tetris
   describe J_Shape do
     let(:j_shape) { J_Shape.new }

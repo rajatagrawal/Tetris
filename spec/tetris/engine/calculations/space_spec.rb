@@ -1,5 +1,6 @@
-require 'tetris/engine/calculations/space'
-require 'tetris/engine/tetris_map'
+require 'spec_helper'
+require 'calculations/space'
+require 'tetris_map'
 
 module Tetris
   module Engine

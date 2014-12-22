@@ -1,4 +1,4 @@
-require 'tetris/engine/engine'
+require '../tetris/engine'
 
 module Tetris
   module Engine

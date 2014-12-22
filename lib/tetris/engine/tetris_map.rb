@@ -1,4 +1,4 @@
-require 'tetris/engine/constants'
+require 'constants'
 
 module Tetris
   module Engine
