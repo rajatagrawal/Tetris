@@ -11,9 +11,9 @@ module Tetris
       @unit_side = config[:unit_side] || 10
     end
 
-    def height
-      1
-    end
+    # def height
+      # 1
+    # end
 
     def width
       1
